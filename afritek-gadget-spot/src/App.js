@@ -1,26 +1,43 @@
-import React from "react";
-import Navbar from "./components/Navbar"; // 1. Import the Navbar file
-import Hero from "./components/Hero";
-import CategorySection from "./components/CategorySection";
-import FeaturedProducts from "./components/FeaturedProducts";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+import Home from "./Pages/Home";
+import Shop from "./Pages/Shop";
+import About from "./Pages/About";
+import Cart from "./Pages/Cart";
+
 function App() {
+  // 🛒 Cart State
+  const [cart, setCart] = useState([]);
+
+  // ➕ Add to Cart Function
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
   return (
-    <div className="App bg-[#0a0c10] min-h-screen">
-      {/* 2. Place the component here */}
-      <Navbar />
-      <Hero />
-      <CategorySection />
-      <FeaturedProducts />
-      <Footer />
-      {/* 3. Add padding-top (pt-20) so content isn't hidden under the fixed Navbar */}
-      <main className="pt-20 flex items-center justify-center">
-        <h1 className="text-white text-3xl font-bold">
-          Welcome to Afritek Gadget Spot
-        </h1>
-      </main>
-    </div>
+    <Router>
+      <div className="bg-[#0a0c10] min-h-screen">
+        {/* Navbar with Dynamic Cart Count */}
+        <Navbar cartCount={cart.length} />
+
+        {/* Page Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop onAdd={handleAddToCart} />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} setCart={setCart} />}
+          />
+        </Routes>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

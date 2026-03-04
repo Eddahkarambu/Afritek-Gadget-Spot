@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Smartphone, ShoppingCart, Menu, X } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ cartCount = 0 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: "About", path: "/about" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#0a0f18] border-b border-gray-800/50 py-4">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo Section */}
-        <div className="flex items-center gap-3 cursor-pointer">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3">
           <div className="border-2 border-[#3b82f6] p-1 rounded-md">
             <Smartphone
               size={20}
@@ -19,28 +26,31 @@ const Navbar = () => {
           <h1 className="text-white text-xl font-bold tracking-tight">
             Afritek <span className="text-[#3b82f6]">Gadget Spot</span>
           </h1>
-        </div>
+        </Link>
 
-        {/* Desktop Navigation Links - Centered Style */}
+        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-10">
-          {["Home", "Phones", "Accessories", "Tablets", "About"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
               className="text-[15px] font-medium text-gray-400 hover:text-white transition-colors"
             >
-              {item}
-            </a>
+              {link.name}
+            </Link>
           ))}
         </div>
 
-        {/* Cart Icon with Exact Badge Style */}
+        {/* Right Side (Cart + Mobile Menu) */}
         <div className="flex items-center gap-4">
+          {/* Cart */}
           <button className="relative p-2 text-gray-300 hover:text-white transition-colors">
             <ShoppingCart size={22} strokeWidth={1.5} />
-            <span className="absolute -top-1 -right-1 bg-[#3b82f6] text-[10px] font-bold text-white h-5 w-5 flex items-center justify-center rounded-full">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#3b82f6] text-[10px] font-bold text-white h-5 w-5 flex items-center justify-center rounded-full">
+                {cartCount}
+              </span>
+            )}
           </button>
 
           {/* Mobile Menu Button */}
@@ -53,20 +63,24 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Dropdown */}
       <div
-        className={`md:hidden absolute w-full bg-[#0a0f18] border-b border-gray-800 transition-all duration-300 ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+        className={`md:hidden absolute w-full bg-[#0a0f18] border-b border-gray-800 transition-all duration-300 ${
+          isMenuOpen
+            ? "max-h-96 opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden"
+        }`}
       >
         <div className="px-6 py-6 flex flex-col gap-5">
-          {["Home", "Phones", "Accessories", "Tablets", "About"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
               className="text-md font-medium text-gray-300"
               onClick={() => setIsMenuOpen(false)}
             >
-              {item}
-            </a>
+              {link.name}
+            </Link>
           ))}
         </div>
       </div>
