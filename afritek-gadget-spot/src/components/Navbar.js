@@ -43,15 +43,18 @@ const Navbar = ({ cartCount = 0 }) => {
 
         {/* Right Side (Cart + Mobile Menu) */}
         <div className="flex items-center gap-4">
-          {/* Cart */}
-          <button className="relative p-2 text-gray-300 hover:text-white transition-colors">
+          {/* Cart - Now Wrapped in Link */}
+          <Link
+            to="/cart"
+            className="relative p-2 text-gray-300 hover:text-white transition-colors"
+          >
             <ShoppingCart size={22} strokeWidth={1.5} />
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#3b82f6] text-[10px] font-bold text-white h-5 w-5 flex items-center justify-center rounded-full">
                 {cartCount}
               </span>
             )}
-          </button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button

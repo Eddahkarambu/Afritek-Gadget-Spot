@@ -8,6 +8,7 @@ import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
+import ProductDetail from "./Pages/ProductDetail";
 
 function App() {
   // 🛒 Cart State
@@ -28,6 +29,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop onAdd={handleAddToCart} />} />
+          <Route
+            path="/product/:id"
+            element={<ProductDetail onAdd={handleAddToCart} />}
+          />
           <Route path="/about" element={<About />} />
           <Route
             path="/cart"
