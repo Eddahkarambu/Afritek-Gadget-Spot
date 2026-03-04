@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
@@ -28,12 +29,21 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-wrap gap-4">
-          <button className="bg-[#3b82f6] hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl flex items-center gap-2 transition-all transform active:scale-95 shadow-lg shadow-blue-500/20">
+          {/* Shop Now Button - LINKED TO /shop */}
+          <Link
+            to="/shop"
+            className="bg-[#3b82f6] hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl flex items-center gap-2 transition-all transform active:scale-95 shadow-lg shadow-blue-500/20"
+          >
             Shop Now <ArrowRight size={20} />
-          </button>
-          <button className="border border-gray-700 hover:bg-gray-800 text-white font-bold px-8 py-4 rounded-xl transition-all">
+          </Link>
+
+          {/* View Deals Button - LINKED TO /shop */}
+          <Link
+            to="/shop"
+            className="border border-gray-700 hover:bg-gray-800 text-white font-bold px-8 py-4 rounded-xl transition-all"
+          >
             View Deals
-          </button>
+          </Link>
         </div>
       </div>
 

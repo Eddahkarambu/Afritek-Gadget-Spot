@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 import SearchFilter from "../components/SearchFilter";
 
@@ -34,14 +34,45 @@ const allProducts = [
     rating: 4.7,
     reviews: 180,
   },
+  {
+    id: 4,
+    name: "iPad Pro 12.9",
+    category: "Tablets",
+    price: "KSh 145,000",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=800",
+    rating: 4.8,
+    reviews: 156,
+  },
+  {
+    id: 5,
+    name: "Apple Watch Series 9",
+    category: "Smartwatches",
+    price: "KSh 65,000",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800",
+    rating: 4.6,
+    reviews: 98,
+  },
 ];
 
 const Shop = ({ onAdd }) => {
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     category: "All",
     priceRange: [0, 300000],
   });
+
+  // Set initial category from navigation
+  useEffect(() => {
+    if (location.state?.selectedCategory) {
+      setFilters((prev) => ({
+        ...prev,
+        category: location.state.selectedCategory,
+      }));
+    }
+  }, [location.state]);
 
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {

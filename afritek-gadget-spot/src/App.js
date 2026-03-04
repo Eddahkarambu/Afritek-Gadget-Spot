@@ -9,6 +9,9 @@ import Shop from "./Pages/Shop";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
 import ProductDetail from "./Pages/ProductDetail";
+import Checkout from "./Pages/Checkout";
+import Payment from "./Pages/Payment";
+import OrderConfirmation from "./Pages/OrderConfirmation";
 
 function App() {
   // 🛒 Cart State
@@ -38,6 +41,12 @@ function App() {
             path="/cart"
             element={<Cart cart={cart} setCart={setCart} />}
           />
+          <Route
+            path="/checkout"
+            element={<Checkout cart={cart} setCart={setCart} />}
+          />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
         </Routes>
 
         <Footer />
