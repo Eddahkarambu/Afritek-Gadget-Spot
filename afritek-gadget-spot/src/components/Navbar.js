@@ -138,13 +138,13 @@ const Navbar = ({ cartItems = [], onCart }) => {
               <Info size={18} />
               About
             </Link>
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="text-gray-300 hover:text-cyan-400 transition-colors font-medium flex items-center gap-2"
             >
               <Phone size={18} />
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Search Bar - Desktop */}
@@ -412,13 +412,13 @@ const Navbar = ({ cartItems = [], onCart }) => {
             >
               ℹ️ About
             </Link>
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               onClick={() => setIsMenuOpen(false)}
               className="block px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-800 rounded transition-colors"
             >
               📞 Contact
-            </a>
+            </Link>
           </div>
         )}
       </div>
