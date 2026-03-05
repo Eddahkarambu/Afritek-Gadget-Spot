@@ -116,13 +116,18 @@ const BestSellers = ({ onAdd }) => {
       <div className="flex justify-between items-center mb-12">
         <div>
           <h2 className="text-5xl font-bold mb-2">
-            Best <span className="text-blue-500">Sellers</span>
+            Best{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">
+              Sellers
+            </span>
           </h2>
-          <p className="text-gray-400">Handpicked products loved by our customers</p>
+          <p className="text-gray-400">
+            Handpicked products loved by our customers
+          </p>
         </div>
         <Link
           to="/shop"
-          className="hidden md:inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-lg transition-colors"
+          className="hidden md:inline-block bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold px-6 py-3 rounded-lg transition-all shadow-lg shadow-cyan-500/20"
         >
           View All →
         </Link>
@@ -133,21 +138,21 @@ const BestSellers = ({ onAdd }) => {
         {bestSellers.map((product) => (
           <div
             key={product.id}
-            className="group relative bg-[#111827] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 overflow-hidden"
+            className="group relative bg-[#111827] rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden"
           >
-            {/* Product Image Container */}
+            {/* Image Container */}
             <div className="relative h-64 bg-[#161b22] overflow-hidden flex items-center justify-center">
               {/* Badge */}
-              <div className="absolute top-3 left-3 z-10 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-cyan-500/30">
                 {product.badge}
               </div>
 
-              {/* Discount Badge */}
+              {/* Discount */}
               <div className="absolute top-3 right-3 z-10 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                 -{product.discount}
               </div>
 
-              {/* Product Image */}
+              {/* Image */}
               <Link to={`/product/${product.id}`}>
                 <img
                   src={product.image}
@@ -156,11 +161,11 @@ const BestSellers = ({ onAdd }) => {
                 />
               </Link>
 
-              {/* Hover Overlay with Add to Cart */}
+              {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <button
                   onClick={() => onAdd(product)}
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-cyan-500/20"
                 >
                   <ShoppingCart size={20} />
                   Add to Cart
@@ -168,16 +173,14 @@ const BestSellers = ({ onAdd }) => {
               </div>
             </div>
 
-            {/* Product Info */}
+            {/* Info */}
             <div className="p-4">
-              {/* Category */}
-              <p className="text-blue-500 text-xs font-bold uppercase tracking-wider mb-1">
+              <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1">
                 {product.category}
               </p>
 
-              {/* Product Name */}
               <Link to={`/product/${product.id}`}>
-                <h3 className="text-white font-bold text-sm mb-3 line-clamp-2 hover:text-blue-400 transition-colors cursor-pointer">
+                <h3 className="text-white font-bold text-sm mb-3 line-clamp-2 hover:text-cyan-400 transition-colors cursor-pointer">
                   {product.name}
                 </h3>
               </Link>
@@ -212,10 +215,10 @@ const BestSellers = ({ onAdd }) => {
                 </span>
               </div>
 
-              {/* Add to Cart Button (Mobile) */}
+              {/* Mobile Button */}
               <button
                 onClick={() => onAdd(product)}
-                className="w-full md:hidden bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg text-sm transition-colors"
+                className="w-full md:hidden bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-2 rounded-lg text-sm transition-all"
               >
                 Add to Cart
               </button>
@@ -228,7 +231,7 @@ const BestSellers = ({ onAdd }) => {
       <div className="md:hidden">
         <Link
           to="/shop"
-          className="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl text-center transition-colors"
+          className="block w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-4 rounded-xl text-center transition-all shadow-lg shadow-cyan-500/20"
         >
           View All Products →
         </Link>

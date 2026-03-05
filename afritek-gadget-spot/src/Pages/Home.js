@@ -15,7 +15,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-[#0a0c10] text-white">
+    <div className="bg-gradient-to-b from-[#0a0f1a] to-[#0a0c10] text-white">
       <Hero />
       <Categories />
       <FlashSale />
