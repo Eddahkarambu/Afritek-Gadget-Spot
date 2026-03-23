@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,98 +8,123 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    alert("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setSubmitted(true);
+    setTimeout(() => {
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      setSubmitted(false);
+    }, 2000);
   };
 
   return (
-    <div className="bg-white min-h-screen pt-24 pb-20">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-teal-900 to-teal-800 text-white py-16 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6">Get In Touch</h1>
-          <p className="text-xl text-cyan-100">
-            We'd love to hear from you. Send us a message!
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            Get in <span className="text-cyan-400">Touch</span>
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Have questions about our products or services? We'd love to hear
+            from you. Send us a message and we'll respond as soon as possible.
           </p>
         </div>
-      </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-16 px-6 bg-gradient-to-b from-white to-teal-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-6 mb-16">
-            {/* Phone */}
-            <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-8 rounded-xl border-2 border-teal-200 text-center hover:border-teal-400 transition-all">
-              <div className="bg-gradient-to-br from-teal-600 to-cyan-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Phone size={32} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900 mb-2">Phone</h3>
-              <p className="text-gray-700">+254 (0) XXX XXXX XXX</p>
-              <p className="text-gray-600 text-sm mt-2">
-                Available Mon-Fri, 9AM-6PM EAT
-              </p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          {/* Contact Info Card 1 */}
+          <div className="bg-[#111827] border border-gray-800 hover:border-cyan-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
+            <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4 border border-cyan-500/30">
+              <Mail size={24} className="text-cyan-400" />
             </div>
+            <h3 className="text-xl font-bold mb-2">Email</h3>
+            <p className="text-gray-400 mb-3">
+              Send us an email and we'll get back to you within 24 hours.
+            </p>
+            <a
+              href="mailto:support@afritekgadget.com"
+              className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
+            >
+              support@afritekgadget.com
+            </a>
+            <p className="text-gray-500 text-sm mt-2">info@afritekgadget.com</p>
+          </div>
 
-            {/* Email */}
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 p-8 rounded-xl border-2 border-purple-200 text-center hover:border-purple-400 transition-all">
-              <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Mail size={32} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-purple-900 mb-2">Email</h3>
-              <p className="text-gray-700">info@afritek.com</p>
-              <p className="text-gray-600 text-sm mt-2">
-                We reply within 24 hours
-              </p>
+          {/* Contact Info Card 2 */}
+          <div className="bg-[#111827] border border-gray-800 hover:border-teal-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-teal-500/10">
+            <div className="w-12 h-12 bg-teal-500/20 rounded-lg flex items-center justify-center mb-4 border border-teal-500/30">
+              <Phone size={24} className="text-teal-400" />
             </div>
+            <h3 className="text-xl font-bold mb-2">Phone</h3>
+            <p className="text-gray-400 mb-3">
+              Call us during business hours. We're here to help!
+            </p>
+            <a
+              href="tel:+254712345678"
+              className="text-teal-400 hover:text-teal-300 font-semibold transition-colors"
+            >
+              +254 712 345 678
+            </a>
+            <p className="text-gray-500 text-sm mt-2">+254 720 987 654</p>
+          </div>
 
-            {/* Location */}
-            <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-8 rounded-xl border-2 border-cyan-200 text-center hover:border-cyan-400 transition-all">
-              <div className="bg-gradient-to-br from-cyan-600 to-teal-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <MapPin size={32} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900 mb-2">Location</h3>
-              <p className="text-gray-700">Nairobi, Kenya</p>
-              <p className="text-gray-600 text-sm mt-2">East Africa HQ</p>
+          {/* Contact Info Card 3 */}
+          <div className="bg-[#111827] border border-gray-800 hover:border-purple-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-purple-500/10">
+            <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 border border-purple-500/30">
+              <MapPin size={24} className="text-purple-400" />
             </div>
-
-            {/* Hours */}
-            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl border-2 border-indigo-200 text-center hover:border-indigo-400 transition-all">
-              <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Clock size={32} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-indigo-900 mb-2">Hours</h3>
-              <p className="text-gray-700">Mon - Fri: 9AM - 6PM</p>
-              <p className="text-gray-600 text-sm mt-2">
-                Sat - Sun: 10AM - 4PM
-              </p>
-            </div>
+            <h3 className="text-xl font-bold mb-2">Location</h3>
+            <p className="text-gray-400 mb-3">
+              Visit us at our office in Nairobi.
+            </p>
+            <p className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
+              123 Tech Avenue
+              <br />
+              Nairobi, Kenya
+            </p>
           </div>
         </div>
-      </section>
 
-      {/* Contact Form & Map */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Form */}
-            <div>
-              <h2 className="text-4xl font-bold text-teal-900 mb-8">
-                Send Us a Message
-              </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Main Contact Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <MessageSquare className="text-cyan-400" size={28} />
+              <h2 className="text-3xl font-bold">Send us a Message</h2>
+            </div>
+
+            {submitted ? (
+              <div className="bg-green-500/20 border border-green-500 rounded-xl p-8 text-center">
+                <div className="text-5xl mb-4">✓</div>
+                <h3 className="text-xl font-bold text-green-400 mb-2">
+                  Message Sent!
+                </h3>
+                <p className="text-gray-300">
+                  Thank you for reaching out. We'll get back to you soon!
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Name Field */}
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
+                  <label className="block text-sm font-semibold mb-2">
                     Your Name
                   </label>
                   <input
@@ -107,29 +132,31 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-teal-200 rounded-lg focus:border-teal-600 focus:outline-none transition-all"
-                    placeholder="John Doe"
                     required
+                    placeholder="John Doe"
+                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
                   />
                 </div>
 
+                {/* Email Field */}
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Email Address
+                  <label className="block text-sm font-semibold mb-2">
+                    Your Email
                   </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-teal-200 rounded-lg focus:border-teal-600 focus:outline-none transition-all"
-                    placeholder="john@example.com"
                     required
+                    placeholder="john@example.com"
+                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
                   />
                 </div>
 
+                {/* Subject Field */}
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
+                  <label className="block text-sm font-semibold mb-2">
                     Subject
                   </label>
                   <input
@@ -137,167 +164,174 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-teal-200 rounded-lg focus:border-teal-600 focus:outline-none transition-all"
-                    placeholder="How can we help?"
                     required
+                    placeholder="How can we help?"
+                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
                   />
                 </div>
 
+                {/* Message Field */}
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
+                  <label className="block text-sm font-semibold mb-2">
                     Message
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-teal-200 rounded-lg focus:border-teal-600 focus:outline-none transition-all resize-none"
-                    placeholder="Your message here..."
-                    rows="6"
                     required
-                  ></textarea>
+                    placeholder="Tell us more about your inquiry..."
+                    rows="5"
+                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all resize-none"
+                  />
                 </div>
 
+                {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-600/30"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
                 >
                   <Send size={20} />
                   Send Message
                 </button>
               </form>
+            )}
+          </div>
+
+          {/* Business Hours & Info */}
+          <div className="space-y-6">
+            {/* Business Hours */}
+            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Clock className="text-yellow-400" size={28} />
+                <h3 className="text-2xl font-bold">Business Hours</h3>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center pb-3 border-b border-gray-700">
+                  <span className="text-gray-400">Monday - Friday</span>
+                  <span className="text-cyan-400 font-semibold">
+                    9:00 AM - 6:00 PM
+                  </span>
+                </div>
+                <div className="flex justify-between items-center pb-3 border-b border-gray-700">
+                  <span className="text-gray-400">Saturday</span>
+                  <span className="text-cyan-400 font-semibold">
+                    10:00 AM - 4:00 PM
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Sunday</span>
+                  <span className="text-red-400 font-semibold">Closed</span>
+                </div>
+              </div>
             </div>
 
-            {/* Info */}
-            <div>
-              <h2 className="text-4xl font-bold text-teal-900 mb-8">
-                Get In Touch
-              </h2>
+            {/* Why Contact Us */}
+            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-4">Why Contact Us?</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="text-cyan-400 mt-1">✓</span>
+                  <span className="text-gray-300">
+                    Product inquiries & support
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-cyan-400 mt-1">✓</span>
+                  <span className="text-gray-300">Technical assistance</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-cyan-400 mt-1">✓</span>
+                  <span className="text-gray-300">
+                    Bulk orders & partnerships
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-cyan-400 mt-1">✓</span>
+                  <span className="text-gray-300">Feedback & suggestions</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-cyan-400 mt-1">✓</span>
+                  <span className="text-gray-300">Returns & replacements</span>
+                </li>
+              </ul>
+            </div>
 
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="bg-gradient-to-br from-teal-600 to-cyan-600 rounded-full p-3">
-                      <Phone size={24} className="text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Call Us
-                    </h3>
-                    <p className="text-gray-700 mb-1">+254 (0) XXX XXXX XXX</p>
-                    <p className="text-gray-600 text-sm">
-                      Mon-Fri, 9AM-6PM EAT
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full p-3">
-                      <Mail size={24} className="text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Email Us
-                    </h3>
-                    <p className="text-gray-700 mb-1">info@afritek.com</p>
-                    <p className="text-gray-600 text-sm">support@afritek.com</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="bg-gradient-to-br from-cyan-600 to-teal-600 rounded-full p-3">
-                      <MapPin size={24} className="text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Visit Us
-                    </h3>
-                    <p className="text-gray-700 mb-1">Nairobi, Kenya</p>
-                    <p className="text-gray-600 text-sm">
-                      East Africa Headquarters
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-8 p-6 bg-gradient-to-br from-teal-50 to-cyan-50 border-2 border-teal-200 rounded-xl">
-                  <h3 className="text-lg font-bold text-teal-900 mb-3">
-                    Follow Us
-                  </h3>
-                  <div className="flex gap-4">
-                    <a
-                      href="https://facebook.com/afritek"
-                      className="text-teal-600 hover:text-teal-700 font-semibold"
-                    >
-                      Facebook
-                    </a>
-                    <a
-                      href="https://twitter.com/afritek"
-                      className="text-teal-600 hover:text-teal-700 font-semibold"
-                    >
-                      Twitter
-                    </a>
-                    <a
-                      href="https://instagram.com/afritek"
-                      className="text-teal-600 hover:text-teal-700 font-semibold"
-                    >
-                      Instagram
-                    </a>
-                  </div>
-                </div>
+            {/* Social Links */}
+            <div className="bg-gradient-to-r from-cyan-500/10 to-teal-500/10 border border-cyan-500/30 rounded-2xl p-8">
+              <h3 className="text-xl font-bold mb-4">Follow Us</h3>
+              <div className="flex gap-4">
+                <a
+                  href="https://facebook.com/afritek"
+                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
+                  title="Facebook"
+                >
+                  f
+                </a>
+                <a
+                  href="https://twitter.com/afritek"
+                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
+                  title="Twitter"
+                >
+                  𝕏
+                </a>
+                <a
+                  href="https://instagram.com/afritek"
+                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
+                  title="Instagram"
+                >
+                  📷
+                </a>
+                <a
+                  href="https://linkedin.com/company/afritek"
+                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
+                  title="LinkedIn"
+                >
+                  in
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-teal-50 to-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-teal-900 mb-16">
-            Frequently Asked Questions
+        {/* FAQ Section */}
+        <div className="mt-20">
+          <h2 className="text-4xl font-bold text-center mb-12">
+            Frequently Asked <span className="text-cyan-400">Questions</span>
           </h2>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
-                question: "What is your delivery timeline?",
-                answer:
-                  "We deliver within 24-48 hours across most of East Africa. Express delivery options are available.",
+                q: "What's your return policy?",
+                a: "We offer a 30-day money-back guarantee on all products. No questions asked!",
               },
               {
-                question: "Are all products authentic?",
-                answer:
-                  "Yes, 100% authentic. Every product is verified and comes with official warranty.",
+                q: "Do you ship internationally?",
+                a: "Yes! We ship to most countries. Shipping costs vary by location.",
               },
               {
-                question: "Do you offer payment plans?",
-                answer:
-                  "Yes, we offer flexible payment options through various partners.",
+                q: "How long does delivery take?",
+                a: "Local delivery takes 2-3 days. International orders take 7-14 days.",
               },
               {
-                question: "What is your return policy?",
-                answer:
-                  "We offer 30-day returns for unused products in original packaging.",
+                q: "Do you offer warranty?",
+                a: "All products come with a 1-year manufacturer warranty.",
               },
-            ].map((faq, index) => (
+            ].map((item, idx) => (
               <div
-                key={index}
-                className="bg-white border-2 border-teal-200 rounded-lg p-6 hover:border-teal-400 transition-all"
+                key={idx}
+                className="bg-[#111827] border border-gray-800 rounded-xl p-6 hover:border-cyan-500/50 transition-all"
               >
-                <h3 className="text-lg font-bold text-teal-900 mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-700">{faq.answer}</p>
+                <h4 className="font-bold text-lg mb-2 text-cyan-400">
+                  {item.q}
+                </h4>
+                <p className="text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
