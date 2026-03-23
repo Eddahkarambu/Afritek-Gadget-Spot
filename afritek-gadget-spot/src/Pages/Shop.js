@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchFilter from "../components/SearchFilter";
 import { Star, ShoppingCart } from "lucide-react";
 import phoneProducts from "../Data/Products";
@@ -12,7 +12,6 @@ const Shop = () => {
     search: "",
   });
 
-  // Convert phoneProducts to match your format
   const allProducts = phoneProducts.map((product) => ({
     id: product.id,
     name: `${product.brand} ${product.model}`,
@@ -27,9 +26,35 @@ const Shop = () => {
     badge: product.isFeatured ? "Featured" : product.isNew ? "New" : "Popular",
   }));
 
+  const applyFilters = useCallback(
+    (filters) => {
+      let products = allProducts.filter((product) => {
+        const searchMatch =
+          !filters.search ||
+          product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+          product.category.toLowerCase().includes(filters.search.toLowerCase());
+
+        const categoryMatch =
+          filters.category === "All" || product.category === filters.category;
+
+        const priceMatch =
+          product.price >= filters.priceRange[0] &&
+          product.price <= filters.priceRange[1];
+
+        const ratingMatch =
+          filters.rating === 0 || product.rating >= filters.rating;
+
+        return searchMatch && categoryMatch && priceMatch && ratingMatch;
+      });
+
+      setFilteredProducts(products);
+    },
+    [allProducts],
+  );
+
   useEffect(() => {
     applyFilters(filterState);
-  }, [filterState]);
+  }, [filterState, applyFilters]);
 
   const handleSearch = (term) => {
     setFilterState((prev) => ({
@@ -40,29 +65,6 @@ const Shop = () => {
 
   const handleFilter = (filters) => {
     setFilterState(filters);
-  };
-
-  const applyFilters = (filters) => {
-    let products = allProducts.filter((product) => {
-      const searchMatch =
-        !filters.search ||
-        product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-        product.category.toLowerCase().includes(filters.search.toLowerCase());
-
-      const categoryMatch =
-        filters.category === "All" || product.category === filters.category;
-
-      const priceMatch =
-        product.price >= filters.priceRange[0] &&
-        product.price <= filters.priceRange[1];
-
-      const ratingMatch =
-        filters.rating === 0 || product.rating >= filters.rating;
-
-      return searchMatch && categoryMatch && priceMatch && ratingMatch;
-    });
-
-    setFilteredProducts(products);
   };
 
   return (
@@ -105,13 +107,15 @@ const Shop = () => {
                     {/* Image Container */}
                     <div className="relative h-64 bg-gradient-to-br from-teal-50 to-cyan-50 overflow-hidden flex items-center justify-center border-b-2 border-teal-100">
                       {/* Badge */}
-                      <div className={`absolute top-3 left-3 z-10 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg ${
-                        product.badge === "Featured" 
-                          ? "bg-gradient-to-r from-purple-600 to-indigo-600"
-                          : product.badge === "New"
-                          ? "bg-gradient-to-r from-teal-600 to-cyan-600"
-                          : "bg-gradient-to-r from-cyan-500 to-teal-500"
-                      }`}>
+                      <div
+                        className={`absolute top-3 left-3 z-10 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg ${
+                          product.badge === "Featured"
+                            ? "bg-gradient-to-r from-purple-600 to-indigo-600"
+                            : product.badge === "New"
+                              ? "bg-gradient-to-r from-teal-600 to-cyan-600"
+                              : "bg-gradient-to-r from-cyan-500 to-teal-500"
+                        }`}
+                      >
                         {product.badge}
                       </div>
 

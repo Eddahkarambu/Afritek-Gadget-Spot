@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingCart, Zap, Truck, Shield, Smartphone } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ShoppingCart, Zap, Truck, Shield, Smartphone } from "lucide-react";
 
 const Home = () => {
   return (
@@ -12,7 +12,10 @@ const Home = () => {
             {/* Left Content */}
             <div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">Afritek</span>
+                Welcome to{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">
+                  Afritek
+                </span>
               </h1>
               <p className="text-xl text-cyan-100 mb-8">
                 Discover the latest gadgets and smartphones at unbeatable prices
@@ -35,10 +38,10 @@ const Home = () => {
               <div className="relative">
                 {/* Outer glow border */}
                 <div className="absolute -inset-2 bg-gradient-to-br from-cyan-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
-                
+
                 {/* Image container */}
                 <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-2 rounded-3xl shadow-2xl shadow-cyan-500/50 overflow-hidden">
-                  <img 
+                  <img
                     src="/images/latest galaxy.jpg"
                     alt="Latest Galaxy"
                     className="rounded-3xl w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
@@ -54,7 +57,10 @@ const Home = () => {
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4 text-teal-900">
-            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">Afritek</span>
+            Why Choose{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
+              Afritek
+            </span>
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">
             Experience premium gadgets with exceptional service
@@ -66,7 +72,9 @@ const Home = () => {
               <div className="bg-gradient-to-br from-teal-500 to-cyan-500 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <Zap size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-teal-900 mb-3">Fast Delivery</h3>
+              <h3 className="text-xl font-bold text-teal-900 mb-3">
+                Fast Delivery
+              </h3>
               <p className="text-gray-600">
                 Get your gadgets delivered within 24-48 hours across East Africa
               </p>
@@ -77,7 +85,9 @@ const Home = () => {
               <div className="bg-gradient-to-br from-purple-600 to-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <ShoppingCart size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-purple-900 mb-3">Best Prices</h3>
+              <h3 className="text-xl font-bold text-purple-900 mb-3">
+                Best Prices
+              </h3>
               <p className="text-gray-600">
                 Competitive pricing with regular discounts and special offers
               </p>
@@ -88,7 +98,9 @@ const Home = () => {
               <div className="bg-gradient-to-br from-cyan-500 to-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <Truck size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-teal-900 mb-3">Wide Selection</h3>
+              <h3 className="text-xl font-bold text-teal-900 mb-3">
+                Wide Selection
+              </h3>
               <p className="text-gray-600">
                 Premium brands including Samsung, iPhone, Oppo, and more
               </p>
@@ -99,7 +111,9 @@ const Home = () => {
               <div className="bg-gradient-to-br from-indigo-600 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <Shield size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-indigo-900 mb-3">Secure & Safe</h3>
+              <h3 className="text-xl font-bold text-indigo-900 mb-3">
+                Secure & Safe
+              </h3>
               <p className="text-gray-600">
                 100% genuine products with warranty and after-sales support
               </p>
@@ -112,7 +126,10 @@ const Home = () => {
       <section className="py-20 px-6 bg-gradient-to-b from-white to-teal-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-teal-900">
-            Shop by <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">Category</span>
+            Shop by{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
+              Category
+            </span>
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -123,7 +140,10 @@ const Home = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-cyan-600 group-hover:from-teal-700 group-hover:to-cyan-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
-                <Smartphone size={64} className="mb-4 group-hover:scale-110 transition-transform" />
+                <Smartphone
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
                 <h3 className="text-2xl font-bold">Smartphones</h3>
                 <p className="text-cyan-100 mt-2">Latest Models</p>
               </div>
@@ -136,7 +156,10 @@ const Home = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 group-hover:from-purple-700 group-hover:to-indigo-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
-                <Zap size={64} className="mb-4 group-hover:scale-110 transition-transform" />
+                <Zap
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
                 <h3 className="text-2xl font-bold">Tablets</h3>
                 <p className="text-indigo-100 mt-2">Premium Devices</p>
               </div>
@@ -149,7 +172,10 @@ const Home = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-teal-600 group-hover:from-cyan-600 group-hover:to-teal-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
-                <Truck size={64} className="mb-4 group-hover:scale-110 transition-transform" />
+                <Truck
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
                 <h3 className="text-2xl font-bold">Accessories</h3>
                 <p className="text-cyan-100 mt-2">All You Need</p>
               </div>
@@ -185,7 +211,9 @@ const Home = () => {
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-teal-900 via-purple-900 to-indigo-900 text-white py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Find Your Perfect Gadget?</h2>
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Find Your Perfect Gadget?
+          </h2>
           <p className="text-xl text-cyan-100 mb-8">
             Browse our extensive collection and get exclusive deals today
           </p>
@@ -204,14 +232,29 @@ const Home = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <h4 className="text-cyan-400 font-bold mb-4">About Afritek</h4>
-              <p className="text-sm">Your trusted source for premium gadgets and electronics across East Africa</p>
+              <p className="text-sm">
+                Your trusted source for premium gadgets and electronics across
+                East Africa
+              </p>
             </div>
             <div>
               <h4 className="text-cyan-400 font-bold mb-4">Quick Links</h4>
               <ul className="text-sm space-y-2">
-                <li><Link to="/" className="hover:text-cyan-400 transition">Home</Link></li>
-                <li><Link to="/shop" className="hover:text-cyan-400 transition">Shop</Link></li>
-                <li><Link to="/about" className="hover:text-cyan-400 transition">About</Link></li>
+                <li>
+                  <Link to="/" className="hover:text-cyan-400 transition">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shop" className="hover:text-cyan-400 transition">
+                    Shop
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-cyan-400 transition">
+                    About
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -225,9 +268,30 @@ const Home = () => {
             <div>
               <h4 className="text-cyan-400 font-bold mb-4">Follow Us</h4>
               <ul className="text-sm space-y-2">
-                <li><a href="https://facebook.com" className="hover:text-cyan-400 transition">Facebook</a></li>
-                <li><a href="https://twitter.com" className="hover:text-cyan-400 transition">Twitter</a></li>
-                <li><a href="https://instagram.com" className="hover:text-cyan-400 transition">Instagram</a></li>
+                <li>
+                  <a
+                    href="https://facebook.com"
+                    className="hover:text-cyan-400 transition"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com"
+                    className="hover:text-cyan-400 transition"
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://instagram.com"
+                    className="hover:text-cyan-400 transition"
+                  >
+                    Instagram
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

@@ -11,10 +11,6 @@ import Cart from "./Pages/Cart";
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
-
   return (
     <Router>
       <Navbar cartItems={cartItems} />

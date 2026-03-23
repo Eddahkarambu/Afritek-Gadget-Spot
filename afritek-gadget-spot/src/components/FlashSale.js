@@ -39,22 +39,22 @@ const FlashSale = () => {
     <section className="bg-gradient-to-b from-teal-50 to-white px-6 py-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-8">
           <div>
-            <h2 className="text-5xl font-bold text-gray-900 mb-2">
-              <Zap className="inline mr-2 text-orange-500" size={40} />
+            <h2 className="text-5xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+              <Zap className="text-orange-500" size={40} />
               Flash{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
                 Sale
               </span>
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-lg">
               Limited time offers on premium gadgets
             </p>
           </div>
 
           {/* Countdown Timer */}
-          <div className="bg-gradient-to-br from-red-900 to-orange-900 border-2 border-orange-500 rounded-xl p-6 text-white">
+          <div className="bg-gradient-to-br from-red-900 to-orange-900 border-2 border-orange-500 rounded-xl p-6 text-white flex-shrink-0">
             <p className="text-sm font-semibold mb-3 text-orange-300">
               Ends In
             </p>
@@ -84,7 +84,7 @@ const FlashSale = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {flashProducts.map((product) => (
             <div
               key={product.id}
@@ -139,7 +139,7 @@ const FlashSale = () => {
         <div className="text-center">
           <Link
             to="/shop"
-            className="inline-block bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold transition-all transform hover:scale-105"
+            className="inline-block bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-600/30"
           >
             View All Flash Deals
           </Link>

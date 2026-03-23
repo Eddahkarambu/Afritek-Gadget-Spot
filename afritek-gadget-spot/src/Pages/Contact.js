@@ -230,19 +230,19 @@ const Contact = () => {
                   </h3>
                   <div className="flex gap-4">
                     <a
-                      href="https://facebook.com"
+                      href="https://facebook.com/afritek"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Facebook
                     </a>
                     <a
-                      href="https://twitter.com"
+                      href="https://twitter.com/afritek"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Twitter
                     </a>
                     <a
-                      href="https://instagram.com"
+                      href="https://instagram.com/afritek"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Instagram

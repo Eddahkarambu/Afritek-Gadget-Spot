@@ -1,142 +1,106 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Smartphone, Tablet, Headphones, Watch } from "lucide-react";
+import React, { useState, useMemo } from 'react';
+import { Smartphone, Watch, Headphones, Zap } from 'lucide-react';
 
 const Categories = () => {
-  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const categoriesData = [
+  const categoriesData = useMemo(() => [
     {
       id: 1,
-      name: "Smartphones",
+      name: 'Smartphones',
       icon: Smartphone,
-      count: 120,
-      color: "from-cyan-600 to-cyan-400",
-      bgGradient: "from-cyan-500/20 to-cyan-500/0",
-      path: "Phones",
+      color: 'from-teal-600 to-cyan-600',
+      count: 156,
+      description: 'Latest phone models'
     },
     {
       id: 2,
-      name: "Tablets",
-      icon: Tablet,
-      count: 45,
-      color: "from-teal-600 to-teal-400",
-      bgGradient: "from-teal-500/20 to-teal-500/0",
-      path: "Tablets",
+      name: 'Tablets',
+      icon: Zap,
+      color: 'from-purple-600 to-indigo-600',
+      count: 89,
+      description: 'Premium tablets'
     },
     {
       id: 3,
-      name: "Accessories",
-      icon: Headphones,
-      count: 200,
-      color: "from-cyan-600 to-cyan-400",
-      bgGradient: "from-cyan-500/20 to-cyan-500/0",
-      path: "Accessories",
+      name: 'Wearables',
+      icon: Watch,
+      color: 'from-cyan-600 to-teal-600',
+      count: 64,
+      description: 'Smart watches & bands'
     },
     {
       id: 4,
-      name: "Smartwatches",
-      icon: Watch,
-      count: 60,
-      color: "from-teal-600 to-teal-400",
-      bgGradient: "from-teal-500/20 to-teal-500/0",
-      path: "Smartwatches",
-    },
-  ];
+      name: 'Audio',
+      icon: Headphones,
+      color: 'from-indigo-600 to-purple-600',
+      count: 112,
+      description: 'Headphones & speakers'
+    }
+  ], []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCategories(categoriesData);
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  const handleCategoryClick = (categoryPath) => {
-    navigate("/shop", { state: { selectedCategory: categoryPath } });
-  };
+  React.useEffect(() => {
+    setCategories(categoriesData);
+  }, [categoriesData]);
 
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-          Shop by{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">
-            Category
-          </span>
-        </h2>
-        <p className="text-gray-400">
-          Browse our extensive collection of premium devices
-        </p>
-      </div>
+    <section className="bg-gradient-to-b from-white to-teal-50 px-6 py-20">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-4">
+            Shop by <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Category</span>
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Browse our extensive collection organized by product type
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {categories.map((category, index) => {
-          const IconComponent = category.icon;
-
-          return (
-            <div
-              key={category.id}
-              className={`transform transition-all duration-500 ${
-                loading
-                  ? "opacity-0 translate-y-8"
-                  : "opacity-100 translate-y-0"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <button
-                onClick={() => handleCategoryClick(category.path)}
-                className="w-full group relative overflow-hidden rounded-2xl p-8 border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 bg-[#111827] hover:bg-[#1a1f2e]"
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((category) => {
+            const IconComponent = category.icon;
+            return (
+              <div
+                key={category.id}
+                className="group bg-white rounded-xl border-2 border-teal-200 hover:border-purple-500 transition-all duration-300 overflow-hidden hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
               >
-                {/* Background Gradient */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                ></div>
-
-                {/* Animated Glow */}
-                <div className="absolute -top-1/2 -right-1/2 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-150"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* Icon Container */}
-                  <div className="mb-4 p-4 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 group-hover:from-cyan-600/20 group-hover:to-teal-400/20 transition-all duration-300 border border-gray-700 group-hover:border-cyan-500/50">
-                    <IconComponent
-                      size={32}
-                      className="text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 group-hover:scale-110 transform"
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
-                    {category.name}
-                  </h3>
-
-                  {/* Count */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
-                      {category.count}+ items
-                    </span>
-                    <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
+                {/* Header */}
+                <div className={`bg-gradient-to-br ${category.color} p-8 text-white flex items-center justify-center h-40 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent size={64} />
                 </div>
 
-                {/* Bottom Border */}
-                <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-cyan-600 to-teal-400 w-0 group-hover:w-full transition-all duration-500"></div>
-              </button>
-            </div>
-          );
-        })}
-      </div>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-teal-700 transition-colors">
+                    {category.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{category.description}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-teal-600">
+                      {category.count} Products
+                    </span>
+                    <button className="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white px-4 py-2 rounded-lg font-semibold transition-all text-sm">
+                      View →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Info */}
-      <div className="mt-12 p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl">
-        <p className="text-cyan-400 text-center">
-          💡 Click on any category to explore our collection and use filters to
-          find exactly what you're looking for
-        </p>
+        {/* Call to Action */}
+        <div className="mt-16 bg-gradient-to-r from-teal-900 to-teal-800 rounded-2xl p-12 text-center text-white">
+          <h3 className="text-3xl font-bold mb-4">Browse All Products</h3>
+          <p className="text-cyan-100 mb-8 text-lg">
+            Explore our complete collection of gadgets and electronics
+          </p>
+          <button className="bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-500 hover:to-teal-500 text-teal-900 px-8 py-3 rounded-lg font-bold transition-all transform hover:scale-105">
+            View All Products
+          </button>
+        </div>
       </div>
     </section>
   );
