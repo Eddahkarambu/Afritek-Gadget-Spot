@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Zap, Clock } from "lucide-react";
+import { Zap } from "lucide-react";
 
 const FlashSale = () => {
   const [timeLeft, setTimeLeft] = useState({

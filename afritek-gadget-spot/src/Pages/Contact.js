@@ -20,10 +20,8 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would send the form data to your backend
     console.log("Form submitted:", formData);
     setSubmitted(true);
-    // Reset form after 2 seconds
     setTimeout(() => {
       setFormData({
         name: "",
@@ -264,28 +262,28 @@ const Contact = () => {
               <h3 className="text-xl font-bold mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://facebook.com/afritek"
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="Facebook"
                 >
                   f
                 </a>
                 <a
-                  href="#"
+                  href="https://twitter.com/afritek"
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="Twitter"
                 >
                   𝕏
                 </a>
                 <a
-                  href="#"
+                  href="https://instagram.com/afritek"
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="Instagram"
                 >
                   📷
                 </a>
                 <a
-                  href="#"
+                  href="https://linkedin.com/company/afritek"
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="LinkedIn"
                 >

@@ -8,10 +8,6 @@ import Contact from "./Pages/Contact";
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
-
   return (
     <Router>
       <Navbar cartItems={cartItems} />

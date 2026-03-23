@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchFilter from "../components/SearchFilter";
 import { Star, ShoppingCart } from "lucide-react";
 
 const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [filterState, setFilterState] = useState({
     category: "All",
     priceRange: [0, 300000],
@@ -119,13 +118,34 @@ const Shop = () => {
     },
   ];
 
-  // Apply filters on mount and when filterState changes
+  const applyFilters = useCallback((filters) => {
+    let products = allProducts.filter((product) => {
+      const searchMatch =
+        !filters.search ||
+        product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+        product.category.toLowerCase().includes(filters.search.toLowerCase());
+
+      const categoryMatch =
+        filters.category === "All" || product.category === filters.category;
+
+      const priceMatch =
+        product.price >= filters.priceRange[0] &&
+        product.price <= filters.priceRange[1];
+
+      const ratingMatch =
+        filters.rating === 0 || product.rating >= filters.rating;
+
+      return searchMatch && categoryMatch && priceMatch && ratingMatch;
+    });
+
+    setFilteredProducts(products);
+  }, [allProducts]);
+
   useEffect(() => {
     applyFilters(filterState);
-  }, [filterState]);
+  }, [filterState, applyFilters]);
 
   const handleSearch = (term) => {
-    setSearchTerm(term);
     setFilterState((prev) => ({
       ...prev,
       search: term,
@@ -134,33 +154,6 @@ const Shop = () => {
 
   const handleFilter = (filters) => {
     setFilterState(filters);
-  };
-
-  const applyFilters = (filters) => {
-    let products = allProducts.filter((product) => {
-      // Search filter
-      const searchMatch =
-        !filters.search ||
-        product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-        product.category.toLowerCase().includes(filters.search.toLowerCase());
-
-      // Category filter
-      const categoryMatch =
-        filters.category === "All" || product.category === filters.category;
-
-      // Price filter
-      const priceMatch =
-        product.price >= filters.priceRange[0] &&
-        product.price <= filters.priceRange[1];
-
-      // Rating filter
-      const ratingMatch =
-        filters.rating === 0 || product.rating >= filters.rating;
-
-      return searchMatch && categoryMatch && priceMatch && ratingMatch;
-    });
-
-    setFilteredProducts(products);
   };
 
   return (
