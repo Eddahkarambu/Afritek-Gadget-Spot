@@ -1,27 +1,313 @@
-import React, { useState } from "react";
-import Hero from "../components/Hero";
-import Categories from "../components/Categories";
-import FlashSale from "../components/FlashSale";
-import BestSellers from "../components/BestSellers";
-import WhyShopWithUs from "../components/WhyShopWithUs";
-import Testimonials from "../components/Testimonials";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  ShoppingCart,
+  Zap,
+  Truck,
+  Shield,
+  Star,
+  Smartphone,
+} from "lucide-react";
 
 const Home = () => {
-  const [cart, setCart] = useState([]);
-
-  const handleAddToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    alert(`${product.name} added to cart!`);
-  };
-
   return (
-    <div className="bg-gradient-to-b from-[#0a0f1a] to-[#0a0c10] text-white">
-      <Hero />
-      <Categories />
-      <FlashSale />
-      <BestSellers onAdd={handleAddToCart} />
-      <WhyShopWithUs />
-      <Testimonials />
+    <div className="bg-white min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-900 text-white pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+                Welcome to{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">
+                  Afritek
+                </span>
+              </h1>
+              <p className="text-xl text-cyan-100 mb-8">
+                Discover the latest gadgets and smartphones at unbeatable prices
+              </p>
+              <div className="flex gap-4">
+                <Link
+                  to="/shop"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/50"
+                >
+                  Shop Now
+                </Link>
+                <button className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105">
+                  Learn More
+                </button>
+              </div>
+            </div>
+
+            {/* Right Image */}
+            <div className="flex justify-center">
+              <div className="relative">
+                {/* Outer glow border */}
+                <div className="absolute -inset-2 bg-gradient-to-br from-cyan-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
+
+                {/* Main container */}
+                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-1 rounded-3xl shadow-2xl shadow-cyan-500/50">
+                  {/* Inner content */}
+                  <div className="bg-gradient-to-br from-purple-400 to-cyan-300 rounded-3xl p-16 flex flex-col items-center justify-center h-96 w-96">
+                    {/* Shopping Cart Icon */}
+                    <div className="mb-8 animate-bounce">
+                      <ShoppingCart
+                        size={120}
+                        className="text-teal-900 drop-shadow-lg"
+                      />
+                    </div>
+
+                    {/* Text */}
+                    <p className="text-teal-900 font-bold text-2xl text-center">
+                      Shop Premium Gadgets
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4 text-teal-900">
+            Why Choose{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
+              Afritek
+            </span>
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">
+            Experience premium gadgets with exceptional service
+          </p>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-8 rounded-xl border-2 border-teal-200 hover:border-purple-400 transition-all hover:shadow-lg hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-teal-500 to-cyan-500 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <Zap size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-teal-900 mb-3">
+                Fast Delivery
+              </h3>
+              <p className="text-gray-600">
+                Get your gadgets delivered within 24-48 hours across East Africa
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 p-8 rounded-xl border-2 border-purple-200 hover:border-cyan-400 transition-all hover:shadow-lg hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-purple-600 to-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <ShoppingCart size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-purple-900 mb-3">
+                Best Prices
+              </h3>
+              <p className="text-gray-600">
+                Competitive pricing with regular discounts and special offers
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-8 rounded-xl border-2 border-cyan-200 hover:border-purple-400 transition-all hover:shadow-lg hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-cyan-500 to-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <Truck size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-teal-900 mb-3">
+                Wide Selection
+              </h3>
+              <p className="text-gray-600">
+                Premium brands including Samsung, iPhone, Oppo, and more
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl border-2 border-indigo-200 hover:border-cyan-400 transition-all hover:shadow-lg hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-indigo-600 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <Shield size={32} className="text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-indigo-900 mb-3">
+                Secure & Safe
+              </h3>
+              <p className="text-gray-600">
+                100% genuine products with warranty and after-sales support
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-white to-teal-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 text-teal-900">
+            Shop by{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
+              Category
+            </span>
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Category 1 */}
+            <Link
+              to="/shop"
+              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-cyan-600 group-hover:from-teal-700 group-hover:to-cyan-700 transition-all"></div>
+              <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
+                <Smartphone
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
+                <h3 className="text-2xl font-bold">Smartphones</h3>
+                <p className="text-cyan-100 mt-2">Latest Models</p>
+              </div>
+            </Link>
+
+            {/* Category 2 */}
+            <Link
+              to="/shop"
+              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 group-hover:from-purple-700 group-hover:to-indigo-700 transition-all"></div>
+              <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
+                <Zap
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
+                <h3 className="text-2xl font-bold">Tablets</h3>
+                <p className="text-indigo-100 mt-2">Premium Devices</p>
+              </div>
+            </Link>
+
+            {/* Category 3 */}
+            <Link
+              to="/shop"
+              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-teal-600 group-hover:from-cyan-600 group-hover:to-teal-700 transition-all"></div>
+              <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
+                <Truck
+                  size={64}
+                  className="mb-4 group-hover:scale-110 transition-transform"
+                />
+                <h3 className="text-2xl font-bold">Accessories</h3>
+                <p className="text-cyan-100 mt-2">All You Need</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="text-center p-8 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl border-2 border-teal-200 hover:border-teal-400 transition-all">
+              <p className="text-5xl font-bold text-teal-700 mb-2">10K+</p>
+              <p className="text-gray-700 font-semibold">Happy Customers</p>
+            </div>
+            <div className="text-center p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border-2 border-purple-200 hover:border-purple-400 transition-all">
+              <p className="text-5xl font-bold text-purple-700 mb-2">500+</p>
+              <p className="text-gray-700 font-semibold">Products</p>
+            </div>
+            <div className="text-center p-8 bg-gradient-to-br from-cyan-50 to-teal-50 rounded-2xl border-2 border-cyan-200 hover:border-cyan-400 transition-all">
+              <p className="text-5xl font-bold text-cyan-700 mb-2">15+</p>
+              <p className="text-gray-700 font-semibold">Brands</p>
+            </div>
+            <div className="text-center p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border-2 border-indigo-200 hover:border-indigo-400 transition-all">
+              <p className="text-5xl font-bold text-indigo-700 mb-2">24/7</p>
+              <p className="text-gray-700 font-semibold">Support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-teal-900 via-purple-900 to-indigo-900 text-white py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Find Your Perfect Gadget?
+          </h2>
+          <p className="text-xl text-cyan-100 mb-8">
+            Browse our extensive collection and get exclusive deals today
+          </p>
+          <Link
+            to="/shop"
+            className="inline-block bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-500 hover:to-teal-500 text-teal-900 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
+          >
+            Explore Now
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 className="text-cyan-400 font-bold mb-4">About Afritek</h4>
+              <p className="text-sm">
+                Your trusted source for premium gadgets and electronics across
+                East Africa
+              </p>
+            </div>
+            <div>
+              <h4 className="text-cyan-400 font-bold mb-4">Quick Links</h4>
+              <ul className="text-sm space-y-2">
+                <li>
+                  <Link to="/" className="hover:text-cyan-400 transition">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shop" className="hover:text-cyan-400 transition">
+                    Shop
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-cyan-400 transition">
+                    About
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-cyan-400 font-bold mb-4">Contact</h4>
+              <ul className="text-sm space-y-2">
+                <li>Email: info@afritek.com</li>
+                <li>Phone: +254 XXX XXXX</li>
+                <li>Location: Nairobi, Kenya</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-cyan-400 font-bold mb-4">Follow Us</h4>
+              <ul className="text-sm space-y-2">
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition">
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition">
+                    Instagram
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm">
+            <p>&copy; 2026 Afritek Gadget Spot. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

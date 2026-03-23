@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchFilter from "../components/SearchFilter";
 import { Star, ShoppingCart } from "lucide-react";
+import phoneProducts from "../Data/Products";
 
 const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -12,114 +13,21 @@ const Shop = () => {
     search: "",
   });
 
-  const allProducts = [
-    {
-      id: 1,
-      name: "Samsung Galaxy S25 Ultra",
-      category: "Phones",
-      price: 189999,
-      originalPrice: 225000,
-      discount: 15,
-      image:
-        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
-      rating: 4.8,
-      reviews: 245,
-      badge: "Best Seller",
-    },
-    {
-      id: 2,
-      name: "iPhone 16 Pro Max",
-      category: "Phones",
-      price: 225000,
-      originalPrice: 249999,
-      discount: 10,
-      image:
-        "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
-      rating: 4.9,
-      reviews: 320,
-      badge: "Top Rated",
-    },
-    {
-      id: 3,
-      name: "AirPods Pro 2",
-      category: "Accessories",
-      price: 35000,
-      originalPrice: 45000,
-      discount: 22,
-      image:
-        "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 180,
-      badge: "Popular",
-    },
-    {
-      id: 4,
-      name: "iPad Pro 12.9 M4",
-      category: "Tablets",
-      price: 145000,
-      originalPrice: 165000,
-      discount: 12,
-      image:
-        "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
-      rating: 4.8,
-      reviews: 156,
-      badge: "Recommended",
-    },
-    {
-      id: 5,
-      name: "Samsung Galaxy Buds3",
-      category: "Accessories",
-      price: 18999,
-      originalPrice: 25000,
-      discount: 24,
-      image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
-      rating: 4.6,
-      reviews: 98,
-      badge: "Great Value",
-    },
-    {
-      id: 6,
-      name: "Apple Watch Series 9",
-      category: "Smartwatches",
-      price: 65000,
-      originalPrice: 75000,
-      discount: 13,
-      image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 142,
-      badge: "Premium",
-    },
-    {
-      id: 7,
-      name: "Google Pixel 9 Pro",
-      category: "Phones",
-      price: 165000,
-      originalPrice: 189999,
-      discount: 13,
-      image:
-        "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 210,
-      badge: "Latest",
-    },
-    {
-      id: 8,
-      name: "USB-C Fast Charger 65W",
-      category: "Accessories",
-      price: 4999,
-      originalPrice: 7500,
-      discount: 33,
-      image:
-        "https://images.unsplash.com/photo-1591437281884-767810e60f11?auto=format&fit=crop&q=80&w=400",
-      rating: 4.5,
-      reviews: 89,
-      badge: "Budget",
-    },
-  ];
+  // Convert phoneProducts to match your format
+  const allProducts = phoneProducts.map((product) => ({
+    id: product.id,
+    name: `${product.brand} ${product.model}`,
+    category:
+      product.category.charAt(0).toUpperCase() + product.category.slice(1),
+    price: product.price,
+    originalPrice: product.price + Math.floor(product.price * 0.15),
+    discount: product.isFeatured ? 15 : product.isNew ? 10 : 5,
+    image: product.image,
+    rating: product.isFeatured ? 4.8 : product.isNew ? 4.7 : 4.5,
+    reviews: Math.floor(Math.random() * 300) + 50,
+    badge: product.isFeatured ? "Featured" : product.isNew ? "New" : "Popular",
+  }));
 
-  // Apply filters on mount and when filterState changes
   useEffect(() => {
     applyFilters(filterState);
   }, [filterState]);
@@ -138,22 +46,18 @@ const Shop = () => {
 
   const applyFilters = (filters) => {
     let products = allProducts.filter((product) => {
-      // Search filter
       const searchMatch =
         !filters.search ||
         product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
         product.category.toLowerCase().includes(filters.search.toLowerCase());
 
-      // Category filter
       const categoryMatch =
         filters.category === "All" || product.category === filters.category;
 
-      // Price filter
       const priceMatch =
         product.price >= filters.priceRange[0] &&
         product.price <= filters.priceRange[1];
 
-      // Rating filter
       const ratingMatch =
         filters.rating === 0 || product.rating >= filters.rating;
 
@@ -164,27 +68,31 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">
-            Latest <span className="text-cyan-400">Gadgets</span>
+    <div className="min-h-screen bg-gradient-to-b from-teal-50 via-white to-cyan-50 pt-24 pb-20">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-teal-900 to-teal-800 text-white py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-5xl font-bold mb-2">
+            Latest <span className="text-cyan-300">Gadgets</span>
           </h1>
-          <p className="text-gray-400">
-            Showing {filteredProducts.length} products
+          <p className="text-cyan-100 text-lg">
+            Showing {filteredProducts.length} of {allProducts.length} products
           </p>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 mt-12">
         {/* Main Layout: Sidebar + Products */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* LEFT SIDEBAR */}
           <div className="w-full lg:w-72 flex-shrink-0">
-            <SearchFilter
-              onSearch={handleSearch}
-              onFilter={handleFilter}
-              products={allProducts}
-            />
+            <div className="sticky top-28">
+              <SearchFilter
+                onSearch={handleSearch}
+                onFilter={handleFilter}
+                products={allProducts}
+              />
+            </div>
           </div>
 
           {/* RIGHT SIDE: PRODUCTS GRID */}
@@ -194,17 +102,25 @@ const Shop = () => {
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="group relative bg-[#111827] rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-cyan-500/10"
+                    className="group relative bg-white rounded-xl border-2 border-teal-200 hover:border-purple-500 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-purple-500/20"
                   >
                     {/* Image Container */}
-                    <div className="relative h-64 bg-[#161b22] overflow-hidden flex items-center justify-center">
+                    <div className="relative h-64 bg-gradient-to-br from-teal-50 to-cyan-50 overflow-hidden flex items-center justify-center border-b-2 border-teal-100">
                       {/* Badge */}
-                      <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-cyan-500/30">
+                      <div
+                        className={`absolute top-3 left-3 z-10 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg ${
+                          product.badge === "Featured"
+                            ? "bg-gradient-to-r from-purple-600 to-indigo-600"
+                            : product.badge === "New"
+                              ? "bg-gradient-to-r from-teal-600 to-cyan-600"
+                              : "bg-gradient-to-r from-cyan-500 to-teal-500"
+                        }`}
+                      >
                         {product.badge}
                       </div>
 
                       {/* Discount */}
-                      <div className="absolute top-3 right-3 z-10 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      <div className="absolute top-3 right-3 z-10 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         -{product.discount}%
                       </div>
 
@@ -213,16 +129,21 @@ const Shop = () => {
                         src={product.image}
                         alt={product.name}
                         className="h-full w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          e.target.src =
+                            "https://via.placeholder.com/300?text=" +
+                            product.name;
+                        }}
                       />
                     </div>
 
                     {/* Info */}
                     <div className="p-4">
-                      <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1">
+                      <p className="text-teal-600 text-xs font-bold uppercase tracking-wider mb-2">
                         {product.category}
                       </p>
 
-                      <h3 className="text-white font-bold text-sm mb-3 line-clamp-2 h-10">
+                      <h3 className="text-gray-800 font-bold text-sm mb-3 line-clamp-2 h-10 group-hover:text-teal-700 transition">
                         {product.name}
                       </h3>
 
@@ -236,7 +157,7 @@ const Shop = () => {
                               className={`${
                                 i < Math.floor(product.rating)
                                   ? "fill-yellow-400 text-yellow-400"
-                                  : "text-gray-600"
+                                  : "text-gray-300"
                               }`}
                             />
                           ))}
@@ -248,16 +169,16 @@ const Shop = () => {
 
                       {/* Prices */}
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="text-white font-bold text-lg">
+                        <span className="text-gray-900 font-bold text-lg">
                           KSh {product.price.toLocaleString()}
                         </span>
-                        <span className="text-gray-500 line-through text-xs">
+                        <span className="text-gray-400 line-through text-xs">
                           KSh {product.originalPrice.toLocaleString()}
                         </span>
                       </div>
 
                       {/* Add to Cart Button */}
-                      <button className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-2 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                      <button className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-2 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-600/30 hover:shadow-teal-600/50">
                         <ShoppingCart size={16} />
                         Add to Cart
                       </button>
@@ -266,9 +187,9 @@ const Shop = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-20 bg-[#111827] rounded-2xl border border-gray-800">
+              <div className="flex flex-col items-center justify-center py-20 bg-white rounded-xl border-2 border-dashed border-teal-300">
                 <div className="text-6xl mb-4">📦</div>
-                <p className="text-gray-400 text-xl mb-6">No products found</p>
+                <p className="text-gray-600 text-xl mb-6">No products found</p>
                 <p className="text-gray-500 text-sm mb-6">
                   Try adjusting your filters or search terms
                 </p>
@@ -281,7 +202,7 @@ const Shop = () => {
                       search: "",
                     });
                   }}
-                  className="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold px-6 py-3 rounded-lg transition-all flex items-center gap-2"
+                  className="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold px-6 py-3 rounded-lg transition-all"
                 >
                   Clear All Filters
                 </button>

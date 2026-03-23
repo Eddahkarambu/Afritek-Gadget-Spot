@@ -1,427 +1,192 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Search,
-  ShoppingCart,
-  Bell,
-  Menu,
-  X,
-  LogOut,
-  Home,
-  Store,
-  Info,
-  Phone,
-  ChevronDown,
-} from "lucide-react";
-import Logo from "./Logo";
+import { Menu, X, ShoppingCart, Search } from "lucide-react";
+import AfritekLogo from "../Images/AfritekLogo.PNG";
 
-const Navbar = ({ cartItems = [], onCart }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [showAccountMenu, setShowAccountMenu] = useState(false);
-  const searchRef = useRef(null);
-  const notifRef = useRef(null);
-  const accountRef = useRef(null);
-
-  // Sample notifications
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      type: "order",
-      message: "Your order #12345 has been shipped",
-      time: "2 hours ago",
-      icon: "📦",
-      read: false,
-    },
-    {
-      id: 2,
-      type: "promo",
-      message: "Flash sale: 50% off on selected phones",
-      time: "5 hours ago",
-      icon: "🎉",
-      read: false,
-    },
-    {
-      id: 3,
-      type: "stock",
-      message: "iPhone 16 Pro is back in stock",
-      time: "1 day ago",
-      icon: "✓",
-      read: true,
-    },
-  ]);
-
-  // Sample products for search
-  const allProducts = [
-    { id: 1, name: "Samsung Galaxy S25 Ultra", category: "Phones" },
-    { id: 2, name: "iPhone 16 Pro Max", category: "Phones" },
-    { id: 3, name: "iPad Pro 12.9", category: "Tablets" },
-    { id: 4, name: "AirPods Pro 2", category: "Accessories" },
-    { id: 5, name: "Apple Watch Series 9", category: "Smartwatches" },
-    { id: 6, name: "Google Pixel 9 Pro", category: "Phones" },
-    { id: 7, name: "Samsung Galaxy Buds3", category: "Accessories" },
-    { id: 8, name: "USB-C Fast Charger", category: "Accessories" },
-  ];
-
-  const searchResults = searchTerm
-    ? allProducts.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-    : [];
-
-  const unreadNotifications = notifications.filter((n) => !n.read).length;
-
-  // Close dropdowns when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setShowSearchResults(false);
-      }
-      if (notifRef.current && !notifRef.current.contains(e.target)) {
-        setShowNotifications(false);
-      }
-      if (accountRef.current && !accountRef.current.contains(e.target)) {
-        setShowAccountMenu(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleMarkAsRead = (id) => {
-    setNotifications(
-      notifications.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
-  };
-
-  const handleClearNotifications = () => {
-    setNotifications([]);
-    setShowNotifications(false);
-  };
+const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
+  const [cartCount, setCartCount] = React.useState(0);
 
   return (
-    <nav className="fixed top-0 w-full bg-gradient-to-b from-[#0a0f1a] to-[#0a0c10] border-b border-gray-800 z-50 backdrop-blur-md bg-opacity-95">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between gap-8">
-          {/* Logo */}
+    <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-50 shadow-lg shadow-teal-900/50">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex items-center justify-between">
+        {/* Logo Section */}
+        <Link
+          to="/"
+          className="flex items-center gap-4 hover:opacity-90 transition-opacity group"
+        >
+          {/* Logo Image from file */}
+          <img
+            src={AfritekLogo}
+            alt="Afritek Logo"
+            className="h-14 w-auto object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-cyan-500/50 transition-all"
+          />
+
+          {/* Logo Text */}
+          <div className="hidden md:flex flex-col">
+            <span className="text-teal-300 font-bold text-2xl leading-none">
+              Afritek
+            </span>
+            <div className="flex gap-1 mt-1">
+              <span className="text-purple-500 font-bold text-xs tracking-wider">
+                GADGET
+              </span>
+              <span className="text-cyan-400 font-bold text-xs tracking-wider">
+                SPOT
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity"
+            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
-            <Logo size={40} showText={true} />
+            Home
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link
+            to="/shop"
+            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
+          >
+            Shop
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link
+            to="/about"
+            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
+          >
+            About
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link
+            to="/contact"
+            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
+          >
+            Contact
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+        </div>
+
+        {/* Right Side Actions */}
+        <div className="flex items-center gap-4">
+          {/* Search Button */}
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-teal-700/50 rounded-lg"
+            title="Search"
+          >
+            <Search size={22} />
+          </button>
+
+          {/* Cart Button with Badge */}
+          <Link to="/cart" className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-cyan-500 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
+
+            <div className="relative bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-5 py-2 rounded-lg transition-all flex items-center gap-2 font-bold hidden md:flex shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50">
+              <ShoppingCart size={20} />
+              <span>Cart</span>
+
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center border-2 border-purple-800 animate-pulse">
+                  {cartCount}
+                </span>
+              )}
+            </div>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Mobile Cart Icon */}
+          <Link
+            to="/cart"
+            className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-2"
+          >
+            <ShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden text-cyan-400 p-2 hover:bg-teal-700/50 rounded-lg transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+            title="Menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Search Bar */}
+      {searchOpen && (
+        <div className="bg-gradient-to-r from-teal-800 to-teal-700 border-t-2 border-cyan-500/30 px-6 py-4 animate-in">
+          <div className="max-w-7xl mx-auto relative">
+            <Search
+              size={20}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400"
+            />
+            <input
+              type="text"
+              placeholder="Search gadgets, phones, tablets..."
+              className="w-full bg-teal-900/50 border-2 border-cyan-500/50 hover:border-cyan-400 focus:border-cyan-300 text-white placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg focus:outline-none transition-all"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-gradient-to-b from-teal-800 to-teal-900 border-t-2 border-cyan-500/50 animate-in">
+          <div className="flex flex-col gap-2 p-6 space-y-2">
             <Link
               to="/"
-              className="text-gray-300 hover:text-cyan-400 transition-colors font-medium flex items-center gap-2"
+              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
+              onClick={() => setIsOpen(false)}
             >
-              <Home size={18} />
               Home
             </Link>
             <Link
               to="/shop"
-              className="text-gray-300 hover:text-cyan-400 transition-colors font-medium flex items-center gap-2"
+              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
+              onClick={() => setIsOpen(false)}
             >
-              <Store size={18} />
               Shop
             </Link>
             <Link
               to="/about"
-              className="text-gray-300 hover:text-cyan-400 transition-colors font-medium flex items-center gap-2"
+              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
+              onClick={() => setIsOpen(false)}
             >
-              <Info size={18} />
               About
             </Link>
             <Link
               to="/contact"
-              className="text-gray-300 hover:text-cyan-400 transition-colors font-medium flex items-center gap-2"
+              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
+              onClick={() => setIsOpen(false)}
             >
-              <Phone size={18} />
               Contact
             </Link>
-          </div>
-
-          {/* Search Bar - Desktop */}
-          <div className="hidden md:block flex-1 max-w-xs" ref={searchRef}>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setShowSearchResults(true);
-                }}
-                onFocus={() => setShowSearchResults(true)}
-                className="w-full bg-[#111827] border border-gray-700 hover:border-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500 pl-4 pr-10 py-2 rounded-lg outline-none transition-all"
-              />
-              <Search
-                size={18}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"
-              />
-
-              {/* Search Results Dropdown */}
-              {showSearchResults && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-[#111827] border border-gray-700 rounded-lg overflow-hidden z-50 shadow-xl">
-                  {searchResults.slice(0, 5).map((product) => (
-                    <Link
-                      key={product.id}
-                      to={`/product/${product.id}`}
-                      onClick={() => {
-                        setSearchTerm("");
-                        setShowSearchResults(false);
-                      }}
-                      className="flex items-center justify-between px-4 py-3 hover:bg-cyan-500/10 border-b border-gray-800 last:border-0 transition-colors group"
-                    >
-                      <div>
-                        <p className="text-white group-hover:text-cyan-400 transition-colors">
-                          {product.name}
-                        </p>
-                        <p className="text-gray-500 text-xs">
-                          {product.category}
-                        </p>
-                      </div>
-                      <Search size={16} className="text-gray-500" />
-                    </Link>
-                  ))}
-                  {searchResults.length > 5 && (
-                    <div className="px-4 py-2 bg-gray-900 text-center text-sm text-gray-400">
-                      +{searchResults.length - 5} more results
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Right Icons */}
-          <div className="flex items-center gap-4">
-            {/* Mobile Search Icon */}
-            <button
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="lg:hidden p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-300 hover:text-cyan-400"
-              title="Search"
-            >
-              <Search size={20} />
-            </button>
-
-            {/* Notifications */}
-            <div className="relative" ref={notifRef}>
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-300 hover:text-cyan-400 group"
-                title="Notifications"
-              >
-                <Bell size={20} />
-                {unreadNotifications > 0 && (
-                  <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                    {unreadNotifications}
-                  </span>
-                )}
-              </button>
-
-              {/* Notifications Dropdown */}
-              {showNotifications && (
-                <div className="absolute right-0 mt-2 w-80 bg-[#111827] border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
-                  {/* Header */}
-                  <div className="bg-[#0a0f18] px-4 py-3 border-b border-gray-700 flex justify-between items-center">
-                    <h3 className="font-bold text-white">Notifications</h3>
-                    {notifications.length > 0 && (
-                      <button
-                        onClick={handleClearNotifications}
-                        className="text-xs text-cyan-400 hover:text-cyan-300"
-                      >
-                        Clear All
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Notifications List */}
-                  {notifications.length > 0 ? (
-                    <div className="max-h-96 overflow-y-auto">
-                      {notifications.map((notif) => (
-                        <div
-                          key={notif.id}
-                          onClick={() => handleMarkAsRead(notif.id)}
-                          className={`px-4 py-3 border-b border-gray-800 last:border-0 cursor-pointer transition-all ${
-                            notif.read
-                              ? "bg-[#111827] hover:bg-[#161b22]"
-                              : "bg-cyan-500/10 hover:bg-cyan-500/20"
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            <span className="text-xl mt-1">{notif.icon}</span>
-                            <div className="flex-1">
-                              <p className="text-white text-sm font-medium">
-                                {notif.message}
-                              </p>
-                              <p className="text-gray-500 text-xs mt-1">
-                                {notif.time}
-                              </p>
-                            </div>
-                            {!notif.read && (
-                              <div className="w-2 h-2 bg-cyan-500 rounded-full mt-1"></div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="px-4 py-8 text-center">
-                      <Bell size={32} className="text-gray-700 mx-auto mb-2" />
-                      <p className="text-gray-400 text-sm">
-                        No notifications yet
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Shopping Cart */}
             <Link
               to="/cart"
-              className="relative p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-300 hover:text-cyan-400 group"
-              title="Shopping Cart"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg mt-4 flex items-center gap-2 justify-center font-medium hover:from-purple-700 hover:to-indigo-700 transition-all w-full relative"
+              onClick={() => setIsOpen(false)}
             >
               <ShoppingCart size={20} />
-              {cartItems.length > 0 && (
-                <span className="absolute top-0 right-0 bg-cyan-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartItems.length}
+              View Cart
+              {cartCount > 0 && (
+                <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
                 </span>
               )}
             </Link>
-
-            {/* Account Menu */}
-            <div className="relative" ref={accountRef}>
-              <button
-                onClick={() => setShowAccountMenu(!showAccountMenu)}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-300 hover:text-cyan-400"
-              >
-                <div className="w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                  👤
-                </div>
-                <ChevronDown size={16} />
-              </button>
-
-              {/* Account Dropdown */}
-              {showAccountMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#111827] border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
-                  <div className="px-4 py-3 border-b border-gray-800">
-                    <p className="text-white font-bold text-sm">John Doe</p>
-                    <p className="text-gray-500 text-xs">john@example.com</p>
-                  </div>
-
-                  <div className="py-2">
-                    <Link
-                      to="/account"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-900 transition-colors text-sm"
-                    >
-                      👤 My Account
-                    </Link>
-                    <Link
-                      to="/orders"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-900 transition-colors text-sm"
-                    >
-                      📦 My Orders
-                    </Link>
-                    <Link
-                      to="/wishlist"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-900 transition-colors text-sm"
-                    >
-                      ❤️ Wishlist
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-900 transition-colors text-sm"
-                    >
-                      ⚙️ Settings
-                    </Link>
-                  </div>
-
-                  <div className="border-t border-gray-800 py-2">
-                    <button className="w-full flex items-center gap-3 px-4 py-2 text-red-400 hover:text-red-300 hover:bg-gray-900 transition-colors text-sm text-left">
-                      <LogOut size={16} />
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-300 hover:text-cyan-400"
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
-
-        {/* Mobile Search Bar */}
-        {isSearchOpen && (
-          <div className="mt-4 mb-4 md:hidden" ref={searchRef}>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setShowSearchResults(true);
-                }}
-                className="w-full bg-[#111827] border border-gray-700 text-white placeholder-gray-500 pl-4 pr-10 py-2 rounded-lg outline-none"
-                autoFocus
-              />
-              <Search
-                size={18}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden mt-4 py-4 border-t border-gray-800 space-y-2">
-            <Link
-              to="/"
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-800 rounded transition-colors"
-            >
-              🏠 Home
-            </Link>
-            <Link
-              to="/shop"
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-800 rounded transition-colors"
-            >
-              🛍️ Shop
-            </Link>
-            <Link
-              to="/about"
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-800 rounded transition-colors"
-            >
-              ℹ️ About
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-800 rounded transition-colors"
-            >
-              📞 Contact
-            </Link>
-          </div>
-        )}
-      </div>
+      )}
     </nav>
   );
 };
