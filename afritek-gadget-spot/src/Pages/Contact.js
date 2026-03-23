@@ -18,7 +18,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     alert("Thank you for your message! We will get back to you soon.");
     setFormData({ name: "", email: "", subject: "", message: "" });
@@ -231,19 +230,19 @@ const Contact = () => {
                   </h3>
                   <div className="flex gap-4">
                     <a
-                      href="#"
+                      href="https://facebook.com"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Facebook
                     </a>
                     <a
-                      href="#"
+                      href="https://twitter.com"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Twitter
                     </a>
                     <a
-                      href="#"
+                      href="https://instagram.com"
                       className="text-teal-600 hover:text-teal-700 font-semibold"
                     >
                       Instagram

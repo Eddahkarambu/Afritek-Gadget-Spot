@@ -5,7 +5,6 @@ import phoneProducts from "../Data/Products";
 
 const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [filterState, setFilterState] = useState({
     category: "All",
     priceRange: [0, 300000],
@@ -33,7 +32,6 @@ const Shop = () => {
   }, [filterState]);
 
   const handleSearch = (term) => {
-    setSearchTerm(term);
     setFilterState((prev) => ({
       ...prev,
       search: term,
@@ -107,15 +105,13 @@ const Shop = () => {
                     {/* Image Container */}
                     <div className="relative h-64 bg-gradient-to-br from-teal-50 to-cyan-50 overflow-hidden flex items-center justify-center border-b-2 border-teal-100">
                       {/* Badge */}
-                      <div
-                        className={`absolute top-3 left-3 z-10 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg ${
-                          product.badge === "Featured"
-                            ? "bg-gradient-to-r from-purple-600 to-indigo-600"
-                            : product.badge === "New"
-                              ? "bg-gradient-to-r from-teal-600 to-cyan-600"
-                              : "bg-gradient-to-r from-cyan-500 to-teal-500"
-                        }`}
-                      >
+                      <div className={`absolute top-3 left-3 z-10 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg ${
+                        product.badge === "Featured" 
+                          ? "bg-gradient-to-r from-purple-600 to-indigo-600"
+                          : product.badge === "New"
+                          ? "bg-gradient-to-r from-teal-600 to-cyan-600"
+                          : "bg-gradient-to-r from-cyan-500 to-teal-500"
+                      }`}>
                         {product.badge}
                       </div>
 
