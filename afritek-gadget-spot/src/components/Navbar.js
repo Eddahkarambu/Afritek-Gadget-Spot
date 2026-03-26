@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
 import AfritekLogo from "../Images/AfritekLogo.PNG";
 
@@ -7,13 +7,21 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [cartCount, setCartCount] = React.useState(0);
+  const navigate = useNavigate();
+
+  const handleNavClick = (to, e) => {
+    // defensive navigation: log and navigate programmatically
+    if (e && e.preventDefault) e.preventDefault();
+    setIsOpen(false);
+    navigate(to);
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-50 shadow-lg shadow-teal-900/50">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex items-center justify-between">
         {/* Logo Section */}
         <Link
-          to="/"
+          to="/" 
           className="flex items-center gap-4 hover:opacity-90 transition-opacity group"
         >
           {/* Logo Image from file */}
@@ -43,6 +51,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
+            onClick={(e) => handleNavClick("/", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Home
@@ -50,6 +59,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/shop"
+            onClick={(e) => handleNavClick("/shop", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Shop
@@ -57,6 +67,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/about"
+            onClick={(e) => handleNavClick("/about", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             About
@@ -64,6 +75,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/contact"
+            onClick={(e) => handleNavClick("/contact", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Contact
@@ -146,28 +158,28 @@ const Navbar = () => {
             <Link
               to="/"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick("/", e)}
             >
               Home
             </Link>
             <Link
               to="/shop"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick("/shop", e)}
             >
               Shop
             </Link>
             <Link
               to="/about"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick("/about", e)}
             >
               About
             </Link>
             <Link
               to="/contact"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick("/contact", e)}
             >
               Contact
             </Link>
