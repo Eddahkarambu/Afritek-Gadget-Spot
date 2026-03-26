@@ -2,6 +2,115 @@ import React, { useState, useEffect, useCallback } from "react";
 import SearchFilter from "../components/SearchFilter";
 import { Star, ShoppingCart } from "lucide-react";
 
+// Move product data outside the component so references are stable and
+// hooks depending on this data don't recreate every render.
+const allProducts = [
+  {
+    id: 1,
+    name: "Samsung Galaxy S25 Ultra",
+    category: "Phones",
+    price: 189999,
+    originalPrice: 225000,
+    discount: 15,
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    rating: 4.8,
+    reviews: 245,
+    badge: "Best Seller",
+  },
+  {
+    id: 2,
+    name: "iPhone 16 Pro Max",
+    category: "Phones",
+    price: 225000,
+    originalPrice: 249999,
+    discount: 10,
+    image:
+      "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
+    rating: 4.9,
+    reviews: 320,
+    badge: "Top Rated",
+  },
+  {
+    id: 3,
+    name: "AirPods Pro 2",
+    category: "Accessories",
+    price: 35000,
+    originalPrice: 45000,
+    discount: 22,
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    rating: 4.7,
+    reviews: 180,
+    badge: "Popular",
+  },
+  {
+    id: 4,
+    name: "iPad Pro 12.9 M4",
+    category: "Tablets",
+    price: 145000,
+    originalPrice: 165000,
+    discount: 12,
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    rating: 4.8,
+    reviews: 156,
+    badge: "Recommended",
+  },
+  {
+    id: 5,
+    name: "Samsung Galaxy Buds3",
+    category: "Accessories",
+    price: 18999,
+    originalPrice: 25000,
+    discount: 24,
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    rating: 4.6,
+    reviews: 98,
+    badge: "Great Value",
+  },
+  {
+    id: 6,
+    name: "Apple Watch Series 9",
+    category: "Smartwatches",
+    price: 65000,
+    originalPrice: 75000,
+    discount: 13,
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    rating: 4.7,
+    reviews: 142,
+    badge: "Premium",
+  },
+  {
+    id: 7,
+    name: "Google Pixel 9 Pro",
+    category: "Phones",
+    price: 165000,
+    originalPrice: 189999,
+    discount: 13,
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    rating: 4.7,
+    reviews: 210,
+    badge: "Latest",
+  },
+  {
+    id: 8,
+    name: "USB-C Fast Charger 65W",
+    category: "Accessories",
+    price: 4999,
+    originalPrice: 7500,
+    discount: 33,
+    image:
+      "https://images.unsplash.com/photo-1591437281884-767810e60f11?auto=format&fit=crop&q=80&w=400",
+    rating: 4.5,
+    reviews: 89,
+    badge: "Budget",
+  },
+];
+
 const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filterState, setFilterState] = useState({
@@ -11,112 +120,8 @@ const Shop = () => {
     search: "",
   });
 
-  const allProducts = [
-    {
-      id: 1,
-      name: "Samsung Galaxy S25 Ultra",
-      category: "Phones",
-      price: 189999,
-      originalPrice: 225000,
-      discount: 15,
-      image:
-        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
-      rating: 4.8,
-      reviews: 245,
-      badge: "Best Seller",
-    },
-    {
-      id: 2,
-      name: "iPhone 16 Pro Max",
-      category: "Phones",
-      price: 225000,
-      originalPrice: 249999,
-      discount: 10,
-      image:
-        "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
-      rating: 4.9,
-      reviews: 320,
-      badge: "Top Rated",
-    },
-    {
-      id: 3,
-      name: "AirPods Pro 2",
-      category: "Accessories",
-      price: 35000,
-      originalPrice: 45000,
-      discount: 22,
-      image:
-        "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 180,
-      badge: "Popular",
-    },
-    {
-      id: 4,
-      name: "iPad Pro 12.9 M4",
-      category: "Tablets",
-      price: 145000,
-      originalPrice: 165000,
-      discount: 12,
-      image:
-        "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
-      rating: 4.8,
-      reviews: 156,
-      badge: "Recommended",
-    },
-    {
-      id: 5,
-      name: "Samsung Galaxy Buds3",
-      category: "Accessories",
-      price: 18999,
-      originalPrice: 25000,
-      discount: 24,
-      image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
-      rating: 4.6,
-      reviews: 98,
-      badge: "Great Value",
-    },
-    {
-      id: 6,
-      name: "Apple Watch Series 9",
-      category: "Smartwatches",
-      price: 65000,
-      originalPrice: 75000,
-      discount: 13,
-      image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 142,
-      badge: "Premium",
-    },
-    {
-      id: 7,
-      name: "Google Pixel 9 Pro",
-      category: "Phones",
-      price: 165000,
-      originalPrice: 189999,
-      discount: 13,
-      image:
-        "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
-      rating: 4.7,
-      reviews: 210,
-      badge: "Latest",
-    },
-    {
-      id: 8,
-      name: "USB-C Fast Charger 65W",
-      category: "Accessories",
-      price: 4999,
-      originalPrice: 7500,
-      discount: 33,
-      image:
-        "https://images.unsplash.com/photo-1591437281884-767810e60f11?auto=format&fit=crop&q=80&w=400",
-      rating: 4.5,
-      reviews: 89,
-      badge: "Budget",
-    },
-  ];
+  // use the module-level allProducts (hoisted above) to avoid recreating the
+  // array each render which can trigger effect loops
 
   const applyFilters = useCallback((filters) => {
     let products = allProducts.filter((product) => {
@@ -139,7 +144,7 @@ const Shop = () => {
     });
 
     setFilteredProducts(products);
-  }, [allProducts]);
+  }, []);
 
   useEffect(() => {
     applyFilters(filterState);
