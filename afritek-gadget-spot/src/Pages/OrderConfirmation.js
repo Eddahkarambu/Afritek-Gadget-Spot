@@ -151,21 +151,7 @@ const OrderConfirmation = () => {
           {/* Total */}
           <div className="bg-[#111827] rounded-3xl p-6 border border-gray-800 mb-6 sticky top-32">
             <h2 className="text-xl font-bold mb-6">Order Total</h2>
-            <div className="space-y-3 pb-6 border-b border-gray-700">
-              <div className="flex justify-between text-gray-400 text-sm">
-                <span>Subtotal</span>
-                <span>KSh {orderData.subtotal.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-gray-400 text-sm">
-                <span>Shipping</span>
-                <span>KSh {orderData.shipping.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-gray-400 text-sm">
-                <span>Tax</span>
-                <span>KSh {orderData.tax.toLocaleString()}</span>
-              </div>
-            </div>
-            <div className="flex justify-between text-white text-xl font-bold pt-6">
+            <div className="flex justify-between text-white text-xl font-bold">
               <span>Total</span>
               <span className="text-green-500">
                 KSh {orderData.total.toLocaleString()}
@@ -229,7 +215,7 @@ const OrderConfirmation = () => {
         </div>
       </div>
 
-      {/* Original Next Steps */}
+      {/* Order Timeline */}
       <div className="bg-[#111827] rounded-3xl p-8 border border-gray-800 mb-8">
         <h2 className="text-2xl font-bold mb-6">Order Timeline</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

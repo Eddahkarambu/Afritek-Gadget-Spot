@@ -60,14 +60,10 @@ const Payment = () => {
         <div className="mb-8 pb-8 border-b border-gray-700">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
           <div className="space-y-2 text-sm">
-            <div className="flex justify-between text-gray-400">
-              <span>Items ({cart.length})</span>
-              <span>KSh {total.toLocaleString()}</span>
-            </div>
             <div className="flex justify-between text-white text-lg font-bold mt-4 pt-4 border-t border-gray-700">
               <span>Total Amount</span>
               <span className="text-green-500">
-                KSh {(total + 500 + Math.round(total * 0.16)).toLocaleString()}
+                KSh {total.toLocaleString()}
               </span>
             </div>
           </div>
@@ -149,8 +145,7 @@ const Payment = () => {
         {/* Instructions */}
         <div className="bg-[#0a0f18] rounded-lg p-4">
           <p className="text-gray-300 text-xs">
-            📱 Make sure you have WhatsApp installed on your device. After
-            sending the message, our team will contact you immediately.
+            📱 Make sure you have WhatsApp installed on your device. After sending the message, our team will contact you immediately.
           </p>
         </div>
       </div>

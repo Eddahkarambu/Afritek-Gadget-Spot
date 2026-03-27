@@ -12,7 +12,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 12000,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 45,
   },
   {
@@ -22,7 +23,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB 5G",
     price: 14800,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 52,
   },
   {
@@ -32,7 +34,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 13500,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 48,
   },
   {
@@ -42,7 +45,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14500,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 55,
   },
   {
@@ -52,7 +56,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 17000,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 62,
   },
   {
@@ -62,7 +67,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 18500,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 70,
   },
   {
@@ -72,7 +78,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 21000,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 78,
   },
   {
@@ -82,7 +89,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27500,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 85,
   },
   {
@@ -92,7 +100,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 34000,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 92,
   },
   {
@@ -102,7 +111,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB RAM",
     price: 122000,
-    image: "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
     reviews: 180,
   },
   {
@@ -112,7 +122,8 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 140000,
-    image: "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
     reviews: 190,
   },
   {
@@ -122,7 +133,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 18000,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
     reviews: 38,
   },
   // REDMI
@@ -133,7 +145,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/3GB RAM",
     price: 11500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 42,
   },
   {
@@ -143,7 +156,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 19500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 65,
   },
   {
@@ -153,7 +167,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14800,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 52,
   },
   {
@@ -163,7 +178,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 18800,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 70,
   },
   {
@@ -173,7 +189,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 28000,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 88,
   },
   {
@@ -183,7 +200,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 35500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 105,
   },
   {
@@ -193,7 +211,8 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 43500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 120,
   },
   {
@@ -203,7 +222,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 51500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 135,
   },
   {
@@ -213,7 +233,8 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 60500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 150,
   },
   // OPPO
@@ -224,7 +245,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 16500,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 58,
   },
   {
@@ -234,7 +256,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 14800,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 72,
   },
   {
@@ -244,7 +267,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 16600,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 85,
   },
   {
@@ -254,7 +278,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/4GB RAM",
     price: 20200,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -264,7 +289,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 21700,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 102,
   },
   {
@@ -274,7 +300,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 25200,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 118,
   },
   {
@@ -284,7 +311,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 29000,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 125,
   },
   {
@@ -294,7 +322,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 4G",
     price: 33800,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 130,
   },
   {
@@ -304,7 +333,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 5G",
     price: 38800,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 140,
   },
   {
@@ -314,7 +344,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 53500,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 155,
   },
   {
@@ -324,7 +355,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 53500,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 160,
   },
   {
@@ -334,7 +366,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 67500,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 170,
   },
   {
@@ -344,7 +377,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 76000,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
     reviews: 180,
   },
   // REALME
@@ -355,7 +389,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12800,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 50,
   },
   {
@@ -365,7 +400,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14800,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 62,
   },
   {
@@ -375,7 +411,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 17000,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 75,
   },
   {
@@ -385,7 +422,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 19000,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 88,
   },
   {
@@ -395,7 +433,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB Warranty",
     price: 14000,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 82,
   },
   {
@@ -405,7 +444,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB Warranty",
     price: 18000,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -415,7 +455,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB Warranty",
     price: 17000,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 80,
   },
   {
@@ -425,7 +466,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 18200,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 88,
   },
   {
@@ -435,7 +477,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 20400,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 102,
   },
   {
@@ -445,7 +488,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 23600,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 110,
   },
   {
@@ -455,7 +499,8 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/8GB RAM",
     price: 27200,
-    image: "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
     reviews: 125,
   },
   // TECNO
@@ -466,7 +511,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/3GB RAM",
     price: 12000,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 45,
   },
   {
@@ -476,7 +522,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 12800,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 52,
   },
   {
@@ -486,7 +533,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 15000,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 60,
   },
   {
@@ -496,7 +544,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14500,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 78,
   },
   {
@@ -506,7 +555,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 19500,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -516,7 +566,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 24600,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 108,
   },
   {
@@ -526,7 +577,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 26500,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 115,
   },
   {
@@ -536,7 +588,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 34200,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 128,
   },
   {
@@ -546,7 +599,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 37200,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 142,
   },
   {
@@ -556,7 +610,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27300,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
     reviews: 102,
   },
   {
@@ -566,7 +621,8 @@ const allProducts = [
     category: "Tablets",
     specs: "128GB/4GB RAM",
     price: 19200,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 65,
   },
   {
@@ -576,7 +632,8 @@ const allProducts = [
     category: "Tablets",
     specs: "256GB/8GB RAM",
     price: 22600,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 78,
   },
   // INFINIX
@@ -587,7 +644,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Device",
     price: 30800,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -597,7 +655,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Device",
     price: 32000,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 102,
   },
   {
@@ -607,7 +666,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 13800,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 62,
   },
   {
@@ -617,7 +677,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 15300,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 75,
   },
   {
@@ -627,7 +688,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 17500,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 88,
   },
   {
@@ -637,7 +699,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 19200,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -647,7 +710,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 23300,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 108,
   },
   {
@@ -657,7 +721,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 26800,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 122,
   },
   {
@@ -667,7 +732,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 11500,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 55,
   },
   {
@@ -677,7 +743,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12500,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 68,
   },
   // ITEL
@@ -688,7 +755,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 9000,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 35,
   },
   {
@@ -698,7 +766,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 9300,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 42,
   },
   {
@@ -708,7 +777,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 10800,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 50,
   },
   {
@@ -718,7 +788,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12300,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 58,
   },
   {
@@ -728,7 +799,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 25000,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 102,
   },
   {
@@ -738,7 +810,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 21500,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -748,7 +821,8 @@ const allProducts = [
     category: "Tablets",
     specs: "32GB Storage",
     price: 10500,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 62,
   },
   {
@@ -758,7 +832,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 9800,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 75,
   },
   {
@@ -768,7 +843,8 @@ const allProducts = [
     category: "Tablets",
     specs: "10-inch Display",
     price: 8800,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 48,
   },
   // VIVO
@@ -779,7 +855,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 13600,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 62,
   },
   {
@@ -789,7 +866,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 15300,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 75,
   },
   {
@@ -799,7 +877,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 18500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 82,
   },
   {
@@ -809,7 +888,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 20200,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 95,
   },
   {
@@ -819,7 +899,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 22900,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 108,
   },
   {
@@ -829,7 +910,8 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 25500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 118,
   },
   {
@@ -839,7 +921,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27900,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 132,
   },
   {
@@ -849,7 +932,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Device",
     price: 30700,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 140,
   },
   {
@@ -859,7 +943,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 4G",
     price: 32500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 148,
   },
   {
@@ -869,7 +954,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB 5G",
     price: 39000,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 158,
   },
   {
@@ -879,7 +965,8 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB RAM",
     price: 56000,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 172,
   },
   {
@@ -889,7 +976,8 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Flagship",
     price: 147500,
-    image: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
     reviews: 210,
   },
   // OTHER BRANDS
@@ -900,7 +988,8 @@ const allProducts = [
     category: "Phones",
     specs: "Basic Device",
     price: 6500,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 25,
   },
   {
@@ -910,7 +999,8 @@ const allProducts = [
     category: "Phones",
     specs: "Basic Device",
     price: 5500,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 18,
   },
   {
@@ -920,7 +1010,8 @@ const allProducts = [
     category: "Phones",
     specs: "32GB Storage",
     price: 7000,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 30,
   },
   {
@@ -930,7 +1021,8 @@ const allProducts = [
     category: "Phones",
     specs: "32GB Storage",
     price: 8000,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 35,
   },
   {
@@ -940,7 +1032,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB Storage",
     price: 8500,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 42,
   },
   {
@@ -950,7 +1043,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 6200,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 28,
   },
   {
@@ -960,7 +1054,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 7300,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 32,
   },
   {
@@ -970,7 +1065,8 @@ const allProducts = [
     category: "Phones",
     specs: "64GB Storage",
     price: 9350,
-    image: "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
     reviews: 38,
   },
   {
@@ -980,7 +1076,8 @@ const allProducts = [
     category: "Tablets",
     specs: "Educational Tablet",
     price: 9500,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 55,
   },
   {
@@ -990,7 +1087,8 @@ const allProducts = [
     category: "Tablets",
     specs: "Educational Tablet",
     price: 8500,
-    image: "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
     reviews: 48,
   },
   {
@@ -1000,12 +1098,13 @@ const allProducts = [
     category: "Other",
     specs: "Landline Phone",
     price: 3800,
-    image: "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image:
+      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
     reviews: 22,
   },
 ];
 
-const Shop = () => {
+const Shop = ({ addToCart }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filterState, setFilterState] = useState({
     category: "All",
@@ -1013,6 +1112,7 @@ const Shop = () => {
     rating: 0,
     search: "",
   });
+  const [addedToCart, setAddedToCart] = useState({});
 
   const applyFilters = useCallback((filters) => {
     let products = allProducts.filter((product) => {
@@ -1053,6 +1153,14 @@ const Shop = () => {
     setFilterState(filters);
   };
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setAddedToCart((prev) => ({ ...prev, [product.id]: true }));
+    setTimeout(() => {
+      setAddedToCart((prev) => ({ ...prev, [product.id]: false }));
+    }, 1500);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
@@ -1086,9 +1194,8 @@ const Shop = () => {
                     key={product.id}
                     className="group relative bg-[#111827] rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-cyan-500/10"
                   >
-                    {/* Image Container - NO BADGES */}
+                    {/* Image Container */}
                     <div className="relative h-64 bg-[#161b22] overflow-hidden flex items-center justify-center">
-                      {/* Image */}
                       <img
                         src={product.image}
                         alt={product.name}
@@ -1110,7 +1217,7 @@ const Shop = () => {
                         {product.specs}
                       </p>
 
-                      {/* Price Only */}
+                      {/* Price */}
                       <div className="flex items-center gap-2 mb-4">
                         <span className="text-white font-bold text-lg">
                           KSh {product.price.toLocaleString()}
@@ -1118,9 +1225,16 @@ const Shop = () => {
                       </div>
 
                       {/* Add to Cart Button */}
-                      <button className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-2 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        className={`w-full font-bold py-2 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg ${
+                          addedToCart[product.id]
+                            ? "bg-green-500 hover:bg-green-600 shadow-green-500/20"
+                            : "bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 shadow-cyan-500/20"
+                        }`}
+                      >
                         <ShoppingCart size={16} />
-                        Add to Cart
+                        {addedToCart[product.id] ? "Added! ✓" : "Add to Cart"}
                       </button>
                     </div>
                   </div>

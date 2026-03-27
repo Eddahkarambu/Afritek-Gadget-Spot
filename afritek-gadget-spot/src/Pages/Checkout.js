@@ -24,14 +24,10 @@ const Checkout = ({ cart, setCart }) => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Calculate Total
-  const subtotal = cart.reduce((acc, item) => {
+  // Calculate Total (No shipping or tax)
+  const total = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
-
-  const shipping = subtotal > 50000 ? 0 : 500;
-  const tax = Math.floor(subtotal * 0.16);
-  const total = subtotal + shipping + tax;
 
   // Form Validation
   const validateForm = () => {
@@ -76,9 +72,6 @@ const Checkout = ({ cart, setCart }) => {
         phone: formData.phone,
         address: `${formData.address}, ${formData.city} ${formData.postalCode}`,
         items: cart,
-        subtotal,
-        shipping,
-        tax,
         total,
         date: new Date().toLocaleString(),
       };
@@ -109,10 +102,7 @@ const Checkout = ({ cart, setCart }) => {
       msg += `• ${item.name} (${item.quantity}x) - KSh ${(item.price * item.quantity).toLocaleString()}\n`;
     });
 
-    msg += `\n*Order Summary:*\n`;
-    msg += `Subtotal: KSh ${orderData.subtotal.toLocaleString()}\n`;
-    msg += `Shipping: KSh ${orderData.shipping.toLocaleString()}\n`;
-    msg += `Tax: KSh ${orderData.tax.toLocaleString()}\n`;
+    msg += `\n*Order Total:*\n`;
     msg += `*Total: KSh ${orderData.total.toLocaleString()}*\n\n`;
     msg += `Order Date: ${orderData.date}`;
 
@@ -368,21 +358,9 @@ const Checkout = ({ cart, setCart }) => {
               ))}
             </div>
 
-            {/* Totals */}
+            {/* Total Only */}
             <div className="space-y-3 pt-6 border-t border-gray-700">
-              <div className="flex justify-between text-gray-400">
-                <span>Subtotal</span>
-                <span>KSh {subtotal.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <span>Shipping</span>
-                <span>{shipping === 0 ? "FREE" : `KSh ${shipping}`}</span>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <span>Tax (16%)</span>
-                <span>KSh {tax.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-white text-xl font-bold pt-3 border-t border-gray-700">
+              <div className="flex justify-between text-white text-xl font-bold">
                 <span>Total</span>
                 <span className="text-green-500">
                   KSh {total.toLocaleString()}
