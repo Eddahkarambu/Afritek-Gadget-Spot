@@ -1,37 +1,27 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
 import AfritekLogo from "../Images/AfritekLogo.PNG";
 
-const Navbar = () => {
+const Navbar = ({ cartItems = [] }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
-  const [cartCount, setCartCount] = React.useState(0);
-  const navigate = useNavigate();
-
-  const handleNavClick = (to, e) => {
-    // defensive navigation: log and navigate programmatically
-    if (e && e.preventDefault) e.preventDefault();
-    setIsOpen(false);
-    navigate(to);
-  };
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
-    <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-50 shadow-lg shadow-teal-900/50">
+    <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-40 shadow-lg shadow-teal-900/50">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex items-center justify-between">
         {/* Logo Section */}
         <Link
-          to="/" 
+          to="/"
           className="flex items-center gap-4 hover:opacity-90 transition-opacity group"
         >
-          {/* Logo Image from file */}
           <img
             src={AfritekLogo}
             alt="Afritek Logo"
             className="h-14 w-auto object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-cyan-500/50 transition-all"
           />
 
-          {/* Logo Text */}
           <div className="hidden md:flex flex-col">
             <span className="text-teal-300 font-bold text-2xl leading-none">
               Afritek
@@ -51,7 +41,6 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            onClick={(e) => handleNavClick("/", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Home
@@ -59,7 +48,6 @@ const Navbar = () => {
           </Link>
           <Link
             to="/shop"
-            onClick={(e) => handleNavClick("/shop", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Shop
@@ -67,7 +55,6 @@ const Navbar = () => {
           </Link>
           <Link
             to="/about"
-            onClick={(e) => handleNavClick("/about", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             About
@@ -75,7 +62,6 @@ const Navbar = () => {
           </Link>
           <Link
             to="/contact"
-            onClick={(e) => handleNavClick("/contact", e)}
             className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
           >
             Contact
@@ -102,9 +88,9 @@ const Navbar = () => {
               <ShoppingCart size={20} />
               <span>Cart</span>
 
-              {cartCount > 0 && (
+              {cartItems && cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center border-2 border-purple-800 animate-pulse">
-                  {cartCount}
+                  {cartItems.length}
                 </span>
               )}
             </div>
@@ -116,9 +102,9 @@ const Navbar = () => {
             className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-2"
           >
             <ShoppingCart size={22} />
-            {cartCount > 0 && (
+            {cartItems && cartItems.length > 0 && (
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                {cartCount}
+                {cartItems.length}
               </span>
             )}
           </Link>
@@ -145,6 +131,14 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search gadgets, phones, tablets..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  console.log("Search for:", searchTerm);
+                  // Add search functionality here
+                }
+              }}
               className="w-full bg-teal-900/50 border-2 border-cyan-500/50 hover:border-cyan-400 focus:border-cyan-300 text-white placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg focus:outline-none transition-all"
             />
           </div>
@@ -158,28 +152,28 @@ const Navbar = () => {
             <Link
               to="/"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={(e) => handleNavClick("/", e)}
+              onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
             <Link
               to="/shop"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={(e) => handleNavClick("/shop", e)}
+              onClick={() => setIsOpen(false)}
             >
               Shop
             </Link>
             <Link
               to="/about"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={(e) => handleNavClick("/about", e)}
+              onClick={() => setIsOpen(false)}
             >
               About
             </Link>
             <Link
               to="/contact"
               className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={(e) => handleNavClick("/contact", e)}
+              onClick={() => setIsOpen(false)}
             >
               Contact
             </Link>
@@ -190,9 +184,9 @@ const Navbar = () => {
             >
               <ShoppingCart size={20} />
               View Cart
-              {cartCount > 0 && (
+              {cartItems && cartItems.length > 0 && (
                 <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartCount}
+                  {cartItems.length}
                 </span>
               )}
             </Link>
