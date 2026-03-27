@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Phone, Mail, MapPin, User } from "lucide-react";
+import {
+  ArrowLeft,
+  Phone,
+  Mail,
+  MapPin,
+  User,
+  MessageCircle,
+} from "lucide-react";
 
 const Checkout = ({ cart, setCart }) => {
   const navigate = useNavigate();
@@ -18,10 +25,13 @@ const Checkout = ({ cart, setCart }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Calculate Total
-  const total = cart.reduce((acc, item) => {
-    const price = parseInt(item.price.replace(/[^0-9]/g, ""));
-    return acc + price;
+  const subtotal = cart.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
   }, 0);
+
+  const shipping = subtotal > 50000 ? 0 : 500;
+  const tax = Math.floor(subtotal * 0.16);
+  const total = subtotal + shipping + tax;
 
   // Form Validation
   const validateForm = () => {
@@ -57,13 +67,56 @@ const Checkout = ({ cart, setCart }) => {
     }
   };
 
-  const handleProceedToPayment = () => {
+  const handleProceedToWhatsApp = () => {
     if (validateForm()) {
-      // Store checkout data and redirect to payment
-      sessionStorage.setItem("checkoutData", JSON.stringify(formData));
-      sessionStorage.setItem("cartData", JSON.stringify(cart));
-      navigate("/payment", { state: { formData, cart, total } });
+      const orderData = {
+        orderId: `ORD-${Date.now()}`,
+        customerName: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        address: `${formData.address}, ${formData.city} ${formData.postalCode}`,
+        items: cart,
+        subtotal,
+        shipping,
+        tax,
+        total,
+        date: new Date().toLocaleString(),
+      };
+
+      // Store order data
+      sessionStorage.setItem("orderData", JSON.stringify(orderData));
+
+      // Create WhatsApp message
+      const message = createWhatsAppMessage(orderData);
+
+      // Navigate to WhatsApp payment page
+      navigate("/payment", {
+        state: { formData, cart, total, orderData, message },
+      });
     }
+  };
+
+  const createWhatsAppMessage = (orderData) => {
+    let msg = `🛒 *New Order Request*\n\n`;
+    msg += `*Customer Details:*\n`;
+    msg += `Name: ${orderData.customerName}\n`;
+    msg += `Email: ${orderData.email}\n`;
+    msg += `Phone: ${orderData.phone}\n`;
+    msg += `Address: ${orderData.address}\n\n`;
+    msg += `*Order Items:*\n`;
+
+    orderData.items.forEach((item) => {
+      msg += `• ${item.name} (${item.quantity}x) - KSh ${(item.price * item.quantity).toLocaleString()}\n`;
+    });
+
+    msg += `\n*Order Summary:*\n`;
+    msg += `Subtotal: KSh ${orderData.subtotal.toLocaleString()}\n`;
+    msg += `Shipping: KSh ${orderData.shipping.toLocaleString()}\n`;
+    msg += `Tax: KSh ${orderData.tax.toLocaleString()}\n`;
+    msg += `*Total: KSh ${orderData.total.toLocaleString()}*\n\n`;
+    msg += `Order Date: ${orderData.date}`;
+
+    return msg;
   };
 
   if (cart.length === 0) {
@@ -279,11 +332,12 @@ const Checkout = ({ cart, setCart }) => {
 
           {/* Proceed Button */}
           <button
-            onClick={handleProceedToPayment}
+            onClick={handleProceedToWhatsApp}
             disabled={isLoading}
-            className="w-full mt-8 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 text-white font-bold py-4 rounded-xl transition-colors text-lg"
+            className="w-full mt-8 bg-green-500 hover:bg-green-600 disabled:bg-gray-600 text-white font-bold py-4 rounded-xl transition-colors text-lg flex items-center justify-center gap-2"
           >
-            {isLoading ? "Processing..." : "Proceed to Payment"}
+            <MessageCircle size={24} />
+            {isLoading ? "Processing..." : "Complete Order via WhatsApp"}
           </button>
         </div>
 
@@ -304,11 +358,11 @@ const Checkout = ({ cart, setCart }) => {
                       {item.name}
                     </p>
                     <p className="text-gray-500 text-xs mt-1">
-                      {item.category}
+                      Qty: {item.quantity}
                     </p>
                   </div>
                   <p className="text-blue-500 font-bold text-sm">
-                    {item.price}
+                    KSh {(item.price * item.quantity).toLocaleString()}
                   </p>
                 </div>
               ))}
@@ -318,29 +372,28 @@ const Checkout = ({ cart, setCart }) => {
             <div className="space-y-3 pt-6 border-t border-gray-700">
               <div className="flex justify-between text-gray-400">
                 <span>Subtotal</span>
-                <span>KSh {total.toLocaleString()}</span>
+                <span>KSh {subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Shipping</span>
-                <span>KSh 500</span>
+                <span>{shipping === 0 ? "FREE" : `KSh ${shipping}`}</span>
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Tax (16%)</span>
-                <span>KSh {Math.round(total * 0.16).toLocaleString()}</span>
+                <span>KSh {tax.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-white text-xl font-bold pt-3 border-t border-gray-700">
                 <span>Total</span>
-                <span className="text-blue-500">
-                  KSh{" "}
-                  {(total + 500 + Math.round(total * 0.16)).toLocaleString()}
+                <span className="text-green-500">
+                  KSh {total.toLocaleString()}
                 </span>
               </div>
             </div>
 
             {/* Info Box */}
-            <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-              <p className="text-blue-400 text-xs">
-                💳 You will be redirected to M-Pesa payment on the next step
+            <div className="mt-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+              <p className="text-green-400 text-xs">
+                💬 You'll complete your order via WhatsApp
               </p>
             </div>
           </div>
