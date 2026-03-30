@@ -1,6 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import SearchFilter from "../components/SearchFilter";
 import { ShoppingCart } from "lucide-react";
+import SumsungAo6 from "../Images/sumsungAo6.webp";
+import SumsungAO7 from "../Images/SumsungGalaxyAO7.webp";
+import SumsungA11 from "../Images/SumsungGalaxyA11.jpg";
+import SumsungA16 from "../Images/SumsungGalaxyA16.jpg";
+import SumsungA17 from "../Images/SumsungGalaxyA17.webp";
+import SumsungA26 from "../Images/SumsungGalaxyA26.jpg";
+import S25Img from "../Images/SumsungGalaxys25ultra.jpg";
+import RedmiA5 from "../Images/redmiA5.jpeg";
+import Redmi15 from "../Images/Redmi15.webp";
+import Redmi15c from "../Images/Redmi15c.webp";
+import Redmi15pro from "../Images/Redmi15pro.jpg";
+import RedmiNote15 from "../Images/Redminote15.webp";
+import RedmiNote15proPlus from "../Images/RedmiNote15pro+.webp";
 
 // All 99 Real Products from your inventory
 const allProducts = [
@@ -12,8 +25,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 12000,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungAo6,
     reviews: 45,
   },
   {
@@ -23,8 +35,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB 5G",
     price: 14800,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungAo6,
     reviews: 52,
   },
   {
@@ -34,8 +45,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 13500,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungAO7,
     reviews: 48,
   },
   {
@@ -45,19 +55,17 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14500,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungAO7,
     reviews: 55,
   },
   {
     id: 5,
-    name: "Samsung Galaxy A16",
+    name: "Samsung Galaxy A16 `",
     brand: "Samsung",
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 17000,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA16,
     reviews: 62,
   },
   {
@@ -67,8 +75,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 18500,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA17,
     reviews: 70,
   },
   {
@@ -78,8 +85,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 21000,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA17,
     reviews: 78,
   },
   {
@@ -89,8 +95,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27500,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA17,
     reviews: 85,
   },
   {
@@ -100,8 +105,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 34000,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA26,
     reviews: 92,
   },
   {
@@ -111,8 +115,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB RAM",
     price: 122000,
-    image:
-      "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
+    image: S25Img,
     reviews: 180,
   },
   {
@@ -122,8 +125,7 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 140000,
-    image:
-      "https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400",
+    image: S25Img,
     reviews: 190,
   },
   {
@@ -133,8 +135,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 18000,
-    image:
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400",
+    image: SumsungA11,
     reviews: 38,
   },
   // REDMI
@@ -145,8 +146,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/3GB RAM",
     price: 11500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: RedmiA5,
     reviews: 42,
   },
   {
@@ -156,8 +156,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 19500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: Redmi15,
     reviews: 65,
   },
   {
@@ -167,8 +166,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14800,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: Redmi15c,
     reviews: 52,
   },
   {
@@ -178,8 +176,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 18800,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: Redmi15c,
     reviews: 70,
   },
   {
@@ -189,8 +186,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 28000,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: RedmiNote15,
     reviews: 88,
   },
   {
@@ -200,8 +196,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 35500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: Redmi15pro,
     reviews: 105,
   },
   {
@@ -211,8 +206,7 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 43500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: Redmi15pro,
     reviews: 120,
   },
   {
@@ -222,8 +216,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 51500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: RedmiNote15proPlus,
     reviews: 135,
   },
   {
@@ -233,8 +226,7 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/12GB RAM",
     price: 60500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: RedmiNote15proPlus,
     reviews: 150,
   },
   // OPPO
