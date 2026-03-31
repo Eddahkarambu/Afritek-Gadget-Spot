@@ -75,10 +75,10 @@ const Contact = () => {
               Call us during business hours. We're here to help!
             </p>
             <a
-              href="tel:+254712345678"
+              href="tel:+25495453038"
               className="text-teal-400 hover:text-teal-300 font-semibold transition-colors"
             >
-              +254 712 345 678
+              +254 954 530 38
             </a>
             <p className="text-gray-500 text-sm mt-2">+254 720 987 654</p>
           </div>
@@ -93,7 +93,7 @@ const Contact = () => {
               Visit us at our office in Nairobi.
             </p>
             <p className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
-              123 Tech Avenue
+              The Bazaar, wing5, Mezzanine floor, Moi Avenue
               <br />
               Nairobi, Kenya
             </p>
@@ -265,7 +265,8 @@ const Contact = () => {
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="Facebook"
                 >
-                  f
+                  T
+                  
                 </a>
                 <a
                   href="https://twitter.com/afritek"
@@ -275,7 +276,7 @@ const Contact = () => {
                   𝕏
                 </a>
                 <a
-                  href="https://instagram.com/afritek"
+                  href="https://www.instagram.com/afritek_gadget_spot/"
                   className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
                   title="Instagram"
                 >
