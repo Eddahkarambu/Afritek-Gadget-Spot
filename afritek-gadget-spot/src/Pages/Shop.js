@@ -29,8 +29,26 @@ import RealmeNote70 from "../Images/RealmeNote70.jpg";
 import RealmeC71 from "../Images/Realmec71.webp";
 import RealmeC67 from "../Images/RealmeC67.webp";
 import RealmeC65 from "../Images/RealmeC65.webp";
-import RealmeC75x from "../Images/RealmeC75x.jpg";
 import RealmeC75 from "../Images/RealmeC75.jpg";
+import RealmeC75x from "../Images/RealmeC75x.jpg";
+
+// TECNO images
+import TecnoPop10 from "../Images/TecnoPop10.webp";
+import TecnoPop20 from "../Images/TecnoPop20.webp";
+import TecnoSpark40 from "../Images/TecnoSpark40.jpg";
+import TecnoSpark40Pro from "../Images/TecnoSpark40Pro.jpg";
+import TecnoSpark40ProPlus from "../Images/TecnoSpark40Pro+.jpg";
+import TecnoCamon40Pro from "../Images/TecnoCamon40Pro.jpg";
+import TecnoCamon50Pro from "../Images/TecnoCamon50Pro.webp";
+import TecnoSparkSlim from "../Images/TecnoSparkSlim.jpg";
+import TecnoMegaPadSE from "../Images/TecnoMegaPadSE.webp";
+
+// INFINIX images
+import InfinixNote50Pro from "../Images/InfinixNote50Pro.png";
+import InfinixNoteEdge from "../Images/InfinixNoteEdge.webp";
+import InfinixHot60i from "../Images/InfinixHot60i.jpg";
+import InfinixHot60ProPlus from "../Images/InfinixHot60Pro+.jpg";
+import InfinixSmart10 from "../Images/InfinixSmart10.webp";
 
 // All 99 Real Products from your inventory
 const allProducts = [
@@ -496,8 +514,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/3GB RAM",
     price: 12000,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoPop10,
     reviews: 45,
   },
   {
@@ -507,8 +524,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 12800,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoPop20,
     reviews: 52,
   },
   {
@@ -518,8 +534,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 15000,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoPop20,
     reviews: 60,
   },
   {
@@ -529,8 +544,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14500,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoSpark40,
     reviews: 78,
   },
   {
@@ -540,8 +554,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 19500,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoSpark40Pro,
     reviews: 95,
   },
   {
@@ -551,8 +564,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 24600,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoSpark40ProPlus,
     reviews: 108,
   },
   {
@@ -562,8 +574,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 26500,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoSpark40ProPlus,
     reviews: 115,
   },
   {
@@ -573,8 +584,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 34200,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoCamon40Pro,
     reviews: 128,
   },
   {
@@ -584,8 +594,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 37200,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoCamon50Pro,
     reviews: 142,
   },
   {
@@ -595,8 +604,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27300,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400",
+    image: TecnoSparkSlim,
     reviews: 102,
   },
   {
@@ -606,8 +614,7 @@ const allProducts = [
     category: "Tablets",
     specs: "128GB/4GB RAM",
     price: 19200,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: TecnoMegaPadSE,
     reviews: 65,
   },
   {
@@ -617,20 +624,18 @@ const allProducts = [
     category: "Tablets",
     specs: "256GB/8GB RAM",
     price: 22600,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: TecnoMegaPadSE,
     reviews: 78,
   },
   // INFINIX
   {
     id: 58,
-    name: "IPronfinix Note 50 ",
+    name: "Infinix Note 50 Pro",
     brand: "Infinix",
     category: "Phones",
     specs: "Advanced Device",
     price: 30800,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixNote50Pro,
     reviews: 95,
   },
   {
@@ -640,8 +645,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Device",
     price: 32000,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixNoteEdge,
     reviews: 102,
   },
   {
@@ -651,8 +655,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 13800,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60i,
     reviews: 62,
   },
   {
@@ -662,8 +665,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 15300,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60i,
     reviews: 75,
   },
   {
@@ -673,8 +675,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 17500,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60i,
     reviews: 88,
   },
   {
@@ -684,8 +685,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 19200,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60ProPlus,
     reviews: 95,
   },
   {
@@ -695,8 +695,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 23300,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60ProPlus,
     reviews: 108,
   },
   {
@@ -706,8 +705,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 26800,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixHot60ProPlus,
     reviews: 122,
   },
   {
@@ -717,8 +715,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 11500,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixSmart10,
     reviews: 55,
   },
   {
@@ -728,8 +725,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12500,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: InfinixSmart10,
     reviews: 68,
   },
   // ITEL
