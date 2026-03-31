@@ -70,6 +70,22 @@ import VivoV60Lite from "../Images/VivoV60Lite.jpg";
 import VivoV60 from "../Images/VivoV60.jpg";
 import VivoX300Pro from "../Images/VivoX300Pro.jpg";
 
+// VILLAON images
+import VillaonV20 from "../Images/VillaonV20.jpg";
+import VillaonV20SE from "../Images/VillaonV20SE.webp";
+import VillaonV25 from "../Images/VillaonV25.jpg";
+import VillaonV40 from "../Images/VillaonV40.jpg";
+import VillaonV40s from "../Images/VillaonV40s.jpg";
+import VillaonV45 from "../Images/VillaonV45.webp";
+import VillaonV50s from "../Images/VillaonV50s.jpg";
+
+// ELIMU-TAB images
+import ElimuET04Pro from "../Images/ElimuTabET04Pro.jpg";
+import ElimuET05 from "../Images/ElimuTabET05.jpg";
+
+// BONTEL images
+import BontelT1000 from "../Images/BontelLandlineT1000.jpg";
+
 // All 99 Real Products from your inventory
 const allProducts = [
   // SAMSUNG
@@ -968,8 +984,7 @@ const allProducts = [
     category: "Phones",
     specs: "Basic Device",
     price: 6500,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV20,
     reviews: 25,
   },
   {
@@ -979,8 +994,7 @@ const allProducts = [
     category: "Phones",
     specs: "Basic Device",
     price: 5500,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV20SE,
     reviews: 18,
   },
   {
@@ -990,8 +1004,7 @@ const allProducts = [
     category: "Phones",
     specs: "32GB Storage",
     price: 7000,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV40,
     reviews: 30,
   },
   {
@@ -1001,8 +1014,7 @@ const allProducts = [
     category: "Phones",
     specs: "32GB Storage",
     price: 8000,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV40s,
     reviews: 35,
   },
   {
@@ -1012,8 +1024,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB Storage",
     price: 8500,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV40s,
     reviews: 42,
   },
   {
@@ -1023,8 +1034,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 6200,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV25,
     reviews: 28,
   },
   {
@@ -1034,8 +1044,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 7300,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV45,
     reviews: 32,
   },
   {
@@ -1045,8 +1054,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB Storage",
     price: 9350,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: VillaonV50s,
     reviews: 38,
   },
   {
@@ -1056,8 +1064,7 @@ const allProducts = [
     category: "Tablets",
     specs: "Educational Tablet",
     price: 9500,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: ElimuET04Pro,
     reviews: 55,
   },
   {
@@ -1067,8 +1074,7 @@ const allProducts = [
     category: "Tablets",
     specs: "Educational Tablet",
     price: 8500,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: ElimuET05,
     reviews: 48,
   },
   {
@@ -1078,8 +1084,7 @@ const allProducts = [
     category: "Other",
     specs: "Landline Phone",
     price: 3800,
-    image:
-      "https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?auto=format&fit=crop&q=80&w=400",
+    image: BontelT1000,
     reviews: 22,
   },
 ];
