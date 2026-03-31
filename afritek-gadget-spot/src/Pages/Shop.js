@@ -15,6 +15,23 @@ import Redmi15pro from "../Images/Redmi15pro.jpg";
 import RedmiNote15 from "../Images/Redminote15.webp";
 import RedmiNote15proPlus from "../Images/RedmiNote15pro+.webp";
 
+// OPPO images
+import OppoA3x from "../Images/OppoA3x.jpg";
+import OppoA6x from "../Images/OppoA6x.jpg";
+import OPPOA6Pro from "../Images/OPPOA6Pro.jpg";
+import OPPOReno14f5G from "../Images/OPPOReno14f5G.jpg";
+import OPPOReno155G from "../Images/OPPOReno155G.jpg";
+import OPPOReno5Pro5G from "../Images/OPPOReno5Pro5G.webp";
+
+// Realme images
+import RealmeNote60x from "../Images/RealmeNote60x.webp";
+import RealmeNote70 from "../Images/RealmeNote70.jpg";
+import RealmeC71 from "../Images/Realmec71.webp";
+import RealmeC67 from "../Images/RealmeC67.webp";
+import RealmeC65 from "../Images/RealmeC65.webp";
+import RealmeC75x from "../Images/RealmeC75x.jpg";
+import RealmeC75 from "../Images/RealmeC75.jpg";
+
 // All 99 Real Products from your inventory
 const allProducts = [
   // SAMSUNG
@@ -237,8 +254,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 16500,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA3x,
     reviews: 58,
   },
   {
@@ -248,8 +264,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 14800,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA6x,
     reviews: 72,
   },
   {
@@ -259,8 +274,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 16600,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA6x,
     reviews: 85,
   },
   {
@@ -270,8 +284,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/4GB RAM",
     price: 20200,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA6x,
     reviews: 95,
   },
   {
@@ -281,8 +294,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 21700,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA6x,
     reviews: 102,
   },
   {
@@ -292,8 +304,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 25200,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OppoA6x,
     reviews: 118,
   },
   {
@@ -303,8 +314,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 29000,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOA6Pro,
     reviews: 125,
   },
   {
@@ -314,8 +324,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 4G",
     price: 33800,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOA6Pro,
     reviews: 130,
   },
   {
@@ -325,8 +334,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 5G",
     price: 38800,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOA6Pro,
     reviews: 140,
   },
   {
@@ -336,8 +344,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 53500,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOReno14f5G,
     reviews: 155,
   },
   {
@@ -347,8 +354,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 53500,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOReno155G,
     reviews: 160,
   },
   {
@@ -358,8 +364,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 67500,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOReno155G,
     reviews: 170,
   },
   {
@@ -369,8 +374,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced 5G",
     price: 76000,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400",
+    image: OPPOReno5Pro5G,
     reviews: 180,
   },
   // REALME
@@ -381,8 +385,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12800,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeNote60x,
     reviews: 50,
   },
   {
@@ -392,8 +395,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 14800,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeNote70,
     reviews: 62,
   },
   {
@@ -403,8 +405,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 17000,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC71,
     reviews: 75,
   },
   {
@@ -414,8 +415,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 19000,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC71,
     reviews: 88,
   },
   {
@@ -425,8 +425,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB Warranty",
     price: 14000,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC67,
     reviews: 82,
   },
   {
@@ -436,8 +435,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB Warranty",
     price: 18000,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC67,
     reviews: 95,
   },
   {
@@ -447,8 +445,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB Warranty",
     price: 17000,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC65,
     reviews: 80,
   },
   {
@@ -458,8 +455,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 18200,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC75x,
     reviews: 88,
   },
   {
@@ -469,8 +465,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 20400,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC75x,
     reviews: 102,
   },
   {
@@ -480,8 +475,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 23600,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC75,
     reviews: 110,
   },
   {
@@ -491,8 +485,7 @@ const allProducts = [
     category: "Phones",
     specs: "512GB/8GB RAM",
     price: 27200,
-    image:
-      "https://images.unsplash.com/photo-1588423770109-910921ee2d20?auto=format&fit=crop&q=80&w=400",
+    image: RealmeC75,
     reviews: 125,
   },
   // TECNO
@@ -631,7 +624,7 @@ const allProducts = [
   // INFINIX
   {
     id: 58,
-    name: "Infinix Note 50 Pro",
+    name: "IPronfinix Note 50 ",
     brand: "Infinix",
     category: "Phones",
     specs: "Advanced Device",

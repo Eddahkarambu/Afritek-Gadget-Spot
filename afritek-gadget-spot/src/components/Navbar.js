@@ -135,8 +135,7 @@ const Navbar = ({ cartItems = [] }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  console.log("Search for:", searchTerm);
-                  // Add search functionality here
+                  // TODO: implement search behavior
                 }
               }}
               className="w-full bg-teal-900/50 border-2 border-cyan-500/50 hover:border-cyan-400 focus:border-cyan-300 text-white placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg focus:outline-none transition-all"
