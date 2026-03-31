@@ -50,6 +50,26 @@ import InfinixHot60i from "../Images/InfinixHot60i.jpg";
 import InfinixHot60ProPlus from "../Images/InfinixHot60Pro+.jpg";
 import InfinixSmart10 from "../Images/InfinixSmart10.webp";
 
+// ITEL images
+import ItelA06 from "../Images/iTelA06.jpg";
+import ItelA100c from "../Images/iTelA100c.jpg";
+import ItelA90 from "../Images/iTelA90.jpg";
+import ItelCity100 from "../Images/iTelCity100.jpg";
+import ItelS23Plus from "../Images/iTelS23+.jpg";
+import ItelS26Ultra from "../Images/iTelS26Ultra.jpg";
+import ItelKidPad from "../Images/iTelKidPad.webp";
+import ItelP55Plus from "../Images/iTelP55+.jpeg";
+import ItelVistaTab10 from "../Images/iTelVistaTab10.jpeg";
+
+// VIVO images
+import VivoY04 from "../Images/VivoY04.webp";
+import VivoY21D from "../Images/VivoY21D.jpg";
+import VivoY31D from "../Images/VivoY31D.jpg";
+import VivoV40Lite from "../Images/VivoV40Lite.jpg";
+import VivoV60Lite from "../Images/VivoV60Lite.jpg";
+import VivoV60 from "../Images/VivoV60.jpg";
+import VivoX300Pro from "../Images/VivoX300Pro.jpg";
+
 // All 99 Real Products from your inventory
 const allProducts = [
   // SAMSUNG
@@ -736,8 +756,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 9000,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelA06,
     reviews: 35,
   },
   {
@@ -747,8 +766,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/2GB RAM",
     price: 9300,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelA100c,
     reviews: 42,
   },
   {
@@ -758,8 +776,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 10800,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelA90,
     reviews: 50,
   },
   {
@@ -769,8 +786,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 12300,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelCity100,
     reviews: 58,
   },
   {
@@ -780,8 +796,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 25000,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelS23Plus,
     reviews: 102,
   },
   {
@@ -791,8 +806,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 21500,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelS26Ultra,
     reviews: 95,
   },
   {
@@ -802,8 +816,7 @@ const allProducts = [
     category: "Tablets",
     specs: "32GB Storage",
     price: 10500,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: ItelKidPad,
     reviews: 62,
   },
   {
@@ -813,8 +826,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/8GB RAM",
     price: 9800,
-    image:
-      "https://images.unsplash.com/photo-1586253408509-e1a6b65ab79a?auto=format&fit=crop&q=80&w=400",
+    image: ItelP55Plus,
     reviews: 75,
   },
   {
@@ -824,8 +836,7 @@ const allProducts = [
     category: "Tablets",
     specs: "10-inch Display",
     price: 8800,
-    image:
-      "https://images.unsplash.com/photo-1591290621836-2be1c4c65b8d?auto=format&fit=crop&q=80&w=400",
+    image: ItelVistaTab10,
     reviews: 48,
   },
   // VIVO
@@ -836,8 +847,7 @@ const allProducts = [
     category: "Phones",
     specs: "64GB/4GB RAM",
     price: 13600,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY04,
     reviews: 62,
   },
   {
@@ -847,8 +857,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 15300,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY04,
     reviews: 75,
   },
   {
@@ -858,8 +867,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/4GB RAM",
     price: 18500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY21D,
     reviews: 82,
   },
   {
@@ -869,8 +877,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 20200,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY21D,
     reviews: 95,
   },
   {
@@ -880,8 +887,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 22900,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY21D,
     reviews: 108,
   },
   {
@@ -891,8 +897,7 @@ const allProducts = [
     category: "Phones",
     specs: "128GB/6GB RAM",
     price: 25500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY31D,
     reviews: 118,
   },
   {
@@ -902,8 +907,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB RAM",
     price: 27900,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoY31D,
     reviews: 132,
   },
   {
@@ -913,8 +917,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Device",
     price: 30700,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoV40Lite,
     reviews: 140,
   },
   {
@@ -924,8 +927,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/8GB 4G",
     price: 32500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoV60Lite,
     reviews: 148,
   },
   {
@@ -935,8 +937,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB 5G",
     price: 39000,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoV60Lite,
     reviews: 158,
   },
   {
@@ -946,8 +947,7 @@ const allProducts = [
     category: "Phones",
     specs: "256GB/12GB RAM",
     price: 56000,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoV60,
     reviews: 172,
   },
   {
@@ -957,8 +957,7 @@ const allProducts = [
     category: "Phones",
     specs: "Advanced Flagship",
     price: 147500,
-    image:
-      "https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=400",
+    image: VivoX300Pro,
     reviews: 210,
   },
   // OTHER BRANDS
