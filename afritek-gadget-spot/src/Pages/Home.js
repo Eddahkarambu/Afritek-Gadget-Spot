@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Zap, Truck, Shield, Smartphone } from "lucide-react";
+import LatestGalaxy from "../Images/LatestGalaxy.jpg";
 
 const Home = () => {
   return (
@@ -42,7 +43,7 @@ const Home = () => {
                 {/* Image container */}
                 <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-2 rounded-3xl shadow-2xl shadow-cyan-500/50 overflow-hidden">
                   <img
-                    src="/images/latest galaxy.jpg"
+                    src={LatestGalaxy}
                     alt="Latest Galaxy"
                     className="rounded-3xl w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
                   />

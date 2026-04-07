@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
-import AfritekLogo from "../Images/AfritekLogo.PNG";
+import AfritekLogo from "../Images/AfritekLogoLogo.jpeg";
 
 const Navbar = ({ cartItems = [] }) => {
   const [isOpen, setIsOpen] = React.useState(false);
