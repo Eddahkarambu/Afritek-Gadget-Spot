@@ -20,15 +20,21 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Build the WhatsApp message from the form data
+    const { name, email, subject, message } = formData;
+    const phone = "254795453038"; // WhatsApp number (no plus sign)
+    const text = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
+    const encoded = encodeURIComponent(text);
+    const waUrl = `https://wa.me/${phone}?text=${encoded}`;
+
+    // Open WhatsApp in a new tab
+    window.open(waUrl, "_blank");
+
+    // Show the temporary submitted state and reset the form
     setSubmitted(true);
     setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
       setSubmitted(false);
+      setFormData({ name: "", email: "", subject: "", message: "" });
     }, 2000);
   };
 
@@ -62,7 +68,6 @@ const Contact = () => {
             >
               support@afritekgadget.com
             </a>
-            <p className="text-gray-500 text-sm mt-2">info@afritekgadget.com</p>
           </div>
 
           {/* Contact Info Card 2 */}
@@ -78,9 +83,8 @@ const Contact = () => {
               href="tel:+25495453038"
               className="text-teal-400 hover:text-teal-300 font-semibold transition-colors"
             >
-              +254 954 530 38
+              +254795453038
             </a>
-            <p className="text-gray-500 text-sm mt-2">+254 720 987 654</p>
           </div>
 
           {/* Contact Info Card 3 */}
@@ -207,17 +211,12 @@ const Contact = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between items-center pb-3 border-b border-gray-700">
-                  <span className="text-gray-400">Monday - Friday</span>
+                  <span className="text-gray-400">Monday - Saturday</span>
                   <span className="text-cyan-400 font-semibold">
-                    9:00 AM - 6:00 PM
+                    8:00 AM - 7:00 PM
                   </span>
                 </div>
-                <div className="flex justify-between items-center pb-3 border-b border-gray-700">
-                  <span className="text-gray-400">Saturday</span>
-                  <span className="text-cyan-400 font-semibold">
-                    10:00 AM - 4:00 PM
-                  </span>
-                </div>
+
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Sunday</span>
                   <span className="text-red-400 font-semibold">Closed</span>
@@ -260,36 +259,105 @@ const Contact = () => {
             <div className="bg-gradient-to-r from-cyan-500/10 to-teal-500/10 border border-cyan-500/30 rounded-2xl p-8">
               <h3 className="text-xl font-bold mb-4">Follow Us</h3>
               <div className="flex gap-4">
-                <a
-                  href="https://facebook.com/afritek"
-                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
-                  title="Facebook"
-                >
-                  T
-                  
-                </a>
-                <a
-                  href="https://twitter.com/afritek"
-                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
-                  title="Twitter"
-                >
-                  𝕏
-                </a>
+                {/* Instagram */}
                 <a
                   href="https://www.instagram.com/afritek_gadget_spot/"
-                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
+                  className="w-12 h-12 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg flex items-center justify-center text-white hover:text-white transition-all"
                   title="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  📷
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <rect
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      ry="5"
+                      fill="url(#g)"
+                    />
+                    <defs>
+                      <linearGradient id="g" x1="0" x2="1">
+                        <stop offset="0%" stopColor="#f58529" />
+                        <stop offset="50%" stopColor="#dd2a7b" />
+                        <stop offset="100%" stopColor="#8134af" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2z"
+                      fill="#ffffff"
+                    />
+                    <circle cx="17.6" cy="6.4" r="0.9" fill="#ffffff" />
+                  </svg>
                 </a>
+
+                {/* TikTok */}
                 <a
-                  href="https://linkedin.com/company/afritek"
-                  className="w-12 h-12 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-all"
-                  title="LinkedIn"
+                  href="https://www.tiktok.com/@afritekgadget"
+                  className="w-12 h-12 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg flex items-center justify-center text-white hover:text-white transition-all"
+                  title="TikTok"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  in
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M16 8.5v4.9a3.6 3.6 0 1 1-3.6-3.6V7.1h2.4c.6 1.1 1.6 1.9 2.7 1.4z"
+                      fill="#25F4EE"
+                    />
+                    <path
+                      d="M13.4 21.5a5.9 5.9 0 1 0 0-11.8v2.6a3.3 3.3 0 1 1 0 6.6v2.6z"
+                      fill="#010101"
+                    />
+                    <path
+                      d="M17.2 7.3c-.2-.1-.5-.1-.7 0-.3.1-.5.3-.6.6-.1.3-.1.5 0 .8.2.5.6.9 1.2 1.1.6.2 1.2.1 1.7-.2v-1.5c-.6.3-1.2.4-1.6.2z"
+                      fill="#FF0050"
+                      opacity="0.95"
+                    />
+                  </svg>
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Map / Location Section */}
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold text-center mb-4">Our Location</h2>
+          <div className="max-w-4xl mx-auto rounded-lg overflow-hidden border border-gray-800">
+            <iframe
+              title="Afritek Gadgets Spot - Map"
+              src="https://www.google.com/maps?q=-1.2819548,36.8216073&z=17&output=embed"
+              width="100%"
+              height="400"
+              className="w-full h-64 sm:h-80 border-0"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="p-4 bg-[#0b1218] text-center">
+              <a
+                href="https://www.google.com/maps/place/Afritek+Gadgets+Spot/@-1.2819494,36.819027,17z/data=!4m14!1m7!3m6!1s0x182f11c6c7ab41c5:0x15c65e4be9c9156d!2sAfritek+Gadgets+Spot!8m2!3d-1.2819548!4d36.8216073!16s%2Fg%2F11n54rqdhh!3m5!1s0x182f11c6c7ab41c5:0x15c65e4be9c9156d!8m2!3d-1.2819548!4d36.8216073!16s%2Fg%2F11n54rqdhh?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 font-semibold"
+              >
+                View on Google Maps
+              </a>
             </div>
           </div>
         </div>
@@ -312,7 +380,7 @@ const Contact = () => {
               },
               {
                 q: "How long does delivery take?",
-                a: "Local delivery takes 2-3 days. International orders take 7-14 days.",
+                a: "Local delivery takes 24hrs. International orders take 7-14 days.",
               },
               {
                 q: "Do you offer warranty?",
