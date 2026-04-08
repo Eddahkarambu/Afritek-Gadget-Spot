@@ -329,8 +329,11 @@ const Home = () => {
               <h4 className="text-cyan-400 font-bold mb-4">Contact</h4>
               <ul className="text-sm space-y-2">
                 <li>Email: info@afritek.com</li>
-                <li>Phone: +254 XXX XXXX</li>
-                <li>Location: Nairobi, Kenya</li>
+                <li>Phone: +25495453038</li>
+                <li>
+                  Location: The Bazaar, wing 5,Mezzanine floor, Moi
+                  Avenue,Nairobi, Kenya
+                </li>
               </ul>
             </div>
             <div>
@@ -346,15 +349,15 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href="https://twitter.com"
+                    href="https://www.tiktok.com/@afritekgadget"
                     className="hover:text-cyan-400 transition"
                   >
-                    Twitter
+                    tiktok
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/afritek_gadget_spot"
                     className="hover:text-cyan-400 transition"
                   >
                     Instagram
