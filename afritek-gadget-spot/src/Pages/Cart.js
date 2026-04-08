@@ -2,24 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Trash2, Plus, Minus } from "lucide-react";
 
-const Cart = () => {
-  const [cartItems, setCartItems] = React.useState([
-    {
-      id: 1,
-      name: "Samsung Galaxy S25 Ultra",
-      price: 122000,
-      quantity: 1,
-      image: "https://via.placeholder.com/100?text=Samsung+S25",
-    },
-    {
-      id: 2,
-      name: "Oppo Reno 15 Pro 5G",
-      price: 76000,
-      quantity: 2,
-      image: "https://via.placeholder.com/100?text=Oppo+Reno15",
-    },
-  ]);
-
+const Cart = ({
+  cartItems = [],
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+}) => {
+  // Calculate totals from props
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
@@ -28,18 +17,7 @@ const Cart = () => {
   const tax = Math.floor(subtotal * 0.16);
   const total = subtotal + shipping + tax;
 
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) return;
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
+  // The updateQuantity and removeItem functions are now passed as props
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-20">
@@ -72,6 +50,11 @@ const Cart = () => {
                       <h3 className="text-xl font-bold text-gray-900 mb-2">
                         {item.name}
                       </h3>
+                      {item.specs && (
+                        <p className="text-sm text-gray-600 mb-2">
+                          {item.specs}
+                        </p>
+                      )}
                       <p className="text-teal-600 font-bold text-lg mb-4">
                         KES {item.price.toLocaleString()}
                       </p>
@@ -100,7 +83,9 @@ const Cart = () => {
                         </div>
 
                         <button
-                          onClick={() => removeItem(item.id)}
+                          onClick={() =>
+                            removeFromCart ? removeFromCart(item.id) : null
+                          }
                           className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition-all"
                         >
                           <Trash2 size={20} />
@@ -170,15 +155,12 @@ const Cart = () => {
                   Proceed to Checkout
                 </button>
 
-                <button className="w-full border-2 border-teal-600 text-teal-600 hover:bg-teal-50 font-bold py-3 rounded-lg transition-all">
+                <Link
+                  to="/shop"
+                  className="w-full block text-center border-2 border-teal-600 text-teal-600 hover:bg-teal-50 font-bold py-3 rounded-lg transition-all"
+                >
                   Continue Shopping
-                </button>
-
-                <div className="mt-8 p-4 bg-white rounded-lg border-2 border-teal-200">
-                  <p className="text-sm text-gray-600 text-center">
-                    ✓ Free shipping on orders over KES 50,000
-                  </p>
-                </div>
+                </Link>
               </div>
             </div>
           )}
