@@ -7,7 +7,7 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
   const [priceRange, setPriceRange] = useState([0, 300000]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(300000);
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedBrands, setSelectedBrands] = useState([]);
   const [showFilters, setShowFilters] = useState(true);
 
   // Get unique categories from products
@@ -16,10 +16,20 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
     ...new Set(products.map((p) => p.category).filter(Boolean)),
   ];
 
+  // Get unique brands from products
+  const brands = [...new Set(products.map((p) => p.brand).filter(Boolean))];
+
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    onSearch(value);
+    // Notify parent of the search term and also apply filters so results update live
+    if (typeof onSearch === "function") onSearch(value);
+    if (typeof onFilter === "function")
+      onFilter({
+        category: selectedCategory,
+        priceRange,
+        search: value,
+      });
   };
 
   const handleCategoryChange = (category) => {
@@ -27,7 +37,7 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
     onFilter({
       category,
       priceRange,
-      rating: selectedRating,
+      brands: selectedBrands,
       search: searchTerm,
     });
   };
@@ -42,7 +52,7 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
       onFilter({
         category: selectedCategory,
         priceRange: newRange,
-        rating: selectedRating,
+        brands: selectedBrands,
         search: searchTerm,
       });
     } else {
@@ -52,19 +62,25 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
       onFilter({
         category: selectedCategory,
         priceRange: newRange,
-        rating: selectedRating,
+        brands: selectedBrands,
         search: searchTerm,
       });
     }
   };
 
-  const handleRatingChange = (rating) => {
-    setSelectedRating(rating);
-    onFilter({
-      category: selectedCategory,
-      priceRange,
-      rating,
-      search: searchTerm,
+  const toggleBrand = (brand) => {
+    setSelectedBrands((prev) => {
+      const exists = prev.includes(brand);
+      const next = exists ? prev.filter((b) => b !== brand) : [...prev, brand];
+      // Notify parent about brand change
+      if (typeof onFilter === "function")
+        onFilter({
+          category: selectedCategory,
+          priceRange,
+          brands: next,
+          search: searchTerm,
+        });
+      return next;
     });
   };
 
@@ -74,11 +90,11 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
     setPriceRange([0, 300000]);
     setMinPrice(0);
     setMaxPrice(300000);
-    setSelectedRating(0);
+    setSelectedBrands([]);
     onFilter({
       category: "All",
       priceRange: [0, 300000],
-      rating: 0,
+      brands: [],
       search: "",
     });
     onSearch("");
@@ -117,8 +133,37 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Search by name..."
-                className="w-full pl-10 pr-4 py-2 border-2 border-teal-200 rounded-lg focus:border-teal-600 focus:outline-none transition-all"
+                autoComplete="off"
+                spellCheck={false}
+                className="w-full pl-10 pr-4 py-2 border-2 border-teal-200 rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-cyan-100 transition-all"
               />
+            </div>
+          </div>
+
+          {/* Brand Filter */}
+          <div className="mb-6 pb-6 border-b-2 border-teal-100">
+            <h4 className="text-sm font-bold text-teal-900 mb-3 uppercase">
+              Brand
+            </h4>
+            <div className="space-y-2 max-h-40 overflow-auto">
+              {brands.map((brand) => (
+                <label
+                  key={brand}
+                  className="flex items-center gap-3 cursor-pointer group"
+                >
+                  <input
+                    type="checkbox"
+                    name="brand"
+                    value={brand}
+                    checked={selectedBrands.includes(brand)}
+                    onChange={() => toggleBrand(brand)}
+                    className="w-4 h-4 text-teal-600 cursor-pointer accent-teal-600"
+                  />
+                  <span className="text-gray-700 group-hover:text-teal-600 transition-colors text-sm">
+                    {brand}
+                  </span>
+                </label>
+              ))}
             </div>
           </div>
 
@@ -155,14 +200,14 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
               Price Range
             </h4>
 
-            {/* Price Display */}
-            <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-3 mb-4">
-              <p className="text-sm text-gray-700">
-                <span className="font-semibold text-teal-700">
+            {/* Price Display (high-contrast for visibility) */}
+            <div className="bg-gradient-to-r from-teal-600 to-cyan-600 rounded-lg p-3 mb-4 text-white">
+              <p className="text-sm">
+                <span className="font-semibold text-white">
                   KES {minPrice.toLocaleString()}
                 </span>
                 {" - "}
-                <span className="font-semibold text-teal-700">
+                <span className="font-semibold text-white">
                   KES {maxPrice.toLocaleString()}
                 </span>
               </p>
@@ -186,7 +231,7 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
                 type="number"
                 value={minPrice}
                 onChange={(e) => handlePriceChange("min", e.target.value)}
-                className="w-full mt-2 px-3 py-2 border-2 border-teal-200 rounded-lg text-sm focus:border-teal-600 focus:outline-none"
+                className="w-full mt-2 px-3 py-2 border-2 border-teal-200 rounded-lg text-sm bg-white text-gray-800 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-cyan-100"
               />
             </div>
 
@@ -208,41 +253,8 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
                 type="number"
                 value={maxPrice}
                 onChange={(e) => handlePriceChange("max", e.target.value)}
-                className="w-full mt-2 px-3 py-2 border-2 border-teal-200 rounded-lg text-sm focus:border-teal-600 focus:outline-none"
+                className="w-full mt-2 px-3 py-2 border-2 border-teal-200 rounded-lg text-sm bg-white text-gray-800 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-cyan-100"
               />
-            </div>
-          </div>
-
-          {/* Rating Filter */}
-          <div className="mb-6 pb-6 border-b-2 border-teal-100">
-            <h4 className="text-sm font-bold text-teal-900 mb-3 uppercase">
-              Rating
-            </h4>
-            <div className="space-y-2">
-              {[
-                { value: 0, label: "All Ratings" },
-                { value: 5, label: "⭐⭐⭐⭐⭐ 5 Star" },
-                { value: 4, label: "⭐⭐⭐⭐ 4 Star & Up" },
-                { value: 3, label: "⭐⭐⭐ 3 Star & Up" },
-                { value: 2, label: "⭐⭐ 2 Star & Up" },
-              ].map((rating) => (
-                <label
-                  key={rating.value}
-                  className="flex items-center gap-3 cursor-pointer group"
-                >
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={rating.value}
-                    checked={selectedRating === rating.value}
-                    onChange={() => handleRatingChange(rating.value)}
-                    className="w-4 h-4 text-teal-600 cursor-pointer accent-teal-600"
-                  />
-                  <span className="text-gray-700 group-hover:text-teal-600 transition-colors text-sm">
-                    {rating.label}
-                  </span>
-                </label>
-              ))}
             </div>
           </div>
 
@@ -253,9 +265,6 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
               className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 rounded-lg transition-all"
             >
               Reset
-            </button>
-            <button className="flex-1 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold py-2 rounded-lg transition-all shadow-lg shadow-teal-600/30">
-              Apply
             </button>
           </div>
 

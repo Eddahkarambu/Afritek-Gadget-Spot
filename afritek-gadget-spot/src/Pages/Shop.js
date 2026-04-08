@@ -1094,8 +1094,9 @@ const Shop = ({ addToCart }) => {
   const [filterState, setFilterState] = useState({
     category: "All",
     priceRange: [0, 300000],
-    rating: 0,
     search: "",
+    brands: [],
+    rating: 0,
   });
   const [addedToCart, setAddedToCart] = useState({});
 
@@ -1114,10 +1115,19 @@ const Shop = ({ addToCart }) => {
         product.price >= filters.priceRange[0] &&
         product.price <= filters.priceRange[1];
 
-      const ratingMatch =
-        filters.rating === 0 || product.rating >= filters.rating;
+      // Brand filter: if no brands selected, show all; otherwise match selected brands
+      const brandMatch =
+        !filters.brands ||
+        filters.brands.length === 0 ||
+        filters.brands.includes(product.brand);
 
-      return searchMatch && categoryMatch && priceMatch && ratingMatch;
+      // Rating filter was removed from the UI. Keep ratingMatch true so
+      // filtering is performed only by search, category and price.
+      const ratingMatch = true;
+
+      return (
+        searchMatch && categoryMatch && priceMatch && brandMatch && ratingMatch
+      );
     });
 
     setFilteredProducts(products);
@@ -1237,6 +1247,7 @@ const Shop = ({ addToCart }) => {
                     setFilterState({
                       category: "All",
                       priceRange: [0, 300000],
+                      brands: [],
                       rating: 0,
                       search: "",
                     });
