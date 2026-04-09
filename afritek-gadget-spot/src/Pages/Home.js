@@ -68,20 +68,34 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Image - Galaxy */}
+            {/* Right Image - Galaxy (larger, more prominent) */}
             <div className="flex justify-center">
-              <div className="relative">
-                {/* Outer glow border */}
-                <div className="absolute -inset-2 bg-gradient-to-br from-cyan-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
+              <div className="relative group">
+                {/* Outer glow border - grows on hover */}
+                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-4xl blur-3xl opacity-60 group-hover:opacity-90 transform-gpu transition-all duration-500"></div>
 
-                {/* Image container */}
-                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-2 rounded-3xl shadow-2xl shadow-cyan-500/50 overflow-hidden w-full max-w-[320px] sm:max-w-md md:max-w-lg">
+                {/* Image container - larger on wide screens */}
+                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-3 rounded-3xl shadow-2xl shadow-cyan-500/40 overflow-hidden w-full max-w-[420px] sm:max-w-[560px] md:max-w-[720px] transform-gpu group-hover:scale-105 transition-transform duration-500">
+                  {/* Top-left badge */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/10 backdrop-blur text-white">
+                      New Arrival
+                    </span>
+                  </div>
+
+                  {/* Bottom-right ribbon */}
+                  <div className="absolute bottom-4 right-4 z-20">
+                    <span className="text-sm font-semibold px-3 py-1 rounded-lg bg-white/20 text-white">
+                      Up to 30% off
+                    </span>
+                  </div>
+
                   <img
                     src={LatestGalaxy}
                     alt="Latest Galaxy"
                     loading="lazy"
                     decoding="async"
-                    className="rounded-3xl w-full h-48 sm:h-64 md:h-96 object-cover hover:scale-105 transition-transform duration-500"
+                    className="rounded-3xl w-full h-64 sm:h-96 md:h-[520px] object-cover shadow-lg"
                   />
                 </div>
               </div>
