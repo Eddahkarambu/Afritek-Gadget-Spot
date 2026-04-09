@@ -2,16 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Zap, Truck, Shield, Smartphone } from "lucide-react";
 import LatestGalaxy from "../Images/LatestGalaxy.jpg";
-import HomeImageMain from "../Images/Homeimage.webp";
-import HomeImage2 from "../Images/HomeImage2.jpeg";
-import HomeImage3 from "../Images/HomeImage3.webp";
-import HomeImage4 from "../Images/HomeImage4.jpg";
-import HomeImage5 from "../Images/HomeImage5.jpg";
-import HomeImage6 from "../Images/HomeImage6.jpg";
-import HomeImage7 from "../Images/HomeImage7.jpg";
-import HomeImage8 from "../Images/HomeImage8.jpg";
-import HomeImage9 from "../Images/HomeImage9.jpg";
-import HomeImage10 from "../Images/HomeImage10.jpg";
+import HomeImageMain from "../Images/phoneDeals.jpg"; // Unique
+import HomeImage2 from "../Images/PhoneDeals1..jpg"; // Unique
+// import HomeImage3 from "../Images/SumsungGalaxys25ultra.jpg";
+import HomeImage4 from "../Images/PhoneDeals2.webp"; // Unique
+import HomeImage5 from "../Images/PhoneDeals3.jpg"; // Unique
 
 const Home = () => {
   return (
@@ -67,53 +62,23 @@ const Home = () => {
       {/* Home Images Gallery */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-stretch">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch">
             {[
-              {
-                src: HomeImageMain,
-                alt: "New Arrivals - Top Picks",
-                text: "New Arrivals",
-              },
-              {
-                src: HomeImage2,
-                alt: "Limited Offer",
-                text: "Limited Offer - 20% Off",
-              },
-              { src: HomeImage3, alt: "Best Seller", text: "Best Seller" },
-              { src: HomeImage4, alt: "Hot Deals", text: "Hot Deals" },
-              { src: HomeImage5, alt: "Top Rated", text: "Top Rated" },
-              { src: HomeImage6, alt: "Just In", text: "Just In" },
-              { src: HomeImage7, alt: "Editor's Pick", text: "Editor's Pick" },
-              { src: HomeImage8, alt: "Shop & Save", text: "Shop & Save" },
-              { src: HomeImage9, alt: "Limited Stock", text: "Limited Stock" },
-              { src: HomeImage10, alt: "Exclusive", text: "Exclusive" },
+              { src: HomeImageMain, alt: "New Arrivals - Top Picks" },
+              { src: HomeImage2, alt: "Limited Offer" },
+              // { src: HomeImage3, alt: "Best Seller" },
+              { src: HomeImage4, alt: "Hot Deals" },
+              { src: HomeImage5, alt: "Top Rated" },
             ].map((img, idx) => {
-              // make the first image larger and span two columns on large screens
               const containerClasses =
-                idx === 0
-                  ? "relative overflow-hidden rounded-2xl bg-white shadow-md lg:col-span-2"
-                  : "relative overflow-hidden rounded-2xl bg-white shadow-md";
+                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300";
 
               const imgClasses =
-                idx === 0
-                  ? "w-full h-56 md:h-72 lg:h-80 object-cover hover:scale-105 transition-transform duration-300"
-                  : "w-full h-48 md:h-56 lg:h-48 object-cover hover:scale-105 transition-transform duration-300";
+                "block w-full h-56 md:h-80 lg:h-96 object-cover transition-transform duration-300 hover:scale-105";
 
               return (
                 <div key={idx} className={containerClasses}>
                   <img src={img.src} alt={img.alt} className={imgClasses} />
-
-                  {/* Overlay text */}
-                  <div className="absolute inset-0 flex items-end">
-                    <div className="w-full bg-gradient-to-t from-black/60 via-black/30 to-transparent p-4">
-                      <h3 className="text-white text-lg md:text-xl font-bold drop-shadow-lg">
-                        {img.text}
-                      </h3>
-                      <p className="text-white text-sm md:text-base opacity-90 mt-1">
-                        Discover great deals on latest gadgets
-                      </p>
-                    </div>
-                  </div>
                 </div>
               );
             })}
