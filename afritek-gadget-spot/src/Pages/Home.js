@@ -7,6 +7,10 @@ import HomeImage2 from "../Images/PhoneDeals1..jpg"; // Unique
 // import HomeImage3 from "../Images/SumsungGalaxys25ultra.jpg";
 import HomeImage4 from "../Images/PhoneDeals2.webp"; // Unique
 import FlashSale3 from "../Images/FlashSale3.png";
+import InfinixHot60i from "../Images/InfinixHot60i.jpg";
+import InfinixNote50Pro from "../Images/InfinixNote50Pro.png";
+import VivoV60 from "../Images/VivoV60.jpg";
+import Redmi15 from "../Images/Redmi15.webp";
 import TikTokLogo from "../Images/tiktoklogo.jpg";
 
 const Home = () => {
@@ -147,39 +151,65 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Image Modal / Lightbox */}
-      {modalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-          onClick={closeModal}
-        >
-          <div
-            className="max-w-4xl w-full bg-transparent rounded-lg relative p-2 sm:p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 bg-white text-gray-900 rounded-full p-2 shadow-lg"
-              aria-label="Close image"
+      {/* Hot Deals Section - 4 selected products */}
+      <section className="py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold text-teal-900">Hot Deals</h3>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { src: InfinixHot60i, alt: "Infinix Hot 60i" },
+              { src: InfinixNote50Pro, alt: "Infinix Note 50 Pro" },
+              { src: VivoV60, alt: "Vivo V60" },
+              { src: Redmi15, alt: "Redmi 15" },
+            ].map((p, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+              >
+                <button
+                  type="button"
+                  onClick={() => openModal({ src: p.src, alt: p.alt })}
+                  onTouchStart={() => openModal({ src: p.src, alt: p.alt })}
+                  className="block w-full text-left"
+                >
+                  <div className="w-full h-36 sm:h-40 md:h-44 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <p className="text-sm font-semibold text-gray-800">
+                      {p.alt}
+                    </p>
+                    <p className="text-xs text-gray-500">From KES 29,999</p>
+                  </div>
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+            <p className="text-sm text-gray-500">
+              Hand-picked deals on popular phones
+            </p>
+            <Link
+              to="/shop"
+              className="inline-block text-sm bg-gradient-to-r from-teal-600 to-cyan-600 text-white px-3 py-2 rounded-lg hover:from-teal-700 hover:to-cyan-700"
             >
-              ✕
-            </button>
-            <img
-              src={modalImg.src}
-              alt={modalImg.alt}
-              loading="eager"
-              className="w-full h-auto max-h-[80vh] object-contain rounded-md"
-            />
-            {modalImg.alt && (
-              <p className="mt-3 text-center text-white">{modalImg.alt}</p>
-            )}
+              See more
+            </Link>
           </div>
         </div>
-      )}
+      </section>
 
-      {/* Features Section */}
+      {/* Image Modal / Lightbox */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4 text-teal-900">
