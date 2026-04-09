@@ -37,23 +37,23 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
                 Welcome to{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">
                   Afritek
                 </span>
               </h1>
-              <p className="text-xl text-cyan-100 mb-8">
+              <p className="text-base sm:text-lg text-cyan-100 mb-8">
                 Discover the latest gadgets and smartphones at unbeatable prices
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/shop"
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/50"
+                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/50 text-center"
                 >
                   Shop Now
                 </Link>
-                <button className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105">
+                <button className="w-full sm:w-auto border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 text-center">
                   Learn More
                 </button>
               </div>
@@ -66,11 +66,11 @@ const Home = () => {
                 <div className="absolute -inset-2 bg-gradient-to-br from-cyan-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
 
                 {/* Image container */}
-                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-2 rounded-3xl shadow-2xl shadow-cyan-500/50 overflow-hidden">
+                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-2 rounded-3xl shadow-2xl shadow-cyan-500/50 overflow-hidden w-full max-w-[320px] sm:max-w-md md:max-w-lg">
                   <img
                     src={LatestGalaxy}
                     alt="Latest Galaxy"
-                    className="rounded-3xl w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                    className="rounded-3xl w-full h-48 sm:h-64 md:h-96 object-cover hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>
@@ -82,7 +82,7 @@ const Home = () => {
       {/* Home Images Gallery */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch">
             {[
               { src: HomeImageMain, alt: "New Arrivals - Top Picks" },
               { src: HomeImage2, alt: "Limited Offer" },
@@ -94,7 +94,7 @@ const Home = () => {
                 "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300";
 
               const imgClasses =
-                "block w-full h-56 md:h-80 lg:h-96 object-cover transition-transform duration-300 hover:scale-105";
+                "block w-full h-40 sm:h-56 md:h-80 lg:h-96 object-cover transition-transform duration-300 hover:scale-105";
 
               return (
                 <div key={idx} className={containerClasses}>
@@ -126,12 +126,12 @@ const Home = () => {
           onClick={closeModal}
         >
           <div
-            className="max-w-4xl w-full bg-transparent rounded-lg relative"
+            className="max-w-4xl w-full bg-transparent rounded-lg relative p-2 sm:p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={closeModal}
-              className="absolute -top-3 -right-3 bg-white text-gray-900 rounded-full p-2 shadow-lg"
+              className="absolute top-2 right-2 bg-white text-gray-900 rounded-full p-2 shadow-lg"
               aria-label="Close image"
             >
               ✕
@@ -161,7 +161,7 @@ const Home = () => {
             Experience premium gadgets with exceptional service
           </p>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Feature 1 */}
             <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-8 rounded-xl border-2 border-teal-200 hover:border-purple-400 transition-all hover:shadow-lg hover:-translate-y-2">
               <div className="bg-gradient-to-br from-teal-500 to-cyan-500 w-16 h-16 rounded-full flex items-center justify-center mb-4">
@@ -220,18 +220,18 @@ const Home = () => {
       {/* Categories Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-white to-teal-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-teal-900">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 text-teal-900">
             Shop by{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
               Category
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {/* Category 1 */}
             <Link
               to="/shop"
-              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+              className="group relative h-48 sm:h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-cyan-600 group-hover:from-teal-700 group-hover:to-cyan-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
@@ -247,7 +247,7 @@ const Home = () => {
             {/* Category 2 */}
             <Link
               to="/shop"
-              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+              className="group relative h-48 sm:h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 group-hover:from-purple-700 group-hover:to-indigo-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
@@ -263,7 +263,7 @@ const Home = () => {
             {/* Category 3 */}
             <Link
               to="/shop"
-              className="group relative h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
+              className="group relative h-48 sm:h-64 rounded-2xl overflow-hidden hover:shadow-2xl transition-all"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-teal-600 group-hover:from-cyan-600 group-hover:to-teal-700 transition-all"></div>
               <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
@@ -282,7 +282,7 @@ const Home = () => {
       {/* Stats Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center p-8 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl border-2 border-teal-200 hover:border-teal-400 transition-all">
               <p className="text-5xl font-bold text-teal-700 mb-2">10K+</p>
               <p className="text-gray-700 font-semibold">Happy Customers</p>
@@ -314,7 +314,7 @@ const Home = () => {
           </p>
           <Link
             to="/shop"
-            className="inline-block bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-500 hover:to-teal-500 text-teal-900 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
+            className="block w-full sm:inline-block bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-500 hover:to-teal-500 text-teal-900 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 text-center"
           >
             Explore Now
           </Link>
@@ -324,7 +324,7 @@ const Home = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h4 className="text-cyan-400 font-bold mb-4">About Afritek</h4>
               <p className="text-sm">
