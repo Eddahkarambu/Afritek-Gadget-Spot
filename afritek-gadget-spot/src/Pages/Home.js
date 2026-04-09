@@ -101,6 +101,10 @@ const Home = () => {
                   <button
                     type="button"
                     onClick={() => openModal(img)}
+                    onTouchStart={() => openModal(img)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") openModal(img);
+                    }}
                     className="w-full h-full p-0 m-0 block text-left"
                     aria-label={`Open ${img.alt}`}
                   >
