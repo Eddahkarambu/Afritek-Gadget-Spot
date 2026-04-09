@@ -45,7 +45,7 @@ const Home = () => {
               <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
                 Welcome to{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">
-                  Afritek
+                  Afritek Gadget Spot
                 </span>
               </h1>
               <p className="text-base sm:text-lg text-cyan-100 mb-8">
@@ -79,6 +79,8 @@ const Home = () => {
                   <img
                     src={LatestGalaxy}
                     alt="Latest Galaxy"
+                    loading="lazy"
+                    decoding="async"
                     className="rounded-3xl w-full h-48 sm:h-64 md:h-96 object-cover hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -120,6 +122,8 @@ const Home = () => {
                     <img
                       src={img.src}
                       alt={img.alt}
+                      loading="lazy"
+                      decoding="async"
                       className={`${imgClasses} cursor-pointer`}
                     />
                   </button>
@@ -152,6 +156,7 @@ const Home = () => {
             <img
               src={modalImg.src}
               alt={modalImg.alt}
+              loading="eager"
               className="w-full h-auto max-h-[80vh] object-contain rounded-md"
             />
             {modalImg.alt && (
@@ -167,7 +172,7 @@ const Home = () => {
           <h2 className="text-4xl font-bold text-center mb-4 text-teal-900">
             Why Choose{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-500">
-              Afritek
+              Afritek Gadget Spot
             </span>
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">

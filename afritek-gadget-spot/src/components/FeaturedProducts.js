@@ -25,14 +25,14 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {featuredProducts.map((product) => (
             <div
               key={product.id}
               className="group bg-white rounded-xl border-2 border-teal-200 hover:border-purple-500 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-purple-500/20"
             >
               {/* Image Area with Badge */}
-              <div className="relative h-48 bg-gradient-to-br from-teal-50 to-cyan-50 overflow-hidden flex items-center justify-center border-b-2 border-teal-100">
+              <div className="relative h-40 sm:h-48 bg-gradient-to-br from-teal-50 to-cyan-50 overflow-hidden flex items-center justify-center border-b-2 border-teal-100">
                 {product.isNew && (
                   <span className="absolute top-3 left-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white text-xs px-3 py-1 rounded-full font-bold z-10">
                     🆕 NEW
@@ -46,7 +46,9 @@ const FeaturedProducts = () => {
                 <img
                   src={product.image}
                   alt={product.model}
-                  className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     e.target.src =
                       "https://via.placeholder.com/200?text=" + product.model;

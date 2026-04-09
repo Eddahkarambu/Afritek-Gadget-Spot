@@ -20,6 +20,7 @@ const Navbar = ({ cartItems = [] }) => {
           <img
             src={AfritekLogo}
             alt="Afritek Logo"
+            loading="eager"
             className="h-14 w-auto object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-cyan-500/50 transition-all"
           />
 
@@ -83,7 +84,7 @@ const Navbar = ({ cartItems = [] }) => {
                 setSearchOpen(!searchOpen);
               }
             }}
-            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-teal-700/50 rounded-lg"
+            className="text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg"
             title="Search"
           >
             <Search size={22} />
@@ -108,7 +109,7 @@ const Navbar = ({ cartItems = [] }) => {
           {/* Mobile Cart Icon */}
           <Link
             to="/cart"
-            className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-2"
+            className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2"
           >
             <ShoppingCart size={22} />
             {cartItems && cartItems.length > 0 && (
@@ -120,7 +121,7 @@ const Navbar = ({ cartItems = [] }) => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-cyan-400 p-2 hover:bg-teal-700/50 rounded-lg transition-colors"
+            className="lg:hidden text-cyan-400 p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             title="Menu"
           >

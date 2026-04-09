@@ -4,7 +4,6 @@ import {
   Star,
   ShoppingCart,
   Heart,
-  Share2,
   Truck,
   Shield,
   RotateCcw,
@@ -56,11 +55,13 @@ const ProductDetail = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl border-2 border-teal-200 p-8 flex items-center justify-center h-96">
+          <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl border-2 border-teal-200 p-6 flex items-center justify-center h-64 sm:h-80 md:h-96">
             <img
               src={product.image}
               alt={product.model}
-              className="h-full object-contain"
+              loading="lazy"
+              decoding="async"
+              className="max-h-full w-full object-contain"
               onError={(e) => {
                 e.target.src =
                   "https://via.placeholder.com/400?text=" + product.model;
@@ -249,6 +250,22 @@ const ProductDetail = () => {
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile sticky Add-to-Cart bar */}
+      <div className="sm:hidden fixed bottom-4 left-4 right-4 z-50">
+        <div className="bg-white rounded-lg shadow-lg p-3 flex items-center justify-between mx-4">
+          <div>
+            <div className="text-sm text-gray-600">
+              KES {product.price.toLocaleString()}
+            </div>
+            <div className="text-xs text-gray-500">Inclusive of VAT</div>
+          </div>
+          <button className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2">
+            <ShoppingCart size={18} />
+            <span>Add to Cart</span>
+          </button>
         </div>
       </div>
     </div>

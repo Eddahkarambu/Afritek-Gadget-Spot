@@ -1202,10 +1202,12 @@ const Shop = ({ addToCart }) => {
                     className="group relative bg-[#111827] rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-cyan-500/10"
                   >
                     {/* Image Container */}
-                    <div className="relative h-64 bg-[#161b22] overflow-hidden flex items-center justify-center">
+                    <div className="relative h-56 sm:h-64 md:h-72 bg-[#161b22] overflow-hidden flex items-center justify-center">
                       <img
                         src={product.image}
                         alt={product.name}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-contain group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
