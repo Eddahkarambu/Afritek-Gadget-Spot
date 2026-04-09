@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, Filter, X } from "lucide-react";
 
 const SearchFilter = ({ onSearch, onFilter, products }) => {
@@ -8,7 +8,22 @@ const SearchFilter = ({ onSearch, onFilter, products }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(300000);
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [showFilters, setShowFilters] = useState(true);
+  // On mobile devices we want filters closed by default — open on larger screens
+  const [showFilters, setShowFilters] = useState(() => {
+    if (typeof window === "undefined") return true;
+    // Tailwind 'lg' breakpoint is 1024px; show filters on lg+ by default
+    return window.innerWidth >= 1024;
+  });
+
+  // Keep responsiveness: if the user resizes the window, adapt the default
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setShowFilters(true);
+      // do not auto-close on resize to small screens if the user already opened it
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   // Get unique categories from products
   const categories = [

@@ -6,7 +6,7 @@ import HomeImageMain from "../Images/phoneDeals.jpg"; // Unique
 import HomeImage2 from "../Images/PhoneDeals1..jpg"; // Unique
 // import HomeImage3 from "../Images/SumsungGalaxys25ultra.jpg";
 import HomeImage4 from "../Images/PhoneDeals2.webp"; // Unique
-import HomeImage5 from "../Images/PhoneDeals3.jpg"; // Unique
+import FlashSale3 from "../Images/FlashSale3.png";
 import TikTokLogo from "../Images/tiktoklogo.jpg";
 
 const Home = () => {
@@ -86,9 +86,7 @@ const Home = () => {
 
                   {/* Bottom-right ribbon */}
                   <div className="absolute bottom-4 right-4 z-20">
-                    <span className="text-sm font-semibold px-3 py-1 rounded-lg bg-white/20 text-white">
-                      Up to 30% off
-                    </span>
+                    <span className="text-sm font-semibold px-3 py-1 rounded-lg bg-white/20 text-white"></span>
                   </div>
 
                   <img
@@ -114,7 +112,7 @@ const Home = () => {
               { src: HomeImage2, alt: "Limited Offer" },
               // { src: HomeImage3, alt: "Best Seller" },
               { src: HomeImage4, alt: "Hot Deals" },
-              { src: HomeImage5, alt: "Top Rated" },
+              { src: FlashSale3, alt: "Flash Sale" },
             ].map((img, idx) => {
               const containerClasses =
                 "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300";
