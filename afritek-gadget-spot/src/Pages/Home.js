@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Zap, Truck, Shield, Smartphone } from "lucide-react";
 import LatestGalaxy from "../Images/LatestGalaxy.jpg";
@@ -9,6 +9,26 @@ import HomeImage4 from "../Images/PhoneDeals2.webp"; // Unique
 import HomeImage5 from "../Images/PhoneDeals3.jpg"; // Unique
 
 const Home = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImg, setModalImg] = useState({ src: "", alt: "" });
+
+  const openModal = (img) => {
+    setModalImg(img);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImg({ src: "", alt: "" });
+  };
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+    if (modalOpen) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [modalOpen]);
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
@@ -78,13 +98,55 @@ const Home = () => {
 
               return (
                 <div key={idx} className={containerClasses}>
-                  <img src={img.src} alt={img.alt} className={imgClasses} />
+                  <button
+                    type="button"
+                    onClick={() => openModal(img)}
+                    className="w-full h-full p-0 m-0 block text-left"
+                    aria-label={`Open ${img.alt}`}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className={`${imgClasses} cursor-pointer`}
+                    />
+                  </button>
                 </div>
               );
             })}
           </div>
         </div>
       </section>
+
+      {/* Image Modal / Lightbox */}
+      {modalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="max-w-4xl w-full bg-transparent rounded-lg relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute -top-3 -right-3 bg-white text-gray-900 rounded-full p-2 shadow-lg"
+              aria-label="Close image"
+            >
+              ✕
+            </button>
+            <img
+              src={modalImg.src}
+              alt={modalImg.alt}
+              className="w-full h-auto max-h-[80vh] object-contain rounded-md"
+            />
+            {modalImg.alt && (
+              <p className="mt-3 text-center text-white">{modalImg.alt}</p>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Features Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
