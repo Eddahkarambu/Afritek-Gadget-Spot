@@ -7,6 +7,7 @@ import HomeImage2 from "../Images/PhoneDeals1..jpg"; // Unique
 // import HomeImage3 from "../Images/SumsungGalaxys25ultra.jpg";
 import HomeImage4 from "../Images/PhoneDeals2.webp"; // Unique
 import HomeImage5 from "../Images/PhoneDeals3.jpg"; // Unique
+import TikTokLogo from "../Images/tiktoklogo.jpg";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -409,16 +410,13 @@ const Home = () => {
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    {/* TikTok SVG - uses currentColor */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 256 256"
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M149.3 40.1V141a48 48 0 01-48-48v104a48 48 0 1048-48V92.4c18.4 9 40 8.5 58.1-1.4V64.3c-22.2 13.1-48.8 8.1-66.1-24.2z" />
-                    </svg>
+                    <img
+                      src={TikTokLogo}
+                      alt="TikTok"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-6 h-6 object-contain rounded-sm"
+                    />
                     <span className="sr-only">TikTok</span>
                     <span className="hidden sm:inline">TikTok</span>
                   </a>

@@ -56,7 +56,7 @@ const Cart = ({
                         alt={item.name}
                         loading="lazy"
                         decoding="async"
-                        className="w-full sm:w-24 h-40 sm:h-24 object-cover rounded-lg bg-gray-100"
+                        className="w-full sm:w-24 h-auto max-h-56 sm:h-24 object-contain rounded-lg bg-gray-100"
                       />
                     </div>
 
