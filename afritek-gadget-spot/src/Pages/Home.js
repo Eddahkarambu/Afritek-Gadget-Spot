@@ -22,6 +22,11 @@ const Home = () => {
     setModalImg({ src: "", alt: "" });
   };
 
+  const scrollToCategories = () => {
+    const el = document.getElementById("categories");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") closeModal();
@@ -53,7 +58,11 @@ const Home = () => {
                 >
                   Shop Now
                 </Link>
-                <button className="w-full sm:w-auto border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 text-center">
+                <button
+                  type="button"
+                  onClick={scrollToCategories}
+                  className="w-full sm:w-auto border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 text-center"
+                >
                   Learn More
                 </button>
               </div>
@@ -222,7 +231,10 @@ const Home = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-white to-teal-50">
+      <section
+        id="categories"
+        className="py-20 px-6 bg-gradient-to-b from-white to-teal-50"
+      >
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 text-teal-900">
             Shop by{" "}
@@ -360,7 +372,7 @@ const Home = () => {
               <h4 className="text-cyan-400 font-bold mb-4">Contact</h4>
               <ul className="text-sm space-y-2">
                 <li>Email: info@afritek.com</li>
-                <li>Phone: +25495453038</li>
+                <li>Phone: +254795453038</li>
                 <li>
                   Location: The Bazaar, wing 5,Mezzanine floor, Moi
                   Avenue,Nairobi, Kenya
@@ -372,26 +384,50 @@ const Home = () => {
               <ul className="text-sm space-y-2">
                 <li>
                   <a
-                    href="https://facebook.com"
-                    className="hover:text-cyan-400 transition"
-                  >
-                    Facebook
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://www.tiktok.com/@afritekgadget"
-                    className="hover:text-cyan-400 transition"
+                    className="hover:text-cyan-400 transition flex items-center gap-2"
+                    aria-label="Afritek on TikTok (opens in new tab)"
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
-                    tiktok
+                    {/* TikTok SVG - uses currentColor */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 256 256"
+                      className="w-6 h-6"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M149.3 40.1V141a48 48 0 01-48-48v104a48 48 0 1048-48V92.4c18.4 9 40 8.5 58.1-1.4V64.3c-22.2 13.1-48.8 8.1-66.1-24.2z" />
+                    </svg>
+                    <span className="sr-only">TikTok</span>
+                    <span className="hidden sm:inline">TikTok</span>
                   </a>
                 </li>
                 <li>
                   <a
                     href="https://www.instagram.com/afritek_gadget_spot"
-                    className="hover:text-cyan-400 transition"
+                    className="hover:text-cyan-400 transition flex items-center gap-2"
+                    aria-label="Afritek on Instagram (opens in new tab)"
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
-                    Instagram
+                    {/* Instagram SVG - uses currentColor */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      aria-hidden="true"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                      <path d="M17.5 6.5h.01" />
+                    </svg>
+                    <span className="sr-only">Instagram</span>
+                    <span className="hidden sm:inline">Instagram</span>
                   </a>
                 </li>
               </ul>
