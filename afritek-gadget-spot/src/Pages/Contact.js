@@ -374,10 +374,7 @@ const Contact = () => {
                 q: "What's your return policy?",
                 a: "We offer a 30-day money-back guarantee on all products. No questions asked!",
               },
-              {
-                q: "Do you ship internationally?",
-                a: "Yes! We ship to most countries. Shipping costs vary by location.",
-              },
+
               {
                 q: "How long does delivery take?",
                 a: "Local delivery takes 24hrs. International orders take 7-14 days.",

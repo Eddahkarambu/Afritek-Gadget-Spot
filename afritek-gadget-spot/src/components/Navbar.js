@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
 import AfritekLogo from "../Images/AfritekLogoLogo.jpeg";
 
 const Navbar = ({ cartItems = [] }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -73,7 +74,15 @@ const Navbar = ({ cartItems = [] }) => {
         <div className="flex items-center gap-4">
           {/* Search Button */}
           <button
-            onClick={() => setSearchOpen(!searchOpen)}
+            onClick={() => {
+              if (searchOpen && searchTerm.trim()) {
+                // go to shop with query param
+                navigate(`/shop?q=${encodeURIComponent(searchTerm.trim())}`);
+                setSearchOpen(false);
+              } else {
+                setSearchOpen(!searchOpen);
+              }
+            }}
             className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-teal-700/50 rounded-lg"
             title="Search"
           >
@@ -135,7 +144,12 @@ const Navbar = ({ cartItems = [] }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  // TODO: implement search behavior
+                  if (searchTerm.trim()) {
+                    navigate(
+                      `/shop?q=${encodeURIComponent(searchTerm.trim())}`,
+                    );
+                    setSearchOpen(false);
+                  }
                 }
               }}
               className="w-full bg-teal-900/50 border-2 border-cyan-500/50 hover:border-cyan-400 focus:border-cyan-300 text-white placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg focus:outline-none transition-all"

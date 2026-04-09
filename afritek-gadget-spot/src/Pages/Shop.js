@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import SearchFilter from "../components/SearchFilter";
 import { ShoppingCart } from "lucide-react";
 import SumsungAo6 from "../Images/sumsungAo6.webp";
@@ -1143,6 +1144,17 @@ const Shop = ({ addToCart }) => {
       search: term,
     }));
   };
+
+  // Apply search query parameter when present (e.g., from navbar)
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const q = searchParams.get("q") || "";
+    if (q) {
+      handleSearch(q);
+    }
+    // If q is empty we don't override existing filters here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const handleFilter = (filters) => {
     setFilterState(filters);

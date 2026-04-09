@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Trash2, Plus, Minus } from "lucide-react";
 
@@ -8,6 +8,18 @@ const Cart = ({
   updateQuantity,
   clearCart,
 }) => {
+  const [emptyClicked, setEmptyClicked] = useState(false);
+  const [summaryClicked, setSummaryClicked] = useState(false);
+
+  const handleEmptyContinue = () => {
+    setEmptyClicked(true);
+    setTimeout(() => setEmptyClicked(false), 800);
+  };
+
+  const handleSummaryContinue = () => {
+    setSummaryClicked(true);
+    setTimeout(() => setSummaryClicked(false), 800);
+  };
   // Calculate totals from props
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -107,7 +119,8 @@ const Cart = ({
                 <p className="text-gray-600 text-lg mb-6">Your cart is empty</p>
                 <Link
                   to="/shop"
-                  className="inline-block bg-gradient-to-r from-teal-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-bold hover:from-teal-700 hover:to-cyan-700 transition-all"
+                  onClick={handleEmptyContinue}
+                  className={`inline-block px-8 py-3 rounded-lg font-bold transition-all transform shadow-lg shadow-teal-600/30 ${emptyClicked ? "bg-teal-700 text-white scale-95" : "bg-gradient-to-r from-teal-600 to-cyan-600 text-white hover:from-teal-700 hover:to-cyan-700"}`}
                 >
                   Continue Shopping
                 </Link>
@@ -157,7 +170,8 @@ const Cart = ({
 
                 <Link
                   to="/shop"
-                  className="w-full block text-center border-2 border-teal-600 text-teal-600 hover:bg-teal-50 font-bold py-3 rounded-lg transition-all"
+                  onClick={handleSummaryContinue}
+                  className={`w-full block text-center py-3 rounded-lg font-bold transition-all shadow-lg shadow-teal-600/30 ${summaryClicked ? "bg-teal-700 text-white" : "bg-gradient-to-r from-teal-600 to-cyan-600 text-white hover:from-teal-700 hover:to-cyan-700"}`}
                 >
                   Continue Shopping
                 </Link>
