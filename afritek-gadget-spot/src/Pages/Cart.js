@@ -29,8 +29,6 @@ const Cart = ({
   const tax = Math.floor(subtotal * 0.16);
   const total = subtotal + shipping + tax;
 
-  // The updateQuantity and removeItem functions are now passed as props
-
   return (
     <div className="min-h-screen bg-white pt-24 pb-20">
       {/* Header */}
@@ -50,18 +48,20 @@ const Cart = ({
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white border-2 border-teal-200 rounded-xl p-6 flex gap-6 hover:border-teal-400 transition-all"
+                    className="bg-white border-2 border-teal-200 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 hover:border-teal-400 transition-all"
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-24 h-24 object-cover rounded-lg bg-gray-100"
-                    />
+                    <div className="w-full sm:w-24 flex-shrink-0 flex items-center justify-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full sm:w-24 h-40 sm:h-24 object-cover rounded-lg bg-gray-100"
+                      />
+                    </div>
 
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                         {item.name}
                       </h3>
                       {item.specs && (
@@ -69,45 +69,54 @@ const Cart = ({
                           {item.specs}
                         </p>
                       )}
-                      <p className="text-teal-600 font-bold text-lg mb-4">
-                        KES {item.price.toLocaleString()}
-                      </p>
 
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center border-2 border-teal-200 rounded-lg">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <p className="text-teal-600 font-bold text-lg">
+                          KES {item.price.toLocaleString()}
+                        </p>
+
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center border-2 border-teal-200 rounded-lg">
+                            <button
+                              onClick={() =>
+                                updateQuantity(
+                                  item.id,
+                                  Math.max(1, item.quantity - 1),
+                                )
+                              }
+                              className="px-3 py-2 text-teal-600 hover:bg-teal-50"
+                              aria-label="Decrease quantity"
+                            >
+                              <Minus size={16} />
+                            </button>
+                            <span className="px-4 py-2 border-l-2 border-r-2 border-teal-200">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
+                              className="px-3 py-2 text-teal-600 hover:bg-teal-50"
+                              aria-label="Increase quantity"
+                            >
+                              <Plus size={16} />
+                            </button>
+                          </div>
+
                           <button
                             onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
+                              removeFromCart ? removeFromCart(item.id) : null
                             }
-                            className="px-3 py-2 text-teal-600 hover:bg-teal-50"
+                            className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition-all"
+                            aria-label="Remove item"
                           >
-                            <Minus size={16} />
-                          </button>
-                          <span className="px-4 py-2 border-l-2 border-r-2 border-teal-200">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
-                            }
-                            className="px-3 py-2 text-teal-600 hover:bg-teal-50"
-                          >
-                            <Plus size={16} />
+                            <Trash2 size={20} />
                           </button>
                         </div>
-
-                        <button
-                          onClick={() =>
-                            removeFromCart ? removeFromCart(item.id) : null
-                          }
-                          className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition-all"
-                        >
-                          <Trash2 size={20} />
-                        </button>
                       </div>
                     </div>
 
-                    <div className="text-right">
+                    <div className="mt-3 sm:mt-0 sm:ml-4 text-left sm:text-right">
                       <p className="text-gray-600 text-sm mb-2">Subtotal</p>
                       <p className="text-2xl font-bold text-teal-700">
                         KES {(item.price * item.quantity).toLocaleString()}
