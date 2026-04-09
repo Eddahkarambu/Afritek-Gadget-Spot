@@ -392,7 +392,15 @@ const Home = () => {
               <h4 className="text-cyan-400 font-bold mb-4">Contact</h4>
               <ul className="text-sm space-y-2">
                 <li>Email: info@afritek.com</li>
-                <li>Phone: +254795453038</li>
+                <li>
+                  Phone:{" "}
+                  <a
+                    href="tel:+254795453038"
+                    className="hover:text-cyan-400 transition"
+                  >
+                    +254795453038
+                  </a>
+                </li>
                 <li>
                   Location: The Bazaar, wing 5,Mezzanine floor, Moi
                   Avenue,Nairobi, Kenya
