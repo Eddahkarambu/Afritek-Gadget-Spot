@@ -179,11 +179,7 @@ const Home = () => {
                             )}
                           </div>
 
-                          <div className="flex items-center gap-3">
-                            <span className="bg-emerald-500 text-white text-sm md:text-base font-bold px-4 py-2 rounded-full shadow-md ring-1 ring-white/30">
-                              Shop
-                            </span>
-                          </div>
+                          {/* CTA removed - decorative 'Shop' pill removed as requested */}
                         </div>
                       </div>
 

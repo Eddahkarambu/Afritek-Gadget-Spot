@@ -25,9 +25,7 @@ const Cart = ({
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
-  const shipping = 2000;
-  const tax = Math.floor(subtotal * 0.16);
-  const total = subtotal + shipping + tax;
+  // Only subtotal is shown in the summary (shipping and tax removed)
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-20">
@@ -150,29 +148,8 @@ const Cart = ({
                 <div className="space-y-4 mb-6 pb-6 border-b-2 border-teal-200">
                   <div className="flex justify-between text-gray-700">
                     <span>Subtotal</span>
-                    <span className="font-semibold">
-                      KES {subtotal.toLocaleString()}
-                    </span>
+                    <span className="font-semibold">KES {subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>Shipping</span>
-                    <span className="font-semibold">
-                      KES {shipping.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>Tax (16%)</span>
-                    <span className="font-semibold">
-                      KES {tax.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center mb-8">
-                  <span className="text-xl font-bold text-gray-900">Total</span>
-                  <span className="text-3xl font-bold text-teal-700">
-                    KES {total.toLocaleString()}
-                  </span>
                 </div>
 
                 <button className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
