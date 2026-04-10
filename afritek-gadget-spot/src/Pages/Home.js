@@ -21,12 +21,10 @@ const Home = () => {
     setModalImg(img);
     setModalOpen(true);
   };
-
   const closeModal = () => {
     setModalOpen(false);
     setModalImg({ src: "", alt: "" });
   };
-
   const scrollToCategories = () => {
     const el = document.getElementById("categories");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -74,33 +72,51 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Image - Galaxy (larger, more prominent) */}
+            {/* Right Image - Galaxy (larger, attention-grabbing hero tile) */}
             <div className="flex justify-center">
-              <div className="relative group">
-                {/* Outer glow border - grows on hover */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-4xl blur-3xl opacity-60 group-hover:opacity-90 transform-gpu transition-all duration-500"></div>
+              <div className="relative group w-full flex items-center justify-center">
+                {/* Enhanced glow */}
+                <div className="absolute -inset-6 bg-gradient-to-br from-cyan-500/25 via-purple-500/18 to-pink-400/12 rounded-5xl blur-4xl opacity-70 group-hover:opacity-100 transform-gpu transition-all duration-700"></div>
 
-                {/* Image container - larger on wide screens */}
-                <div className="relative bg-gradient-to-br from-purple-500 via-cyan-400 to-teal-400 p-3 rounded-3xl shadow-2xl shadow-cyan-500/40 overflow-hidden w-full max-w-[420px] sm:max-w-[560px] md:max-w-[720px] transform-gpu group-hover:scale-105 transition-transform duration-500">
-                  {/* Top-left badge */}
-                  <div className="absolute top-4 left-4 z-20">
+                {/* Big image container */}
+                <div className="relative bg-gradient-to-br from-purple-700 via-cyan-500 to-teal-500 p-1 sm:p-4 rounded-4xl shadow-[0_35px_60px_-15px_rgba(14,165,233,0.20)] overflow-hidden w-full max-w-[520px] sm:max-w-[720px] md:max-w-[920px] transform-gpu group-hover:scale-105 group-hover:-translate-y-2 transition-transform duration-700">
+                  {/* Exclusive badge */}
+                  <div className="absolute top-4 left-4 z-30">
                     <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/10 backdrop-blur text-white">
-                      New Arrival
+                      Exclusive
                     </span>
                   </div>
 
-                  {/* Bottom-right ribbon */}
-                  <div className="absolute bottom-4 right-4 z-20">
-                    <span className="text-sm font-semibold px-3 py-1 rounded-lg bg-white/20 text-white"></span>
-                  </div>
-
+                  {/* Main hero image (click opens modal) */}
                   <img
                     src={LatestGalaxy}
                     alt="Latest Galaxy"
                     loading="lazy"
                     decoding="async"
-                    className="rounded-3xl w-full h-64 sm:h-96 md:h-[520px] object-cover shadow-lg"
+                    onClick={() =>
+                      openModal({ src: LatestGalaxy, alt: "Latest Galaxy" })
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        openModal({ src: LatestGalaxy, alt: "Latest Galaxy" });
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    className="rounded-3xl w-full h-72 sm:h-[420px] md:h-[560px] lg:h-[640px] object-cover shadow-2xl cursor-pointer"
                   />
+
+                  {/* CTA overlay */}
+                  <div className="absolute left-6 bottom-6 z-30">
+                    <Link
+                      to="/shop"
+                      className="inline-flex items-center gap-3 bg-white/95 text-teal-900 font-bold px-5 py-3 rounded-full shadow-lg hover:scale-105 transform transition-transform"
+                    >
+                      Shop New Arrivals
+                    </Link>
+                  </div>
+
+                  {/* Subtle decorative border */}
+                  <div className="pointer-events-none absolute inset-0 rounded-4xl border border-white/5 mix-blend-overlay"></div>
                 </div>
               </div>
             </div>
@@ -156,9 +172,11 @@ const Home = () => {
                             <p className="text-white text-xl md:text-2xl font-extrabold leading-tight drop-shadow-md">
                               {img.alt}
                             </p>
-                            <p className="text-amber-300 text-sm md:text-base font-semibold drop-shadow-sm">
-                              From KES 29,999
-                            </p>
+                            {img.subtitle && (
+                              <p className="text-amber-300 text-sm md:text-base font-semibold drop-shadow-sm">
+                                {img.subtitle}
+                              </p>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-3">
@@ -546,17 +564,26 @@ const Home = () => {
               <h4 className="text-cyan-400 font-bold mb-4">Quick Links</h4>
               <ul className="text-sm space-y-2">
                 <li>
-                  <Link to="/" className="hover:text-cyan-400 transition">
+                  <Link
+                    to="/"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/shop" className="hover:text-cyan-400 transition">
+                  <Link
+                    to="/shop"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+                  >
                     Shop
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="hover:text-cyan-400 transition">
+                  <Link
+                    to="/about"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+                  >
                     About
                   </Link>
                 </li>
@@ -570,7 +597,7 @@ const Home = () => {
                   Phone:{" "}
                   <a
                     href="tel:+254795453038"
-                    className="hover:text-cyan-400 transition"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
                   >
                     +254795453038
                   </a>
@@ -587,7 +614,7 @@ const Home = () => {
                 <li>
                   <a
                     href="https://www.tiktok.com/@afritekgadget"
-                    className="hover:text-cyan-400 transition flex items-center gap-2"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm flex items-center gap-2"
                     aria-label="Afritek on TikTok (opens in new tab)"
                     target="_blank"
                     rel="noreferrer noopener"
@@ -606,7 +633,7 @@ const Home = () => {
                 <li>
                   <a
                     href="https://www.instagram.com/afritek_gadget_spot"
-                    className="hover:text-cyan-400 transition flex items-center gap-2"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm flex items-center gap-2"
                     aria-label="Afritek on Instagram (opens in new tab)"
                     target="_blank"
                     rel="noreferrer noopener"
