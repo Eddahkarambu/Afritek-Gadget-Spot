@@ -210,6 +210,51 @@ const Home = () => {
       </section>
 
       {/* Image Modal / Lightbox */}
+      {modalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="max-w-4xl w-full bg-transparent rounded-lg relative p-2 sm:p-4 transform transition-transform duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-2 right-2 bg-white text-gray-900 rounded-full p-2 shadow-lg"
+              aria-label="Close image"
+            >
+              ✕
+            </button>
+            <img
+              src={modalImg.src}
+              alt={modalImg.alt}
+              loading="eager"
+              className="w-full h-auto max-h-[70vh] object-contain rounded-md transform scale-105 transition-transform duration-200 ease-out shadow-2xl"
+            />
+            {modalImg.alt && (
+              <div className="mt-3 bg-white/95 text-gray-900 p-3 rounded-md max-h-40 overflow-auto">
+                <p className="text-center text-sm leading-relaxed">
+                  {modalImg.alt}
+                </p>
+              </div>
+            )}
+            {/* Close / cancel button so mobile users can dismiss and continue scrolling */}
+            <div className="mt-4 flex justify-center">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-white text-gray-900 rounded-md shadow hover:bg-gray-100 transition"
+                aria-label="Close image and continue"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4 text-teal-900">
