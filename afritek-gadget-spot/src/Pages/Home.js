@@ -130,11 +130,14 @@ const Home = () => {
                     type="button"
                     onClick={() => openModal(img)}
                     onTouchStart={() => openModal(img)}
+                    onTouchEnd={() => openModal(img)}
+                    onPointerDown={() => openModal(img)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") openModal(img);
                     }}
                     className="w-full h-full p-0 m-0 block text-left"
                     aria-label={`Open ${img.alt}`}
+                    style={{ touchAction: "manipulation" }}
                   >
                     <img
                       src={img.src}
@@ -173,7 +176,10 @@ const Home = () => {
                   type="button"
                   onClick={() => openModal({ src: p.src, alt: p.alt })}
                   onTouchStart={() => openModal({ src: p.src, alt: p.alt })}
+                  onTouchEnd={() => openModal({ src: p.src, alt: p.alt })}
+                  onPointerDown={() => openModal({ src: p.src, alt: p.alt })}
                   className="block w-full text-left"
+                  style={{ touchAction: "manipulation" }}
                 >
                   <div className="w-full h-36 sm:h-40 md:h-44 overflow-hidden bg-gray-100 flex items-center justify-center">
                     <img
@@ -216,6 +222,8 @@ const Home = () => {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
           onClick={closeModal}
+          onTouchStart={closeModal}
+          onTouchEnd={closeModal}
         >
           <div
             className="max-w-4xl w-full bg-transparent rounded-lg relative p-2 sm:p-4 transform transition-transform duration-200"
@@ -223,6 +231,8 @@ const Home = () => {
           >
             <button
               onClick={closeModal}
+              onTouchStart={closeModal}
+              onTouchEnd={closeModal}
               className="absolute top-2 right-2 bg-white text-gray-900 rounded-full p-2 shadow-lg"
               aria-label="Close image"
             >
