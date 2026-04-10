@@ -108,10 +108,70 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Reviews / Testimonials Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-teal-900">
+            What our customers say
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "John Mwangi",
+                rating: 5,
+                text: "Fast delivery and excellent after-sales support. My phone works perfectly — highly recommend Afritek!",
+                location: "Nairobi, KE",
+              },
+              {
+                name: "Aisha Omar",
+                rating: 5,
+                text: "Great prices and the warranty process was smooth. I buy here every time.",
+                location: "Mombasa, KE",
+              },
+              {
+                name: "David Kamau",
+                rating: 4,
+                text: "Helpful staff and a wide choice of models. The checkout was quick.",
+                location: "Nakuru, KE",
+              },
+              {
+                name: "Grace W.",
+                rating: 5,
+                text: "Excellent value for money — superb customer service and genuine products.",
+                location: "Kisumu, KE",
+              },
+            ].map((r, i) => (
+              <div key={i} className="bg-white p-5 rounded-xl shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-semibold text-teal-800">
+                      {r.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">
+                        {r.name}
+                      </p>
+                      <p className="text-xs text-gray-500">{r.location}</p>
+                    </div>
+                  </div>
+                  <div className="text-yellow-500 font-bold">
+                    {Array.from({ length: r.rating }).map((_, idx) => (
+                      <span key={idx}>★</span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700">{r.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Home Images Gallery */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 items-stretch">
             {[
               { src: HomeImageMain, alt: "New Arrivals - Top Picks" },
               { src: HomeImage2, alt: "Limited Offer" },
@@ -120,10 +180,10 @@ const Home = () => {
               { src: FlashSale3, alt: "Flash Sale" },
             ].map((img, idx) => {
               const containerClasses =
-                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300";
+                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300 p-3";
 
               const imgClasses =
-                "block w-full h-36 sm:h-48 md:h-72 lg:h-80 object-cover transition-transform duration-300 hover:scale-105";
+                "block w-full h-32 sm:h-44 md:h-64 lg:h-72 object-cover transition-transform duration-300 hover:scale-105";
 
               return (
                 <div key={idx} className={containerClasses}>
@@ -160,7 +220,7 @@ const Home = () => {
             <h3 className="text-2xl font-bold text-teal-900">Hot Deals</h3>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { src: InfinixHot60i, alt: "Infinix Hot 60i" },
               { src: InfinixNote50Pro, alt: "Infinix Note 50 Pro" },
@@ -169,10 +229,10 @@ const Home = () => {
             ].map((p, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition p-3"
               >
                 <Link to="/shop" className="block w-full text-left">
-                  <div className="w-full h-36 sm:h-40 md:h-44 overflow-hidden bg-gray-100 flex items-center justify-center">
+                  <div className="w-full h-40 sm:h-44 md:h-48 overflow-hidden bg-gray-100 flex items-center justify-center rounded-md">
                     <img
                       src={p.src}
                       alt={p.alt}
@@ -182,7 +242,7 @@ const Home = () => {
                     />
                   </div>
                   <div className="p-3">
-                    <p className="text-sm font-semibold text-gray-800">
+                    <p className="text-sm font-semibold text-gray-800 mb-1">
                       {p.alt}
                     </p>
                     <p className="text-xs text-gray-500">From KES 29,999</p>
