@@ -47,29 +47,30 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
-                Welcome to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">
-                  Afritek Gadget Spot
-                </span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                Latest Smartphones & Gadgets
               </h1>
-              <p className="text-base sm:text-lg text-cyan-100 mb-8">
-                Discover the latest gadgets and smartphones at unbeatable prices
+              <p className="text-lg sm:text-xl text-cyan-100 mb-6 max-w-xl">
+                Genuine products, warranty-backed, fast delivery across East
+                Africa — trusted by thousands of happy customers.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/shop"
-                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/50 text-center"
+                  className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 text-white px-8 py-4 rounded-full font-extrabold text-lg shadow-2xl transform hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-4 focus:ring-emerald-300 text-center"
                 >
                   Shop Now
                 </Link>
-                <button
-                  type="button"
-                  onClick={scrollToCategories}
-                  className="w-full sm:w-auto border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-teal-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 text-center"
+
+                <a
+                  href="https://wa.me/254795453038?text=Hello%20Afritek%20Gadget%20Spot%2C%20I%27m%20interested%20in%20your%20products"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full font-extrabold text-lg shadow-2xl transition-all focus:outline-none focus:ring-4 focus:ring-emerald-300"
                 >
-                  Learn More
-                </button>
+                  Order on WhatsApp
+                </a>
               </div>
             </div>
 
