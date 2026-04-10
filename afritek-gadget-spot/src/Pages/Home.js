@@ -180,17 +180,16 @@ const Home = () => {
               { src: FlashSale3, alt: "Flash Sale" },
             ].map((img, idx) => {
               const containerClasses =
-                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300 p-3";
+                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300 p-4";
 
               const imgClasses =
-                "block w-full h-32 sm:h-44 md:h-64 lg:h-72 object-cover transition-transform duration-300 hover:scale-105";
+                "block w-full h-44 sm:h-56 md:h-64 lg:h-72 object-contain transition-transform duration-300 hover:scale-105";
 
               return (
                 <div key={idx} className={containerClasses}>
                   <button
                     type="button"
                     onClick={() => openModal(img)}
-                    onTouchStart={() => openModal(img)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") openModal(img);
                     }}
@@ -273,8 +272,6 @@ const Home = () => {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
           onClick={closeModal}
-          onTouchStart={closeModal}
-          onTouchEnd={closeModal}
         >
           <div
             className="max-w-4xl w-full bg-transparent rounded-lg relative p-2 sm:p-4 transform transition-transform duration-200"
@@ -282,8 +279,6 @@ const Home = () => {
           >
             <button
               onClick={closeModal}
-              onTouchStart={closeModal}
-              onTouchEnd={closeModal}
               className="absolute top-2 right-2 bg-white text-gray-900 rounded-full p-2 shadow-lg"
               aria-label="Close image"
             >
