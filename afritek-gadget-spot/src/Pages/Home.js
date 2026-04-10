@@ -122,7 +122,7 @@ const Home = () => {
                 "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300";
 
               const imgClasses =
-                "block w-full h-40 sm:h-56 md:h-80 lg:h-96 object-cover transition-transform duration-300 hover:scale-105";
+                "block w-full h-36 sm:h-48 md:h-72 lg:h-80 object-cover transition-transform duration-300 hover:scale-105";
 
               return (
                 <div key={idx} className={containerClasses}>
@@ -130,8 +130,6 @@ const Home = () => {
                     type="button"
                     onClick={() => openModal(img)}
                     onTouchStart={() => openModal(img)}
-                    onTouchEnd={() => openModal(img)}
-                    onPointerDown={() => openModal(img)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") openModal(img);
                     }}
@@ -172,15 +170,7 @@ const Home = () => {
                 key={i}
                 className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
               >
-                <button
-                  type="button"
-                  onClick={() => openModal({ src: p.src, alt: p.alt })}
-                  onTouchStart={() => openModal({ src: p.src, alt: p.alt })}
-                  onTouchEnd={() => openModal({ src: p.src, alt: p.alt })}
-                  onPointerDown={() => openModal({ src: p.src, alt: p.alt })}
-                  className="block w-full text-left"
-                  style={{ touchAction: "manipulation" }}
-                >
+                <Link to="/shop" className="block w-full text-left">
                   <div className="w-full h-36 sm:h-40 md:h-44 overflow-hidden bg-gray-100 flex items-center justify-center">
                     <img
                       src={p.src}
@@ -196,7 +186,7 @@ const Home = () => {
                     </p>
                     <p className="text-xs text-gray-500">From KES 29,999</p>
                   </div>
-                </button>
+                </Link>
               </div>
             ))}
           </div>
