@@ -122,10 +122,10 @@ const Home = () => {
               { src: FlashSale3, alt: "Flash Sale" },
             ].map((img, idx) => {
               const containerClasses =
-                "relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300 p-4";
+                "relative overflow-hidden rounded-3xl bg-white shadow-2xl hover:shadow-2xl transition-transform duration-500 p-0 transform-gpu group will-change-transform";
 
               const imgClasses =
-                "block w-full h-44 sm:h-56 md:h-64 lg:h-72 object-contain transition-transform duration-300 hover:scale-105";
+                "block w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-1";
 
               return (
                 <div key={idx} className={containerClasses}>
@@ -135,17 +135,43 @@ const Home = () => {
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") openModal(img);
                     }}
-                    className="w-full h-full p-0 m-0 block text-left"
+                    className="w-full h-full p-0 m-0 block text-left group"
                     aria-label={`Open ${img.alt}`}
                     style={{ touchAction: "manipulation" }}
                   >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      loading="lazy"
-                      decoding="async"
-                      className={`${imgClasses} cursor-pointer`}
-                    />
+                    <div className="relative w-full h-full">
+                      {/* Poster image */}
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading="lazy"
+                        decoding="async"
+                        className={`${imgClasses} cursor-pointer rounded-3xl w-full h-full`}
+                      />
+
+                      {/* Readable poster overlay for title/price/cta */}
+                      <div className="absolute left-0 right-0 bottom-0 px-4 py-5 bg-gradient-to-t from-black/80 via-black/60 to-transparent rounded-b-3xl backdrop-blur-sm min-h-[72px] sm:min-h-[88px]">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-white text-xl md:text-2xl font-extrabold leading-tight drop-shadow-md">
+                              {img.alt}
+                            </p>
+                            <p className="text-amber-300 text-sm md:text-base font-semibold drop-shadow-sm">
+                              From KES 29,999
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-3">
+                            <span className="bg-emerald-500 text-white text-sm md:text-base font-bold px-4 py-2 rounded-full shadow-md ring-1 ring-white/30">
+                              Shop
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Decorative poster border */}
+                      <div className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-white/5 ring-1 ring-white/5"></div>
+                    </div>
                   </button>
                 </div>
               );
@@ -163,17 +189,32 @@ const Home = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
-              { src: InfinixHot60i, alt: "Infinix Hot 60i" },
-              { src: InfinixNote50Pro, alt: "Infinix Note 50 Pro" },
-              { src: VivoV60, alt: "Vivo V60" },
-              { src: Redmi15, alt: "Redmi 15" },
+              {
+                src: InfinixHot60i,
+                alt: "Infinix Hot 60i",
+                price: "From KES 9,999",
+              },
+              {
+                src: InfinixNote50Pro,
+                alt: "Infinix Note 50 Pro",
+                price: "From KES 29,999",
+              },
+              { src: VivoV60, alt: "Vivo V60", price: "From KES 34,999" },
+              { src: Redmi15, alt: "Redmi 15", price: "From KES 18,499" },
             ].map((p, i) => (
               <div
                 key={i}
                 className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition p-3"
               >
                 <Link to="/shop" className="block w-full text-left">
-                  <div className="w-full h-40 sm:h-44 md:h-48 overflow-hidden bg-gray-100 flex items-center justify-center rounded-md">
+                  <div className="w-full h-40 sm:h-44 md:h-48 overflow-hidden bg-gray-100 flex items-center justify-center rounded-md relative">
+                    {/* Offer badge */}
+                    <span
+                      className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10"
+                      aria-hidden="true"
+                    >
+                      OFFER
+                    </span>
                     <img
                       src={p.src}
                       alt={p.alt}
@@ -186,7 +227,9 @@ const Home = () => {
                     <p className="text-sm font-semibold text-gray-800 mb-1">
                       {p.alt}
                     </p>
-                    <p className="text-xs text-gray-500">From KES 29,999</p>
+                    <p className="text-sm text-gray-600 font-semibold">
+                      {p.price}
+                    </p>
                   </div>
                 </Link>
               </div>
