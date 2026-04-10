@@ -108,65 +108,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Reviews / Testimonials Section */}
-      <section className="py-16 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8 text-teal-900">
-            What our customers say
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                name: "John Mwangi",
-                rating: 5,
-                text: "Fast delivery and excellent after-sales support. My phone works perfectly — highly recommend Afritek!",
-                location: "Nairobi, KE",
-              },
-              {
-                name: "Aisha Omar",
-                rating: 5,
-                text: "Great prices and the warranty process was smooth. I buy here every time.",
-                location: "Mombasa, KE",
-              },
-              {
-                name: "David Kamau",
-                rating: 4,
-                text: "Helpful staff and a wide choice of models. The checkout was quick.",
-                location: "Nakuru, KE",
-              },
-              {
-                name: "Grace W.",
-                rating: 5,
-                text: "Excellent value for money — superb customer service and genuine products.",
-                location: "Kisumu, KE",
-              },
-            ].map((r, i) => (
-              <div key={i} className="bg-white p-5 rounded-xl shadow-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-semibold text-teal-800">
-                      {r.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-800">
-                        {r.name}
-                      </p>
-                      <p className="text-xs text-gray-500">{r.location}</p>
-                    </div>
-                  </div>
-                  <div className="text-yellow-500 font-bold">
-                    {Array.from({ length: r.rating }).map((_, idx) => (
-                      <span key={idx}>★</span>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-gray-700">{r.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Reviews / Testimonials Section moved to just before footer */}
 
       {/* Home Images Gallery */}
       <section className="py-12 px-6">
@@ -237,7 +179,7 @@ const Home = () => {
                       alt={p.alt}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                   <div className="p-3">
@@ -487,6 +429,66 @@ const Home = () => {
       </section>
 
       {/* Footer */}
+      {/* Reviews / Testimonials Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-teal-900">
+            What our customers say
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "John Mwangi",
+                rating: 5,
+                text: "Fast delivery and excellent after-sales support. My phone works perfectly — highly recommend Afritek!",
+                location: "Nairobi, KE",
+              },
+              {
+                name: "Aisha Omar",
+                rating: 5,
+                text: "Great prices and the warranty process was smooth. I buy here every time.",
+                location: "Mombasa, KE",
+              },
+              {
+                name: "David Kamau",
+                rating: 4,
+                text: "Helpful staff and a wide choice of models. The checkout was quick.",
+                location: "Nakuru, KE",
+              },
+              {
+                name: "Grace W.",
+                rating: 5,
+                text: "Excellent value for money — superb customer service and genuine products.",
+                location: "Kisumu, KE",
+              },
+            ].map((r, i) => (
+              <div key={i} className="bg-white p-5 rounded-xl shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-semibold text-teal-800">
+                      {r.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">
+                        {r.name}
+                      </p>
+                      <p className="text-xs text-gray-500">{r.location}</p>
+                    </div>
+                  </div>
+                  <div className="text-yellow-500 font-bold">
+                    {Array.from({ length: r.rating }).map((_, idx) => (
+                      <span key={idx}>★</span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700">{r.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <footer className="bg-gray-900 text-gray-400 py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
