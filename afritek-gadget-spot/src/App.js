@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
@@ -10,42 +10,52 @@ import Checkout from "./Pages/Checkout";
 import Payment from "./Pages/Payment";
 import OrderConfirmation from "./Pages/OrderConfirmation";
 
+const CART_KEY = "afritek.cart.v1";
+
+function readCart() {
+  try {
+    const items = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    if (!Array.isArray(items)) return [];
+    return items.filter((item) => item &&
+      (typeof item.id === "string" || Number.isSafeInteger(item.id)) &&
+      typeof item.name === "string" && Number.isFinite(item.price) &&
+      item.price > 0 && Number.isSafeInteger(item.quantity) && item.quantity > 0);
+  } catch {
+    return [];
+  }
+}
+
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(readCart);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(cartItems));
+    } catch {
+      // Shopping still works when browser storage is unavailable.
+    }
+  }, [cartItems]);
 
   // Add to cart
   const addToCart = (product) => {
-    const existingItem = cartItems.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        ),
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
+    setCartItems((items) => {
+      const existingItem = items.find((item) => item.id === product.id);
+      return existingItem
+        ? items.map((item) => item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 } : item)
+        : [...items, { ...product, quantity: 1 }];
+    });
   };
 
-  // Remove from cart
   const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+    setCartItems((items) => items.filter((item) => item.id !== productId));
   };
 
-  // Update quantity
   const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-    } else {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === productId ? { ...item, quantity } : item,
-        ),
-      );
-    }
+    if (!Number.isSafeInteger(quantity)) return;
+    if (quantity <= 0) removeFromCart(productId);
+    else setCartItems((items) => items.map((item) =>
+      item.id === productId ? { ...item, quantity } : item));
   };
 
   // Clear cart

@@ -152,9 +152,9 @@ const Cart = ({
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
+                <Link to="/checkout" className="block text-center w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
                   Proceed to Checkout
-                </button>
+                </Link>
 
                 <Link
                   to="/shop"
