@@ -1,5 +1,7 @@
+import useResource from '../hooks/useResource';
+import RequestState from '../components/RequestState';
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +10,8 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [notice, setNotice] = useState('');
+  const shop = useResource('/shop');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,25 +25,20 @@ const Contact = () => {
     e.preventDefault();
     // Build the WhatsApp message from the form data
     const { name, email, subject, message } = formData;
-    const phone = "254795453038"; // WhatsApp number (no plus sign)
+    const phone = shop.data?.phone?.replace(/\D/g, '') || '';
+    if (!phone) { setNotice('Shop contact details are unavailable. Please retry loading them.'); return; } // WhatsApp number (no plus sign)
     const text = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
     const encoded = encodeURIComponent(text);
     const waUrl = `https://wa.me/${phone}?text=${encoded}`;
 
-    // Open WhatsApp in a new tab
-    window.open(waUrl, "_blank");
-
-    // Show the temporary submitted state and reset the form
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 2000);
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setNotice('WhatsApp will open with your draft. Send the message there to contact us. Opening WhatsApp does not confirm delivery of the message.');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <RequestState {...shop} />
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
@@ -60,13 +58,13 @@ const Contact = () => {
             </div>
             <h3 className="text-xl font-bold mb-2">Email</h3>
             <p className="text-gray-400 mb-3">
-              Send us an email and we'll get back to you within 24 hours.
+              Email the shop with your phone or order questions.
             </p>
             <a
-              href="mailto:support@afritekgadget.com"
+              href={shop.data?.email ? `mailto:${shop.data.email}` : undefined}
               className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
             >
-              support@afritekgadget.com
+              {shop.data?.email || 'Email unavailable'}
             </a>
           </div>
 
@@ -80,10 +78,10 @@ const Contact = () => {
               Call us during business hours. We're here to help!
             </p>
             <a
-              href="tel:+25495453038"
+              href={shop.data?.phone ? `tel:${shop.data.phone}` : undefined}
               className="text-teal-400 hover:text-teal-300 font-semibold transition-colors"
             >
-              +254795453038
+              {shop.data?.phone || 'Phone unavailable'}
             </a>
           </div>
 
@@ -97,9 +95,7 @@ const Contact = () => {
               Visit us at our office in Nairobi.
             </p>
             <p className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
-              The Bazaar, wing5, Mezzanine floor, Moi Avenue
-              <br />
-              Nairobi, Kenya
+              {shop.data?.address || 'Contact us for shop location details.'}
             </p>
           </div>
         </div>
@@ -113,26 +109,15 @@ const Contact = () => {
               <h2 className="text-3xl font-bold">Send us a Message</h2>
             </div>
 
-            {submitted ? (
-              <div className="bg-green-500/20 border border-green-500 rounded-xl p-8 text-center">
-                <div className="text-5xl mb-4">✓</div>
-                <h3 className="text-xl font-bold text-green-400 mb-2">
-                  Message Sent!
-                </h3>
-                <p className="text-gray-300">
-                  Thank you for reaching out. We'll get back to you soon!
-                </p>
-              </div>
-            ) : (
+            {notice && <p role="status" className="border border-cyan-500 p-4 rounded-lg mb-6">{notice}</p>}
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name Field */}
                 <div>
-                  <label className="block text-sm font-semibold mb-2">
+                  <label htmlFor="contact-name" className="block text-sm font-semibold mb-2">
                     Your Name
                   </label>
-                  <input
-                    type="text"
-                    name="name"
+                  <input type="text"
+                    id="contact-name" name="name" maxLength={120}
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -143,15 +128,13 @@ const Contact = () => {
 
                 {/* Email Field */}
                 <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Your Email
+                  <label htmlFor="contact-email" className="block text-sm font-semibold mb-2">
+                    Your Email (optional)
                   </label>
-                  <input
-                    type="email"
-                    name="email"
+                  <input type="email"
+                    id="contact-email" name="email" maxLength={254}
                     value={formData.email}
                     onChange={handleChange}
-                    required
                     placeholder="john@example.com"
                     className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
                   />
@@ -159,12 +142,11 @@ const Contact = () => {
 
                 {/* Subject Field */}
                 <div>
-                  <label className="block text-sm font-semibold mb-2">
+                  <label htmlFor="contact-subject" className="block text-sm font-semibold mb-2">
                     Subject
                   </label>
-                  <input
-                    type="text"
-                    name="subject"
+                  <input type="text"
+                    id="contact-subject" name="subject" maxLength={120}
                     value={formData.subject}
                     onChange={handleChange}
                     required
@@ -175,11 +157,10 @@ const Contact = () => {
 
                 {/* Message Field */}
                 <div>
-                  <label className="block text-sm font-semibold mb-2">
+                  <label htmlFor="contact-message" className="block text-sm font-semibold mb-2">
                     Message
                   </label>
-                  <textarea
-                    name="message"
+                  <textarea id="contact-message" name="message" maxLength={1000}
                     value={formData.message}
                     onChange={handleChange}
                     required
@@ -195,35 +176,13 @@ const Contact = () => {
                   className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
                 >
                   <Send size={20} />
-                  Send Message
+                  Open WhatsApp draft
                 </button>
               </form>
-            )}
           </div>
 
           {/* Business Hours & Info */}
           <div className="space-y-6">
-            {/* Business Hours */}
-            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <Clock className="text-yellow-400" size={28} />
-                <h3 className="text-2xl font-bold">Business Hours</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center pb-3 border-b border-gray-700">
-                  <span className="text-gray-400">Monday - Saturday</span>
-                  <span className="text-cyan-400 font-semibold">
-                    8:00 AM - 7:00 PM
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-400">Sunday</span>
-                  <span className="text-red-400 font-semibold">Closed</span>
-                </div>
-              </div>
-            </div>
-
             {/* Why Contact Us */}
             <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4">Why Contact Us?</h3>
@@ -341,7 +300,7 @@ const Contact = () => {
           <div className="max-w-4xl mx-auto rounded-lg overflow-hidden border border-gray-800">
             <iframe
               title="Afritek Gadgets Spot - Map"
-              src="https://www.google.com/maps?q=-1.2819548,36.8216073&z=17&output=embed"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(shop.data?.address || 'Afritek Gadget Spot Nairobi')}&output=embed`}
               width="100%"
               height="400"
               className="w-full h-64 sm:h-80 border-0"
@@ -351,7 +310,7 @@ const Contact = () => {
             />
             <div className="p-4 bg-[#0b1218] text-center">
               <a
-                href="https://www.google.com/maps/place/Afritek+Gadgets+Spot/@-1.2819494,36.819027,17z/data=!4m14!1m7!3m6!1s0x182f11c6c7ab41c5:0x15c65e4be9c9156d!2sAfritek+Gadgets+Spot!8m2!3d-1.2819548!4d36.8216073!16s%2Fg%2F11n54rqdhh!3m5!1s0x182f11c6c7ab41c5:0x15c65e4be9c9156d!8m2!3d-1.2819548!4d36.8216073!16s%2Fg%2F11n54rqdhh?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D"
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.data?.address || 'Afritek Gadget Spot Nairobi')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-cyan-400 hover:text-cyan-300 font-semibold"
@@ -372,16 +331,16 @@ const Contact = () => {
             {[
               {
                 q: "What's your return policy?",
-                a: "We offer a 30-day money-back guarantee on all products. No questions asked!",
+                a: "Please contact the shop to discuss the terms for your specific phone before ordering.",
               },
 
               {
                 q: "How long does delivery take?",
-                a: "Local delivery takes 24hrs. International orders take 7-14 days.",
+                a: "We agree the delivery timing and fee with you before confirming your order.",
               },
               {
                 q: "Do you offer warranty?",
-                a: "All products come with a 1-year manufacturer warranty.",
+                a: "Warranty terms depend on the phone. Please ask us before ordering.",
               },
             ].map((item, idx) => (
               <div

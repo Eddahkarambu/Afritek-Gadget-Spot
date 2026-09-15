@@ -10,8 +10,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">About Afritek</h1>
           <p className="text-xl text-cyan-100">
-            Your trusted destination for premium gadgets and electronics across
-            East Africa
+            Phones online and at our Nairobi shop, with cash on delivery.
           </p>
         </div>
       </section>
@@ -22,15 +21,10 @@ const About = () => {
           <div>
             <h2 className="text-4xl font-bold text-teal-900 mb-6">Our Story</h2>
             <p className="text-gray-700 mb-4 text-lg leading-relaxed">
-              Founded in 2024, Afritek Gadget Spot was born from a simple
-              vision: to make premium technology accessible to everyone across
-              East Africa. We started as a small operation with a passion for
-              gadgets and a commitment to customer excellence.
+              Afritek Gadget Spot sells phones in Kenya through our online storefront and one physical branch.
             </p>
             <p className="text-gray-700 mb-4 text-lg leading-relaxed">
-              Today, we're proud to be one of the fastest-growing electronics
-              retailers in the region, serving thousands of satisfied customers
-              with authentic products and exceptional service.
+              Choose a phone and configuration online. We will contact you to confirm availability, agree the delivery fee and arrange delivery with our rider.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed">
               Our journey is just beginning, and we're excited to bring the
@@ -116,8 +110,7 @@ const About = () => {
                   Fast & Reliable Delivery
                 </h3>
                 <p className="text-gray-700">
-                  We guarantee delivery within 24-48 hours across East Africa
-                  with real-time tracking
+                  We agree delivery arrangements and the fee with you before confirming your order.
                 </p>
               </div>
             </div>
@@ -130,11 +123,10 @@ const About = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-purple-900 mb-2">
-                  100% Authentic Products
+                  Phone information
                 </h3>
                 <p className="text-gray-700">
-                  Every product is verified and comes with official warranty and
-                  after-sales support
+                  Ask us about the specific phone and its warranty terms before ordering.
                 </p>
               </div>
             </div>
@@ -150,8 +142,7 @@ const About = () => {
                   Expert Customer Support
                 </h3>
                 <p className="text-gray-700">
-                  Our dedicated team is available 24/7 to help you with any
-                  questions or concerns
+                  Contact our shop for help choosing a phone or discussing an order.
                 </p>
               </div>
             </div>
@@ -164,37 +155,12 @@ const About = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-indigo-900 mb-2">
-                  Best Prices Guaranteed
+                  Clear pricing
                 </h3>
                 <p className="text-gray-700">
-                  Competitive pricing with regular promotions and loyalty
-                  rewards for our customers
+                  Prices are shown for each configuration. The delivery fee is agreed separately.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl border-2 border-teal-200">
-              <p className="text-4xl font-bold text-teal-700 mb-2">10,000+</p>
-              <p className="text-gray-700 font-semibold">Happy Customers</p>
-            </div>
-            <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border-2 border-purple-200">
-              <p className="text-4xl font-bold text-purple-700 mb-2">500+</p>
-              <p className="text-gray-700 font-semibold">Product Models</p>
-            </div>
-            <div className="text-center p-6 bg-gradient-to-br from-cyan-50 to-teal-50 rounded-xl border-2 border-cyan-200">
-              <p className="text-4xl font-bold text-cyan-700 mb-2">15+</p>
-              <p className="text-gray-700 font-semibold">Brands Available</p>
-            </div>
-            <div className="text-center p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-200">
-              <p className="text-4xl font-bold text-indigo-700 mb-2">24/7</p>
-              <p className="text-gray-700 font-semibold">Customer Support</p>
             </div>
           </div>
         </div>

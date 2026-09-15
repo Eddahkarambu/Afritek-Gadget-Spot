@@ -1,13 +1,17 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
 import AfritekLogo from "../Images/AfritekLogoLogo.jpeg";
 
 const Navbar = ({ cartItems = [] }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
+
+  React.useEffect(() => { setIsOpen(false); setSearchOpen(false); }, [location.pathname, location.search]);
 
   return (
     <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-40 shadow-lg shadow-teal-900/50">
@@ -86,6 +90,7 @@ const Navbar = ({ cartItems = [] }) => {
             }}
             className="text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg"
             title="Search"
+            aria-label="Search" aria-expanded={searchOpen}
           >
             <Search size={22} />
           </button>
@@ -100,7 +105,7 @@ const Navbar = ({ cartItems = [] }) => {
 
               {cartItems && cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center border-2 border-purple-800 animate-pulse">
-                  {cartItems.length}
+                  {count}
                 </span>
               )}
             </div>
@@ -109,12 +114,13 @@ const Navbar = ({ cartItems = [] }) => {
           {/* Mobile Cart Icon */}
           <Link
             to="/cart"
+            aria-label={`Cart, ${count} items`}
             className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2"
           >
             <ShoppingCart size={22} />
             {cartItems && cartItems.length > 0 && (
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                {cartItems.length}
+                {count}
               </span>
             )}
           </Link>
@@ -124,6 +130,7 @@ const Navbar = ({ cartItems = [] }) => {
             className="lg:hidden text-cyan-400 p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             title="Menu"
+            aria-label="Menu" aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -140,10 +147,12 @@ const Navbar = ({ cartItems = [] }) => {
             />
             <input
               type="text"
-              placeholder="Search gadgets, phones, tablets..."
+              aria-label="Search phones"
+              autoFocus maxLength={100}
+              placeholder="Search phones..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={(e) => {
+              onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   if (searchTerm.trim()) {
                     navigate(
@@ -200,7 +209,7 @@ const Navbar = ({ cartItems = [] }) => {
               View Cart
               {cartItems && cartItems.length > 0 && (
                 <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems.length}
+                  {count}
                 </span>
               )}
             </Link>

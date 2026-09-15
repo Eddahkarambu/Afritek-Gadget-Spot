@@ -6,3 +6,10 @@ body {
   margin: 0;
   background-color: #0a0c10; /* This ensures your background stays dark */
 }
+:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }
+button:disabled { cursor: not-allowed; }
+input, select, textarea { max-width: 100%; font-size: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media print { nav, footer, button { display: none !important; } body, main, main * { color: black !important; background: white !important; } }

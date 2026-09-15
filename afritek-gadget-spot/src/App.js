@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
@@ -7,22 +7,16 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
-import Payment from "./Pages/Payment";
 import OrderConfirmation from "./Pages/OrderConfirmation";
 
-const CART_KEY = "afritek.cart.v1";
+import ProductDetail from './Pages/ProductDetail';
+import Footer from './components/Footer';
+import { CART_KEY, readCart } from './lib/cart';
 
-function readCart() {
-  try {
-    const items = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-    if (!Array.isArray(items)) return [];
-    return items.filter((item) => item &&
-      (typeof item.id === "string" || Number.isSafeInteger(item.id)) &&
-      typeof item.name === "string" && Number.isFinite(item.price) &&
-      item.price > 0 && Number.isSafeInteger(item.quantity) && item.quantity > 0);
-  } catch {
-    return [];
-  }
+function RouteChange() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
 }
 
 function App() {
@@ -36,15 +30,18 @@ function App() {
     }
   }, [cartItems]);
 
+  const cartRef = useRef(cartItems);
+  cartRef.current = cartItems;
+
   // Add to cart
-  const addToCart = (product) => {
-    setCartItems((items) => {
-      const existingItem = items.find((item) => item.id === product.id);
-      return existingItem
-        ? items.map((item) => item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 } : item)
-        : [...items, { ...product, quantity: 1 }];
-    });
+  const addToCart = (product, quantity = 1) => {
+    const items = cartRef.current;
+    const existing = items.find(item => item.id === product.id);
+    if (!Number.isSafeInteger(quantity) || quantity < 1 || quantity + (existing?.quantity || 0) > 10 || (!existing && items.length >= 20)) return false;
+    const next = existing ? items.map(item => item.id === product.id ? { ...item, ...product, quantity: item.quantity + quantity } : item) : [...items, { ...product, quantity }];
+    cartRef.current = next;
+    setCartItems(next);
+    return true;
   };
 
   const removeFromCart = (productId) => {
@@ -52,7 +49,7 @@ function App() {
   };
 
   const updateQuantity = (productId, quantity) => {
-    if (!Number.isSafeInteger(quantity)) return;
+    if (!Number.isSafeInteger(quantity) || quantity > 10) return;
     if (quantity <= 0) removeFromCart(productId);
     else setCartItems((items) => items.map((item) =>
       item.id === productId ? { ...item, quantity } : item));
@@ -65,9 +62,12 @@ function App() {
 
   return (
     <Router>
+      <RouteChange />
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:bg-white focus:text-black focus:p-4">Skip to content</a>
       <Navbar cartItems={cartItems} />
-      <Routes>
+      <main id="main"><Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products/:slug" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/shop" element={<Shop addToCart={addToCart} />} />
         <Route
           path="/cart"
@@ -77,18 +77,21 @@ function App() {
               removeFromCart={removeFromCart}
               updateQuantity={updateQuantity}
               clearCart={clearCart}
+              replaceCart={setCartItems}
             />
           }
         />
         <Route
           path="/checkout"
-          element={<Checkout cart={cartItems} setCart={setCartItems} />}
+          element={<Checkout cart={cartItems} clearCart={clearCart} />}
         />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<Navigate to="/checkout" replace />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-      </Routes>
+        <Route path="*" element={<div className="pt-32 pb-20 px-6 text-white"><h1 className="text-3xl font-bold">Page not found</h1><Link className="underline" to="/shop">Browse phones</Link></div>} />
+      </Routes></main>
+      <Footer />
     </Router>
   );
 }
