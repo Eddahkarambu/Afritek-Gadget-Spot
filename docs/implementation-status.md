@@ -33,3 +33,7 @@ The owner selected repairs to the existing React application. The application ro
 5. The legacy Create React App build/test dependency tree still reports development-tool advisories after compatible fixes (29 at the 11 September audit; none critical). Runtime-only audit reported zero advisories. These are not proof that build tooling is risk-free. A separate build-tool upgrade is still needed; the existing React source can be retained. Do not run an exposed development server or force npm's proposed `react-scripts@0.0.0` replacement.
 
 Unused legacy components/assets remain in the repository for review but are not routed/rendered by the repaired application. Business terms, browser support beyond tested Chromium desktop/mobile, actual provider account configuration and production load testing remain owner launch checks.
+
+## Existing Netlify preview integrations
+
+PR checks revealed two existing Netlify integrations. One reported a failed deployment without a public error summary; another published both `build/index.html` and `public/index.html`, indicating an overly broad publish directory. Added root `netlify.toml` specifying the existing application base, production build output and SPA routes. This config correction is reviewable in the PR; account-specific failures still require the deployment log. Netlify origins also require explicit backend allowlisting before API testing.

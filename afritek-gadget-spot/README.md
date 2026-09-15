@@ -48,3 +48,5 @@ Publish reviewed phone models, variants and photos in the admin and fill in shop
 The static page and bundled CSS load independently of Render. API data, product photos and checkout still depend on the backend. Render Free sleeps after 15 idle minutes and can take about a minute to wake up: https://render.com/docs/free . The UI waits up to two minutes and offers explicit retry without silently creating new order requests. Paid always-on compute removes idle spin-up, but does not eliminate network/database latency. No paid plan has been provisioned.
 
 See `../docs/implementation-status.md` for the review findings and remaining launch checks.
+
+For the repository's existing Netlify integrations, root `netlify.toml` explicitly selects the application and publishes only its `build` output. It includes the routed SPA paths. A Netlify preview's exact origin must be added to the backend allowlist before API testing; a successful static deployment alone does not establish working checkout.
