@@ -1,0 +1,21 @@
+name: Verify Render keep-alive
+on:
+  push:
+    paths:
+      - 'ops/render-keepalive/**'
+      - '.github/workflows/verify-keepalive.yml'
+  pull_request:
+    paths:
+      - 'ops/render-keepalive/**'
+      - '.github/workflows/verify-keepalive.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test ops/render-keepalive/worker.test.mjs
