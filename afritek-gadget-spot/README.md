@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Afritek Gadget Spot storefront
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the existing React storefront, repaired in place. React, React Router, Create React App and the original branding/page layouts remain. The phone catalogue and guest checkout use the existing Afritek NestJS API; the browser never connects directly to the database or R2.
 
-## Available Scripts
+## Run locally
 
-In the project directory, you can run:
+Use Node 24. From this application directory:
 
-### `npm start`
+```sh
+npm ci --include=dev
+cp .env.example .env.local
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The example starts the storefront on port 3001. For a local API, set `REACT_APP_API_URL=http://localhost:3000/api/v1` and add the exact storefront origin to the backend `STOREFRONT_ORIGINS`. `localhost` and `127.0.0.1` are different origins. React environment variables are public; never include secrets.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Verify
 
-### `npm test`
+```sh
+CI=true npm test -- --watchAll=false --runInBand
+npx playwright install chromium
+npm run test:e2e
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Browser tests use fictional intercepted API responses on desktop and mobile. They do not create remote orders. The backend repository separately tests real database checkout, origin isolation, photo access, price validation and retry idempotency.
 
-### `npm run build`
+## Vercel deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Keep the existing project; set its Root Directory to `afritek-gadget-spot`, install command `npm ci --include=dev`, build command `npm run build`, and output directory `build`. The included `vercel.json` serves known SPA paths on refresh while leaving missing file requests as 404s. Unknown SPA paths render a Page not found screen.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Set `REACT_APP_API_URL=https://afritek-admin-testing.onrender.com/api/v1` (also the default). Deploy the backend integration before the storefront branch: it adds `GET /shop`, filters, storefront CORS and public photo embedding. The backend defaults to allowing `https://afritek-gadget-spot.vercel.app`. Additional preview/custom domains must be explicitly included in backend `STOREFRONT_ORIGINS`; never allow all Vercel previews. A build does not itself update the current Vercel deployment.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Publish reviewed phone models, variants and photos in the admin and fill in shop contact settings. Embedded demonstration products and testimonials are no longer displayed or imported automatically. Existing product assets and unused legacy components remain available in git for owner review.
 
-### `npm run eject`
+## Ordering and storage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- One product page offers exact storage/RAM/colour variants. Unavailable configurations cannot be ordered.
+- Cart quantities are 1–10 per variant, with up to 20 variants; prices use integer KES minor units.
+- Cart IDs from the old hardcoded catalogue cannot map safely to backend variants. New API carts use a separate local-storage version.
+- Checkout needs name, Kenyan mobile, area, address/landmark and optional instructions. Email/postal code are not required.
+- Session storage holds the exact pending request before submission, including its UUID. On an uncertain result, retry the same request; do not clear browser storage and place it again. If the problem persists, contact the shop.
+- Only a server receipt clears the cart and opens the received screen. This means receipt of a NEW order, not payment or shop confirmation. The delivery fee/final total remain unagreed.
+- Cart price refresh shows changed prices/unavailable items and requires explicit acceptance. The server always revalidates prices at submission.
+- Contact opens a WhatsApp draft for the customer to send. It does not claim message delivery.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Hosting performance
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The static page and bundled CSS load independently of Render. API data, product photos and checkout still depend on the backend. Render Free sleeps after 15 idle minutes and can take about a minute to wake up: https://render.com/docs/free . The UI waits up to two minutes and offers explicit retry without silently creating new order requests. Paid always-on compute removes idle spin-up, but does not eliminate network/database latency. No paid plan has been provisioned.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+See `../docs/implementation-status.md` for the review findings and remaining launch checks.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For the repository's existing Netlify integrations, root `netlify.toml` explicitly selects the application and publishes only its `build` output. It includes the routed SPA paths. A Netlify preview's exact origin must be added to the backend allowlist before API testing; a successful static deployment alone does not establish working checkout.

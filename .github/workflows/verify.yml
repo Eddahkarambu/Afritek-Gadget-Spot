@@ -1,0 +1,26 @@
+name: Verify storefront
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  storefront:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: afritek-gadget-spot
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: afritek-gadget-spot/package-lock.json
+      - run: npm ci --include=dev
+      - run: npm test -- --watchAll=false --runInBand
+        env:
+          CI: 'true'
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

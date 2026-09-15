@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { api, cartItem, money } from '../lib/api';
+import ProductImage from '../components/ProductImage';
 import { Trash2, Plus, Minus } from "lucide-react";
 
 const Cart = ({
@@ -7,7 +9,31 @@ const Cart = ({
   removeFromCart,
   updateQuantity,
   clearCart,
+  replaceCart,
 }) => {
+  const [review, setReview] = useState(null);
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState('');
+  const signature = JSON.stringify(cartItems);
+  async function checkPrices() {
+    setChecking(true); setError(''); setReview(null);
+    try {
+      const products = await Promise.all([...new Set(cartItems.map(item => item.slug))].map(async slug => {
+        try { return await api(`/products/${encodeURIComponent(slug)}`); }
+        catch (error) { if (error.status === 404) return null; throw error; }
+      }));
+      const changes = [];
+      const next = cartItems.flatMap(item => {
+        const product = products.find(p => p?.slug === item.slug);
+        const variant = product?.variants.find(v => v.id === item.id && v.available);
+        if (!variant) { changes.push(`${item.name} (${item.specs}) is unavailable and will be removed.`); return []; }
+        if (variant.priceMinor !== item.priceMinor) changes.push(`${item.name} (${item.specs}): ${money(item.priceMinor)} → ${money(variant.priceMinor)} each.`);
+        return [{ ...cartItem(product, variant), quantity: item.quantity }];
+      });
+      setReview({ signature, next, changes });
+    } catch (error) { setError(error.message); }
+    finally { setChecking(false); }
+  }
   const [emptyClicked, setEmptyClicked] = useState(false);
   const [summaryClicked, setSummaryClicked] = useState(false);
 
@@ -22,7 +48,7 @@ const Cart = ({
   };
   // Calculate totals from props
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.priceMinor * item.quantity,
     0,
   );
   // Only subtotal is shown in the summary (shipping and tax removed)
@@ -33,7 +59,7 @@ const Cart = ({
       <section className="bg-gradient-to-r from-teal-900 to-teal-800 text-white py-12 px-6 mb-12">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold">Shopping Cart</h1>
-          <p className="text-cyan-100 mt-2">{cartItems.length} items in cart</p>
+          <p className="text-cyan-100 mt-2">{cartItems.reduce((sum, item) => sum + item.quantity, 0)} items in cart</p>
         </div>
       </section>
 
@@ -49,7 +75,7 @@ const Cart = ({
                     className="bg-white border-2 border-teal-200 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 hover:border-teal-400 transition-all"
                   >
                     <div className="w-full sm:w-24 flex-shrink-0 flex items-center justify-center">
-                      <img
+                      <ProductImage
                         src={item.image}
                         alt={item.name}
                         loading="lazy"
@@ -60,7 +86,7 @@ const Cart = ({
 
                     <div className="flex-1">
                       <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                        {item.name}
+                        <Link className="hover:underline" to={`/products/${item.slug}`}>{item.name}</Link>
                       </h3>
                       {item.specs && (
                         <p className="text-sm text-gray-600 mb-2">
@@ -83,6 +109,7 @@ const Cart = ({
                                 )
                               }
                               className="px-3 py-2 text-teal-600 hover:bg-teal-50"
+                              disabled={item.quantity <= 1}
                               aria-label="Decrease quantity"
                             >
                               <Minus size={16} />
@@ -95,6 +122,7 @@ const Cart = ({
                                 updateQuantity(item.id, item.quantity + 1)
                               }
                               className="px-3 py-2 text-teal-600 hover:bg-teal-50"
+                              disabled={item.quantity >= 10}
                               aria-label="Increase quantity"
                             >
                               <Plus size={16} />
@@ -148,13 +176,19 @@ const Cart = ({
                 <div className="space-y-4 mb-6 pb-6 border-b-2 border-teal-200">
                   <div className="flex justify-between text-gray-700">
                     <span>Subtotal</span>
-                    <span className="font-semibold">KES {subtotal.toLocaleString()}</span>
+                    <span className="font-semibold">{money(subtotal)}</span>
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
+                <button disabled={checking} onClick={checkPrices} className="block w-full text-teal-800 underline py-3 mb-3 disabled:opacity-50">{checking ? 'Checking prices and availability…' : 'Review latest prices and availability'}</button>
+                {error && <p role="alert" className="text-red-700 mb-4">{error}</p>}
+                {review && review.signature === signature && <div role="status" className="border border-teal-600 p-4 mb-4 rounded-lg text-gray-900">
+                  {review.changes.length ? <><ul className="space-y-3">{review.changes.map(change => <li key={change}>{change}</li>)}</ul><button onClick={() => { replaceCart(review.next); setReview(null); }} className="bg-teal-700 text-white rounded-lg p-3 mt-4">Accept cart updates</button></> : <p>Prices and availability are up to date. They will be checked again when you place your order.</p>}
+                </div>}
+                <p className="text-gray-700 mb-4">Cash on delivery. Delivery fee to be confirmed.</p>
+                <Link to="/checkout" className="block text-center w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
                   Proceed to Checkout
-                </button>
+                </Link>
 
                 <Link
                   to="/shop"
