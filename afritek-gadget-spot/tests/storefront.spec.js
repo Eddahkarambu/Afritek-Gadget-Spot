@@ -163,3 +163,40 @@ test('cart caps quantities and removes unavailable items only after review', asy
   await page.getByRole('button', { name: 'Accept cart updates' }).click();
   await expect(page.getByText('Your cart is empty')).toBeVisible();
 });
+
+test('visible catalogue search, budget links and mobile navigation work together', async ({ page, isMobile }) => {
+  await mockShop(page);
+  await page.goto('/');
+  await page.getByRole('search').getByRole('searchbox').fill('Galaxy');
+  await page.getByRole('search').getByRole('button', { name: 'Search catalogue' }).click();
+  await expect(page).toHaveURL(/\/shop\?q=Galaxy$/);
+  await expect(page.getByLabel('Search phones', { exact: true })).toHaveValue('Galaxy');
+  if (isMobile) {
+    await page.getByRole('button', { name: 'Menu', exact: true }).click();
+    await expect(page.locator('#mobile-navigation')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#mobile-navigation')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Menu', exact: true })).toBeFocused();
+    await page.getByRole('button', { name: 'Menu', exact: true }).click();
+    await page.locator('#mobile-navigation').getByRole('link', { name: 'Our story' }).click();
+    await expect(page).toHaveURL(/\/about$/);
+    await expect(page.locator('#mobile-navigation')).toHaveCount(0);
+  }
+  await page.goto('/');
+  await page.getByRole('link', { name: /Everyday essentials/ }).click();
+  await expect(page).toHaveURL(/\/shop\?max=15000$/);
+  await expect(page.getByLabel('Max price (KES)', { exact: true })).toHaveValue('15000');
+  await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Cart, 0 items', exact: true })).toHaveCount(1);
+});
+
+test('empty home catalogue does not invent a spotlight product or a price', async ({ page }) => {
+  await mockShop(page, async route => {
+    if (new URL(route.request().url()).pathname === '/api/v1/products') { await route.fulfill({ json: { items: [], total: 0, pages: 0, page: 1, pageSize: 8 } }); return true; }
+    return false;
+  });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'New phones are on the way.' })).toBeVisible();
+  await expect(page.locator('.phone-card')).toHaveCount(0);
+  await expect(page.locator('.spotlight-link')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Shop phones', exact: true }).first()).toBeVisible();
+});

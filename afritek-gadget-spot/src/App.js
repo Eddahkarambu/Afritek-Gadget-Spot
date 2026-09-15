@@ -89,7 +89,7 @@ function App() {
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<div className="pt-32 pb-20 px-6 text-white"><h1 className="text-3xl font-bold">Page not found</h1><Link className="underline" to="/shop">Browse phones</Link></div>} />
+        <Route path="*" element={<div className="pt-32 pb-20 px-6 text-gray-900"><h1 className="text-3xl font-bold">Page not found</h1><Link className="underline" to="/shop">Browse phones</Link></div>} />
       </Routes></main>
       <Footer />
     </Router>

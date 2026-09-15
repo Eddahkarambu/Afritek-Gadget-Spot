@@ -37,3 +37,13 @@ Unused legacy components/assets remain in the repository for review but are not 
 ## Existing Netlify preview integrations
 
 PR checks revealed two existing Netlify integrations. One reported a failed deployment without a public error summary; another published both `build/index.html` and `public/index.html`, indicating an overly broad publish directory. Added root `netlify.toml` specifying the existing application base, production build output and SPA routes. This config correction is reviewable in the PR; account-specific failures still require the deployment log. Netlify origins also require explicit backend allowlisting before API testing.
+
+## Storefront design iteration 1 — 15 September 2026
+
+- Added a shared light visual direction, persistent search, one responsive cart link, and keyboard-accessible mobile menu.
+- Reworked the homepage around an API-backed spotlight, eight product cards, budget/brand links and concise COD/delivery information.
+- Updated reusable product cards and catalogue surfaces; kept the existing React application and shopping flows.
+- Whole-shilling price display omits `.00`, preserving fractional prices and all minor-unit calculations.
+- See `docs/storefront-design.md` for the review scope and next product-detail/checkout iterations.
+- Verification: six unit tests, production build, and 18 desktop/mobile browser scenarios. Visual checks with saved test-catalogue images at 1440, 768, 390 and 320 pixels found no horizontal overflow on home/shop.
+- No remote orders, settings or catalogue mutations were performed for this design iteration. Temporary test data and screenshots remain outside Git. Owner review/merge and exact preview-origin configuration remain deployment steps.

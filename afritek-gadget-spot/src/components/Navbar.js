@@ -1,223 +1,29 @@
-import React from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingCart, Search } from "lucide-react";
-import AfritekLogo from "../Images/AfritekLogoLogo.jpeg";
+import React from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, ShoppingBag, Search, ArrowUpRight } from 'lucide-react';
+import AfritekLogo from '../Images/AfritekLogoLogo.jpeg';
 
-const Navbar = ({ cartItems = [] }) => {
+export default function Navbar({ cartItems = [] }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState('');
+  const menuButton = React.useRef(null);
   const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [searchOpen, setSearchOpen] = React.useState(false);
-  const [searchTerm, setSearchTerm] = React.useState("");
-
-  React.useEffect(() => { setIsOpen(false); setSearchOpen(false); }, [location.pathname, location.search]);
-
-  return (
-    <nav className="fixed top-0 w-full bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 backdrop-blur-md border-b-2 border-cyan-500/50 z-40 shadow-lg shadow-teal-900/50">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex items-center justify-between">
-        {/* Logo Section */}
-        <Link
-          to="/"
-          className="flex items-center gap-4 hover:opacity-90 transition-opacity group"
-        >
-          <img
-            src={AfritekLogo}
-            alt="Afritek Logo"
-            loading="eager"
-            className="h-14 w-auto object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-cyan-500/50 transition-all"
-          />
-
-          <div className="hidden md:flex flex-col">
-            <span className="text-teal-300 font-bold text-2xl leading-none">
-              Afritek
-            </span>
-            <div className="flex gap-1 mt-1">
-              <span className="text-purple-500 font-bold text-xs tracking-wider">
-                GADGET
-              </span>
-              <span className="text-cyan-400 font-bold text-xs tracking-wider">
-                SPOT
-              </span>
-            </div>
-          </div>
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-8">
-          <Link
-            to="/"
-            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
-          >
-            Home
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link
-            to="/shop"
-            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
-          >
-            Shop
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link
-            to="/about"
-            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
-          >
-            About
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link
-            to="/contact"
-            className="text-gray-100 hover:text-cyan-300 transition-colors font-medium relative group"
-          >
-            Contact
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-        </div>
-
-        {/* Right Side Actions */}
-        <div className="flex items-center gap-4">
-          {/* Search Button */}
-          <button
-            onClick={() => {
-              if (searchOpen && searchTerm.trim()) {
-                // go to shop with query param
-                navigate(`/shop?q=${encodeURIComponent(searchTerm.trim())}`);
-                setSearchOpen(false);
-              } else {
-                setSearchOpen(!searchOpen);
-              }
-            }}
-            className="text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg"
-            title="Search"
-            aria-label="Search" aria-expanded={searchOpen}
-          >
-            <Search size={22} />
-          </button>
-
-          {/* Cart Button with Badge */}
-          <Link to="/cart" className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-cyan-500 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
-
-            <div className="relative bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-5 py-2 rounded-lg transition-all flex items-center gap-2 font-bold hidden md:flex shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50">
-              <ShoppingCart size={20} />
-              <span>Cart</span>
-
-              {cartItems && cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center border-2 border-purple-800 animate-pulse">
-                  {count}
-                </span>
-              )}
-            </div>
-          </Link>
-
-          {/* Mobile Cart Icon */}
-          <Link
-            to="/cart"
-            aria-label={`Cart, ${count} items`}
-            className="lg:hidden relative text-cyan-400 hover:text-cyan-300 transition-colors p-3 sm:p-2"
-          >
-            <ShoppingCart size={22} />
-            {cartItems && cartItems.length > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                {count}
-              </span>
-            )}
-          </Link>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-cyan-400 p-3 sm:p-2 hover:bg-teal-700/50 rounded-lg transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            title="Menu"
-            aria-label="Menu" aria-expanded={isOpen}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Search Bar */}
-      {searchOpen && (
-        <div className="bg-gradient-to-r from-teal-800 to-teal-700 border-t-2 border-cyan-500/30 px-6 py-4 animate-in">
-          <div className="max-w-7xl mx-auto relative">
-            <Search
-              size={20}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400"
-            />
-            <input
-              type="text"
-              aria-label="Search phones"
-              autoFocus maxLength={100}
-              placeholder="Search phones..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  if (searchTerm.trim()) {
-                    navigate(
-                      `/shop?q=${encodeURIComponent(searchTerm.trim())}`,
-                    );
-                    setSearchOpen(false);
-                  }
-                }
-              }}
-              className="w-full bg-teal-900/50 border-2 border-cyan-500/50 hover:border-cyan-400 focus:border-cyan-300 text-white placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg focus:outline-none transition-all"
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="lg:hidden bg-gradient-to-b from-teal-800 to-teal-900 border-t-2 border-cyan-500/50 animate-in">
-          <div className="flex flex-col gap-2 p-6 space-y-2">
-            <Link
-              to="/"
-              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Shop
-            </Link>
-            <Link
-              to="/about"
-              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="text-gray-100 hover:text-cyan-300 transition-colors py-2 font-medium px-4 hover:bg-teal-700/50 rounded-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
-            <Link
-              to="/cart"
-              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg mt-4 flex items-center gap-2 justify-center font-medium hover:from-purple-700 hover:to-indigo-700 transition-all w-full relative"
-              onClick={() => setIsOpen(false)}
-            >
-              <ShoppingCart size={20} />
-              View Cart
-              {cartItems && cartItems.length > 0 && (
-                <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {count}
-                </span>
-              )}
-            </Link>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-};
-
-export default Navbar;
+  React.useEffect(() => { setOpen(false); setSearch(new URLSearchParams(location.search).get('q') || ''); }, [location.pathname, location.search]);
+  function closeOnEscape(event) {
+    if (event.key === 'Escape' && open) { setOpen(false); menuButton.current?.focus(); }
+  }
+  const links = <><NavLink to="/shop">Shop phones</NavLink><NavLink to="/about">Our story</NavLink><NavLink to="/contact">Contact <ArrowUpRight size={14} aria-hidden="true" /></NavLink></>;
+  return <nav className="store-nav" aria-label="Main navigation" onKeyDown={closeOnEscape}>
+    <div className="store-container nav-layout">
+      <Link to="/" className="store-brand" aria-label="Afritek Gadget Spot home"><img src={AfritekLogo} alt="" width="44" height="44" /><span>Afritek<span className="brand-caption">GADGET SPOT</span></span></Link>
+      <form className="nav-search" role="search" onSubmit={event => { event.preventDefault(); navigate(search.trim() ? `/shop?q=${encodeURIComponent(search.trim())}` : '/shop'); setOpen(false); }}>
+        <Search size={18} aria-hidden="true" /><input aria-label="Search catalogue" type="search" maxLength={100} placeholder="Search phones or brands" value={search} onChange={event => setSearch(event.target.value)} /><button type="submit" aria-label="Search catalogue">Search</button>
+      </form>
+      <div className="nav-desktop">{links}</div>
+      <div className="nav-actions"><Link to="/cart" className="nav-cart" aria-label={`Cart, ${count} items`}><ShoppingBag size={21} aria-hidden="true" /><span className="cart-label">Cart</span><span className="cart-count">{count}</span></Link><button ref={menuButton} className="nav-menu" aria-label="Menu" aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>{open ? <X size={23} /> : <Menu size={23} />}</button></div>
+    </div>
+    {open && <div id="mobile-navigation" className="mobile-navigation">{links}</div>}
+  </nav>;
+}

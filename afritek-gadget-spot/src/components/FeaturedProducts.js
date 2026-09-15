@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useResource from '../hooks/useResource';
+import { ArrowRight } from 'lucide-react';
 import RequestState from './RequestState';
 import ProductCard from './ProductCard';
-export default function FeaturedProducts() {
-  const result = useResource('/products?pageSize=4');
-  return <section className="bg-gradient-to-b from-white to-teal-50 px-6 py-16 text-gray-900"><div className="max-w-7xl mx-auto">
-    <h2 className="text-3xl font-bold text-teal-900 mb-8">Explore our phones</h2><RequestState {...result} />
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{result.data?.items.map(product => <ProductCard key={product.id} product={product} />)}</div>
-    {result.data?.total === 0 && <p>Our phone catalogue is being updated. Please check back soon.</p>}
-    <Link to="/shop" className="inline-block bg-teal-700 text-white px-6 py-3 rounded-lg mt-8">View all phones</Link>
-  </div></section>;
+export default function FeaturedProducts({ result }) {
+  return <section className="store-container catalogue-section" aria-labelledby="catalogue-heading">
+    <div className="section-heading"><div><p className="eyebrow">THE PHONE EDIT</p><h2 id="catalogue-heading">Find your everyday upgrade.</h2></div><Link className="text-link" to="/shop">View all phones <ArrowRight size={18} aria-hidden="true" /></Link></div>
+    <RequestState {...result} />
+    {!result.error && <div className="phone-grid">{result.data?.items.map(product => <ProductCard key={product.id} product={product} />)}</div>}
+    {result.data?.total === 0 && <div className="catalogue-empty"><h3>New phones are on the way.</h3><p>Our catalogue is being updated. Check back soon or contact the shop for help.</p><Link className="text-link" to="/contact">Contact the shop <ArrowRight size={18} /></Link></div>}
+  </section>;
 }
