@@ -56,3 +56,5 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - Added desktop/mobile regression coverage for invalid budgets, fractional API prices, applied-chip/history synchronization and missing shop contact data.
 - Remaining product-detail, cart/checkout, server-side sorting/facets and owner-provided business content are tracked in docs/storefront-design.md.
 - Verification: six unit tests, production build and all 22 desktop/mobile browser scenarios passed. Local visual review at 1440, 768, 390 and 320 pixels found no horizontal overflow on shop/contact/about. Reviewed desktop/mobile screenshots are included for the PR; no remote orders or settings were changed.
+
+- PR #7 follow-up: restored the embedded map using the configured shop address and highlighted walk-in customers. No location fallback is used when the address is missing.

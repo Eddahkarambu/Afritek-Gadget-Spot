@@ -44,3 +44,5 @@ Preview deployments need their exact origin in the backend allowlist to fetch li
 3. Catalogue API: dynamic brand facets and server-side sorting before adding a stock-derived brand list or sort controls.
 4. Business content: owner-approved branch photos, opening hours, warranty/return terms and privacy information before launch.
 5. Confirm the production contact settings and replace/remove the temporary test catalogue before taking real orders.
+
+- Walk-in visits: Contact highlights the physical shop and embeds Google Maps using the configured address, with an external map link. The map is omitted only when no address is configured.

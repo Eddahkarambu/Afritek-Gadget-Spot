@@ -132,6 +132,8 @@ test('loading failures have retry and contact opens a draft without claiming del
   await expect(page.getByRole('heading', { name: 'Test Galaxy' })).toBeVisible();
   await page.goto('/contact');
   await expect(page.getByRole('link', { name: '+254712345678' })).toHaveAttribute('href', 'tel:+254712345678');
+  await expect(page.getByText('Walk-in customers are welcome.', { exact: false })).toBeVisible();
+  await expect(page.getByTitle('Afritek Gadget Spot shop location')).toHaveAttribute('src', 'https://www.google.com/maps?q=Test%20Nairobi%20branch&output=embed');
   await page.evaluate(() => { window.open = (...args) => { window.testOpened = args; return null; }; });
   await page.getByLabel('Your Name').fill('Fictional Customer');
   await page.getByLabel('Subject', { exact: true }).fill('Phone question');
