@@ -19,14 +19,14 @@ const Shop = () => {
     setParams({ ...(value.search ? { q: value.search } : {}), ...(value.available ? { available: 'true' } : {}), ...(value.brand ? { brand: value.brand } : {}), ...(value.min ? { min: value.min } : {}), ...(value.max ? { max: value.max } : {}) }, { replace: true });
   }
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
+    <div className="shop-page min-h-screen pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
-            Latest <span className="text-cyan-400">Phones</span>
+            Find your next phone
           </h1>
-          <p className="text-gray-400">
+          <p className="text-gray-600">
             {result.data ? `${result.data.total} phones` : 'Browse our phone catalogue'}
           </p>
         </div>
@@ -42,13 +42,13 @@ const Shop = () => {
           <div className="flex-1 min-w-0">
             <RequestState {...result} />
             {!result.loading && !result.error && (filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="phone-grid shop-phone-grid">
                 {filteredProducts.map(product => <ProductCard key={product.id} product={product} />)}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-20 bg-[#111827] rounded-2xl border border-gray-800">
+              <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-gray-200">
                 <div className="text-6xl mb-4">📦</div>
-                <p className="text-gray-400 text-xl mb-6">No products found</p>
+                <p className="text-gray-600 text-xl mb-6">No products found</p>
                 <p className="text-gray-500 text-sm mb-6">
                   Try adjusting your filters or search terms
                 </p>
@@ -61,9 +61,9 @@ const Shop = () => {
               </div>
             ))}
             {result.data?.pages > 1 && <nav aria-label="Product pages" className="flex items-center justify-between gap-3 mt-8">
-              <button disabled={page <= 1 || result.loading} onClick={() => setParams({ ...Object.fromEntries(params), page: String(page - 1) })} className="bg-teal-700 p-3 rounded-lg disabled:opacity-50">Previous</button>
+              <button disabled={page <= 1 || result.loading} onClick={() => setParams({ ...Object.fromEntries(params), page: String(page - 1) })} className="bg-teal-800 text-white p-3 rounded-lg disabled:opacity-50">Previous</button>
               <span>Page {page} of {result.data.pages}</span>
-              <button disabled={page >= result.data.pages || result.loading} onClick={() => setParams({ ...Object.fromEntries(params), page: String(page + 1) })} className="bg-teal-700 p-3 rounded-lg disabled:opacity-50">Next</button>
+              <button disabled={page >= result.data.pages || result.loading} onClick={() => setParams({ ...Object.fromEntries(params), page: String(page + 1) })} className="bg-teal-800 text-white p-3 rounded-lg disabled:opacity-50">Next</button>
             </nav>}
           </div>
         </div>
