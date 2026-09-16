@@ -1,3 +1,4 @@
+import VisitShop from '../components/VisitShop';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { api, cartItem, money } from '../lib/api';
@@ -185,7 +186,7 @@ const Cart = ({
                 {review && review.signature === signature && <div role="status" className="border border-teal-600 p-4 mb-4 rounded-lg text-gray-900">
                   {review.changes.length ? <><ul className="space-y-3">{review.changes.map(change => <li key={change}>{change}</li>)}</ul><button onClick={() => { replaceCart(review.next); setReview(null); }} className="bg-teal-700 text-white rounded-lg p-3 mt-4">Accept cart updates</button></> : <p>Prices and availability are up to date. They will be checked again when you place your order.</p>}
                 </div>}
-                <p className="text-gray-700 mb-4">Cash on delivery. Delivery fee to be confirmed.</p>
+                <VisitShop /><p className="text-gray-700 mb-4">For online orders: cash on delivery. Delivery fee to be confirmed.</p>
                 <Link to="/checkout" className="block text-center w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold py-3 rounded-lg mb-4 transition-all shadow-lg shadow-teal-600/30">
                   Proceed to Checkout
                 </Link>

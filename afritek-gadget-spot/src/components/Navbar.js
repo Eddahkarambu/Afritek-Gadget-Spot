@@ -14,7 +14,7 @@ export default function Navbar({ cartItems = [] }) {
   function closeOnEscape(event) {
     if (event.key === 'Escape' && open) { setOpen(false); menuButton.current?.focus(); }
   }
-  const links = <><NavLink to="/shop">Shop phones</NavLink><NavLink to="/about">Our story</NavLink><NavLink to="/contact">Contact <ArrowUpRight size={14} aria-hidden="true" /></NavLink></>;
+  const links = <><NavLink to="/shop">Shop phones</NavLink><NavLink to="/about">Our story</NavLink><NavLink to="/contact">Visit our shop <ArrowUpRight size={14} aria-hidden="true" /></NavLink></>;
   return <nav className="store-nav" aria-label="Main navigation" onKeyDown={closeOnEscape}>
     <div className="store-container nav-layout">
       <Link to="/" className="store-brand" aria-label="Afritek Gadget Spot home"><img src={AfritekLogo} alt="" width="44" height="44" /><span>Afritek<span className="brand-caption">GADGET SPOT</span></span></Link>

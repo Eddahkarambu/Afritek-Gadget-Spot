@@ -1,3 +1,4 @@
+import VisitShop from '../components/VisitShop';
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api, ApiError, money } from '../lib/api';
@@ -49,22 +50,23 @@ export default function Checkout({ cart, clearCart }) {
       setError(error instanceof ApiError ? error.message : 'Allow session storage in your browser before placing an order. Your order has not been sent.');
     } finally { busy.current = false; setLoading(false); }
   }
-  if (!cart.length && !pending) return <div className="pt-32 pb-20 px-6 text-white text-center"><h1 className="text-3xl font-bold mb-5">Your cart is empty</h1><Link to="/shop" className="underline">Continue shopping</Link></div>;
-  return <div className="pt-28 pb-20 px-6 max-w-6xl mx-auto text-white">
-    <Link to="/cart" className="underline text-cyan-300">Back to cart</Link><h1 className="text-3xl sm:text-4xl font-bold my-8">Checkout details</h1>
-    <div className="grid lg:grid-cols-3 gap-8"><form onSubmit={submit} className="lg:col-span-2 bg-[#111827] p-5 sm:p-8 rounded-3xl border border-gray-800">
+  if (!cart.length && !pending) return <div className="pt-32 pb-20 px-6 text-gray-900 text-center"><h1 className="text-3xl font-bold mb-5">Your cart is empty</h1><Link to="/shop" className="underline">Continue shopping</Link></div>;
+  return <div className="pt-28 pb-20 px-6 max-w-6xl mx-auto text-gray-900">
+    <Link to="/cart" className="underline text-teal-800">Back to cart</Link><h1 className="text-3xl sm:text-4xl font-bold my-8">Checkout details</h1>
+    {!pending && <VisitShop />}
+    <div className="grid lg:grid-cols-3 gap-8"><form onSubmit={submit} className="lg:col-span-2 bg-white p-5 sm:p-8 rounded-3xl border border-gray-200">
       <h2 className="text-2xl font-bold mb-6">Contact and delivery</h2>
       {pending && <p role="status" className="p-4 mb-5 border border-cyan-500 rounded-lg">This order request is awaiting a receipt. Retry the same request to check its result. Keep these details unchanged until we know whether it was received.</p>}
       <fieldset disabled={loading || !!pending} className="space-y-5 disabled:opacity-75">
-        {fields.map(([name, label, type, maxLength, minLength, autoComplete]) => <label key={name} className="block">{label}<input required name={name} type={type} maxLength={maxLength} minLength={minLength} autoComplete={autoComplete} value={form[name]} onChange={e => setForm({ ...form, [name]: e.target.value })} className="block mt-2 w-full bg-[#0a0f18] border border-gray-600 text-white p-3 rounded-lg" /></label>)}
-        <label className="block">Delivery instructions (optional)<textarea maxLength={1000} value={form.instructions || ''} onChange={e => setForm({ ...form, instructions: e.target.value })} className="block mt-2 w-full bg-[#0a0f18] border border-gray-600 text-white p-3 rounded-lg" /></label>
+        {fields.map(([name, label, type, maxLength, minLength, autoComplete]) => <label key={name} className="block">{label}<input required name={name} type={type} maxLength={maxLength} minLength={minLength} autoComplete={autoComplete} value={form[name]} onChange={e => setForm({ ...form, [name]: e.target.value })} className="block mt-2 w-full bg-white border border-gray-400 text-gray-900 p-3 rounded-lg" /></label>)}
+        <label className="block">Delivery instructions (optional)<textarea maxLength={1000} value={form.instructions || ''} onChange={e => setForm({ ...form, instructions: e.target.value })} className="block mt-2 w-full bg-white border border-gray-400 text-gray-900 p-3 rounded-lg" /></label>
       </fieldset>
       <p className="mt-6">We use these details to contact you and arrange delivery of this order.</p>
       {error && <div role="alert" className="border border-red-400 rounded-lg p-4 mt-5"><p>{error}</p>{!pending && <Link to="/cart" className="underline">Review cart prices and availability</Link>}</div>}
       {loading && <RequestState loading />}
-      <button disabled={loading || !!receipt} type="submit" className="w-full mt-6 bg-teal-700 hover:bg-teal-800 py-4 rounded-xl font-bold disabled:opacity-50">{loading ? 'Waiting for order receipt…' : pending ? 'Retry same order request' : 'Place order — cash on delivery'}</button>
-    </form><aside className="bg-[#111827] rounded-3xl p-6 border border-gray-800 h-fit"><h2 className="text-2xl font-bold mb-6">Order summary</h2>
-      {pending ? <p>The saved request contains {pending.items.reduce((sum, item) => sum + item.quantity, 0)} phone(s).</p> : cart.map(item => <div className="border-b border-gray-700 py-4" key={item.id}><p>{item.name}</p><p className="text-gray-300 text-sm">{item.specs} × {item.quantity}</p><p>{money(item.priceMinor * item.quantity)}</p></div>)}
+      <button disabled={loading || !!receipt} type="submit" className="w-full mt-6 text-white bg-teal-700 hover:bg-teal-800 py-4 rounded-xl font-bold disabled:opacity-50">{loading ? 'Waiting for order receipt…' : pending ? 'Retry same order request' : 'Place order — cash on delivery'}</button>
+    </form><aside className="bg-white rounded-3xl p-6 border border-gray-200 h-fit"><h2 className="text-2xl font-bold mb-6">Order summary</h2>
+      {pending ? <p>The saved request contains {pending.items.reduce((sum, item) => sum + item.quantity, 0)} phone(s).</p> : cart.map(item => <div className="border-b border-gray-200 py-4" key={item.id}><p>{item.name}</p><p className="text-gray-600 text-sm">{item.specs} × {item.quantity}</p><p>{money(item.priceMinor * item.quantity)}</p></div>)}
       <p className="text-xl font-bold mt-6">Subtotal: {money(pending ? pending.items.reduce((sum, item) => sum + item.expectedUnitPriceMinor * item.quantity, 0) : subtotal)}</p>
       <p className="mt-4">Delivery fee to be confirmed.</p><p className="mt-4">Pay cash on delivery. We will call you to agree availability, delivery arrangements and the final amount before confirming your order.</p>
     </aside></div>

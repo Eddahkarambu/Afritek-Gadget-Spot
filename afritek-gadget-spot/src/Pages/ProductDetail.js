@@ -1,3 +1,4 @@
+import VisitShop from '../components/VisitShop';
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
@@ -39,7 +40,7 @@ function Product({ product, addToCart }) {
           setNotice(added ? 'Added to your cart.' : 'Your cart allows up to 10 of each configuration and 20 configurations.');
         }} className="w-full bg-teal-700 hover:bg-teal-800 text-white py-4 rounded-lg flex items-center justify-center gap-2 disabled:opacity-50"><ShoppingCart size={20} />{variant?.available ? 'Add to Cart' : 'Currently unavailable'}</button>
         <p role="status" className="mt-3">{notice} {notice.startsWith('Added') && <Link className="underline text-teal-800" to="/cart">View cart</Link>}</p>
-        <div className="border-t border-gray-200 mt-6 pt-6"><p className="font-bold">Cash on delivery</p><p className="mt-2">Delivery fee to be confirmed. We will contact you to agree the final amount and delivery arrangements.</p></div>
+        <VisitShop productName={`${product.name}${variant ? ` (${variantLabel(variant)})` : ''}`} /><div className="border-t border-gray-200 mt-6 pt-6"><p className="font-bold">Cash on delivery</p><p className="mt-2">Delivery fee to be confirmed. We will contact you to agree the final amount and delivery arrangements.</p></div>
       </div>
     </div>
     <section className="mt-12"><h2 className="text-2xl font-bold mb-5">About this phone</h2><p className="whitespace-pre-wrap">{product.description}</p>

@@ -1,3 +1,4 @@
+import VisitShop from '../components/VisitShop';
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import SearchFilter from "../components/SearchFilter";
@@ -33,6 +34,7 @@ const Shop = () => {
           </p>
         </div>
 
+        <VisitShop />
         {/* Main Layout: Sidebar + Products */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* LEFT SIDEBAR */}

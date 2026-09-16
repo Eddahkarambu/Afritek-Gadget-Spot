@@ -68,3 +68,11 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - WhatsApp inquiry now requires only the message. Removed name/email/subject inputs; blank messages are blocked and the exact message is preserved after opening the draft.
 - Regression coverage includes delayed page navigation, filter draft persistence, stable panel dimensions and message-only WhatsApp URLs.
 - Verification: production build, six unit tests and all 24 desktop/mobile Playwright scenarios passed. Fresh screenshot capture was blocked by the automatic approval review service reporting capacity failure when starting the preview server.
+
+## Walk-in buying — 16 September 2026
+
+- Added a primary Visit our shop action, Bazaar location messaging across home/catalogue/product/cart/checkout/navigation/footer, and separate walk-in/delivery explanations in Our Story.
+- Retained Bazaar address/pin; added confirmed 7 am–7 pm Nairobi hours without inventing opening days. Product inquiries prefill the message with the chosen configuration. Location links scroll to the map after asynchronous shop details load.
+- Fixed checkout/receipt contrast while preserving delivery order creation and retries. Real branch photos and confirmed opening days remain content follow-ups.
+- Verification: build, six unit tests and all 26 desktop/mobile browser scenarios passed, including walk-in navigation and configuration-specific inquiry text.
+- Visual review at 1440, 768, 390 and 320px found no home/shop/contact overflow. PR previews use saved temporary catalogue data, blank contact settings and the real Bazaar map; the public live contact settings are not modified.

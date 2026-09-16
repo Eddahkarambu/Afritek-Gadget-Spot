@@ -48,3 +48,9 @@ Preview deployments need their exact origin in the backend allowlist to fetch li
 - Walk-in visits: Contact highlights the physical shop and embeds Google Maps using the configured address, with an external map link. The map is omitted only when no address is configured.
 
 - Correction: restored the original storefront’s documented Bazaar branch address and exact coordinates (-1.2819548, 36.8216073) as defaults when backend address settings are empty. An explicit admin address overrides these defaults. Earlier statements about omitting the map for empty settings are superseded.
+
+## Walk-in buying — 16 September 2026
+
+The owner confirmed walk-ins are the main customer path and the branch is in The Bazaar. Home now leads with visiting the shop alongside browsing; navigation, footer, catalogue, product details and cart/checkout include a clear visit path. Customers are explicitly told no online order is required. Product-specific inquiries prefill the WhatsApp message with the chosen phone/configuration.
+
+The original Bazaar address and exact map pin are retained. Confirmed hours are 7:00 am–7:00 pm, Nairobi time; opening days and holiday exceptions have not been supplied, so no seven-days-a-week claim is made. A real storefront/entrance photo remains owner-provided content. Hash links land at the map after contact details finish loading. Checkout and receipt text/surfaces now use readable light styling; delivery submission and uncertain-order handling remain intact.

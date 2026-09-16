@@ -266,3 +266,17 @@ test('pagination keeps the catalogue and filter layout visible during delayed re
   await page.getByRole('button', { name: 'Previous', exact: true }).click();
   await expect(page.getByText('Page 1 of 2')).toBeVisible();
 });
+
+
+test('walk-in journey leads from home and a selected phone to the Bazaar map and inquiry', async ({ page }) => {
+  await mockShop(page);
+  await page.goto('/');
+  await expect(page.getByText('Walk-ins welcome. No online order needed.')).toBeVisible();
+  await page.locator('.hero-copy').getByRole('link', { name: 'Visit our shop' }).click();
+  await expect(page).toHaveURL(/contact#shop-location$/);
+  await expect(page.getByRole('heading', { name: 'Find our physical shop' })).toBeInViewport();
+  await page.goto('/products/test-galaxy');
+  await page.getByRole('link', { name: 'Ask about this phone' }).click();
+  await expect(page.getByLabel('Message', { exact: true })).toHaveValue(/Test Galaxy.*128GB.*Black/);
+  await expect(page.getByText('No online order is needed.', { exact: false }).first()).toBeVisible();
+});
