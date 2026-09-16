@@ -135,13 +135,12 @@ test('loading failures have retry and contact opens a draft without claiming del
   await expect(page.getByText('Walk-in customers are welcome.', { exact: false })).toBeVisible();
   await expect(page.getByTitle('Afritek Gadget Spot shop location')).toHaveAttribute('src', 'https://www.google.com/maps?q=Test%20Nairobi%20branch&output=embed');
   await page.evaluate(() => { window.open = (...args) => { window.testOpened = args; return null; }; });
-  await page.getByLabel('Your Name').fill('Fictional Customer');
-  await page.getByLabel('Subject', { exact: true }).fill('Phone question');
+  await expect(page.locator('.contact-form input')).toHaveCount(0);
   await page.getByLabel('Message', { exact: true }).fill('Which colours are available?');
   await page.getByRole('button', { name: 'Open WhatsApp draft' }).click();
   await expect(page.getByRole('status')).toContainText('draft');
   await expect(page.getByLabel('Message', { exact: true })).toHaveValue('Which colours are available?');
-  expect((await page.evaluate(() => window.testOpened))[0]).toContain('https://wa.me/254712345678?text=');
+  expect((await page.evaluate(() => window.testOpened))[0]).toBe('https://wa.me/254712345678?text=Which%20colours%20are%20available%3F');
   await expect(page.getByText('Message Sent!', { exact: true })).toHaveCount(0);
 });
 
@@ -235,4 +234,35 @@ test('empty shop settings retain the original physical shop map and disable What
   await expect(page.getByText('The Bazaar, Wing 5, Mezzanine floor, Moi Avenue, Nairobi, Kenya', { exact: true })).toBeVisible();
   await page.getByText('How much is delivery?', { exact: true }).click();
   await expect(page.getByText('We agree the delivery fee and timing', { exact: false })).toBeVisible();
+});
+
+
+test('pagination keeps the catalogue and filter layout visible during delayed requests', async ({ page, isMobile }) => {
+  let release;
+  await mockShop(page, async route => {
+    const url = new URL(route.request().url());
+    if (!url.pathname.endsWith('/products')) return false;
+    const number = Number(url.searchParams.get('page') || 1);
+    if (number === 2) await new Promise(resolve => { release = resolve; });
+    await route.fulfill({ json: { items: [product], total: 24, pages: 2, page: number } });
+    return true;
+  });
+  await page.goto('/shop');
+  await expect(page.locator('.phone-card')).toHaveCount(1);
+  if (isMobile) await page.getByRole('button', { name: 'Filters', exact: true }).click();
+  await page.getByLabel('Search phones', { exact: true }).fill('Unsaved search');
+  const panel = await page.locator('.filter-panel').boundingBox();
+  await page.getByRole('button', { name: 'Next', exact: true }).click();
+  await expect(page.getByText('Updating phones…')).toBeVisible();
+  await expect(page.locator('.phone-card')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeDisabled();
+  await expect(page.getByLabel('Search phones', { exact: true })).toHaveValue('Unsaved search');
+  const loadingPanel = await page.locator('.filter-panel').boundingBox();
+  expect(loadingPanel.width).toBe(panel.width);
+  expect(loadingPanel.height).toBe(panel.height);
+  await expect.poll(() => Boolean(release)).toBe(true);
+  release();
+  await expect(page.getByText('Page 2 of 2')).toBeVisible();
+  await page.getByRole('button', { name: 'Previous', exact: true }).click();
+  await expect(page.getByText('Page 1 of 2')).toBeVisible();
 });

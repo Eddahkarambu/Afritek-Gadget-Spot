@@ -5,7 +5,7 @@ import useResource from '../hooks/useResource';
 import RequestState from '../components/RequestState';
 export default function Contact() {
   const shop = useResource('/shop');
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [message, setMessage] = useState('');
   const [notice, setNotice] = useState('');
   const phone = shop.data?.phone;
   const configuredAddress = shop.data?.address?.trim();
@@ -13,8 +13,8 @@ export default function Contact() {
   const mapQuery = configuredAddress || '-1.2819548,36.8216073';
   function submit(event) {
     event.preventDefault();
-    if (!phone) return;
-    const text = `Name: ${form.name}\nEmail: ${form.email}\nSubject: ${form.subject}\nMessage: ${form.message}`;
+    if (!phone || !message.trim()) return;
+    const text = message.trim();
     window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setNotice('Your WhatsApp draft is ready. Send it in WhatsApp to contact us. If a new tab did not open, allow pop-ups and try again.');
   }
@@ -33,9 +33,9 @@ export default function Contact() {
       <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} target="_blank" rel="noreferrer">Open shop location in Google Maps <ArrowUpRight size={16} /></a>
     </section>}
     <div className="contact-layout"><section className="information-card contact-form"><MessageCircle size={24} /><h2>Start a WhatsApp conversation</h2><p>This form prepares a message. You’ll review and send it in WhatsApp.</p>
-      <form onSubmit={submit}>{[['name', 'Your Name', 'text', 120], ['email', 'Your Email (optional)', 'email', 254], ['subject', 'Subject', 'text', 120]].map(([name, label, type, max]) => <label key={name} htmlFor={`contact-${name}`}>{label}<input id={`contact-${name}`} type={type} maxLength={max} required={name !== 'email'} autoComplete={name === 'subject' ? 'off' : name} value={form[name]} onChange={e => setForm({ ...form, [name]: e.target.value })} /></label>)}
-      <label htmlFor="contact-message"><span id="message-label">Message</span><textarea aria-labelledby="message-label" id="contact-message" required maxLength={1000} rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Tell us the phone you’re interested in, or include your order reference." /></label>
-      <button className="solid-button" disabled={!phone} type="submit">Open WhatsApp draft</button>
+      <form onSubmit={submit}>
+      <label htmlFor="contact-message"><span id="message-label">Message</span><textarea aria-labelledby="message-label" id="contact-message" required maxLength={1000} rows={5} value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us the phone you’re interested in, or include your order reference." /></label>
+      <button className="solid-button" disabled={!phone || !message.trim()} type="submit">Open WhatsApp draft</button>
       {!phone && <p className="field-help">WhatsApp is available once the shop’s phone details have loaded.</p>}
       {notice && <p role="status" className="draft-notice">{notice}</p>}</form>
     </section><section className="shopping-questions"><p className="eyebrow">GOOD TO KNOW</p><h2>Before you order</h2>{[
