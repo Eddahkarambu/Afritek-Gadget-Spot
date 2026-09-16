@@ -1,363 +1,48 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, MessageCircle, ArrowUpRight } from 'lucide-react';
 import useResource from '../hooks/useResource';
 import RequestState from '../components/RequestState';
-import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
-
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [notice, setNotice] = useState('');
+export default function Contact() {
   const shop = useResource('/shop');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Build the WhatsApp message from the form data
-    const { name, email, subject, message } = formData;
-    const phone = shop.data?.phone?.replace(/\D/g, '') || '';
-    if (!phone) { setNotice('Shop contact details are unavailable. Please retry loading them.'); return; } // WhatsApp number (no plus sign)
-    const text = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
-    const encoded = encodeURIComponent(text);
-    const waUrl = `https://wa.me/${phone}?text=${encoded}`;
-
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
-    setNotice('WhatsApp will open with your draft. Send the message there to contact us. Opening WhatsApp does not confirm delivery of the message.');
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1b2a] via-[#0a0c10] to-[#000000] text-white pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
-        <RequestState {...shop} />
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            Get in <span className="text-cyan-400">Touch</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Have questions about our products or services? We'd love to hear
-            from you. Send us a message and we'll respond as soon as possible.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {/* Contact Info Card 1 */}
-          <div className="bg-[#111827] border border-gray-800 hover:border-cyan-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-            <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4 border border-cyan-500/30">
-              <Mail size={24} className="text-cyan-400" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Email</h3>
-            <p className="text-gray-400 mb-3">
-              Email the shop with your phone or order questions.
-            </p>
-            <a
-              href={shop.data?.email ? `mailto:${shop.data.email}` : undefined}
-              className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
-            >
-              {shop.data?.email || 'Email unavailable'}
-            </a>
-          </div>
-
-          {/* Contact Info Card 2 */}
-          <div className="bg-[#111827] border border-gray-800 hover:border-teal-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-teal-500/10">
-            <div className="w-12 h-12 bg-teal-500/20 rounded-lg flex items-center justify-center mb-4 border border-teal-500/30">
-              <Phone size={24} className="text-teal-400" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Phone</h3>
-            <p className="text-gray-400 mb-3">
-              Call us during business hours. We're here to help!
-            </p>
-            <a
-              href={shop.data?.phone ? `tel:${shop.data.phone}` : undefined}
-              className="text-teal-400 hover:text-teal-300 font-semibold transition-colors"
-            >
-              {shop.data?.phone || 'Phone unavailable'}
-            </a>
-          </div>
-
-          {/* Contact Info Card 3 */}
-          <div className="bg-[#111827] border border-gray-800 hover:border-purple-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-purple-500/10">
-            <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 border border-purple-500/30">
-              <MapPin size={24} className="text-purple-400" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Location</h3>
-            <p className="text-gray-400 mb-3">
-              Visit us at our office in Nairobi.
-            </p>
-            <p className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
-              {shop.data?.address || 'Contact us for shop location details.'}
-            </p>
-          </div>
-        </div>
-
-        {/* Main Contact Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <MessageSquare className="text-cyan-400" size={28} />
-              <h2 className="text-3xl font-bold">Send us a Message</h2>
-            </div>
-
-            {notice && <p role="status" className="border border-cyan-500 p-4 rounded-lg mb-6">{notice}</p>}
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name Field */}
-                <div>
-                  <label htmlFor="contact-name" className="block text-sm font-semibold mb-2">
-                    Your Name
-                  </label>
-                  <input type="text"
-                    id="contact-name" name="name" maxLength={120}
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Doe"
-                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
-                  />
-                </div>
-
-                {/* Email Field */}
-                <div>
-                  <label htmlFor="contact-email" className="block text-sm font-semibold mb-2">
-                    Your Email (optional)
-                  </label>
-                  <input type="email"
-                    id="contact-email" name="email" maxLength={254}
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
-                  />
-                </div>
-
-                {/* Subject Field */}
-                <div>
-                  <label htmlFor="contact-subject" className="block text-sm font-semibold mb-2">
-                    Subject
-                  </label>
-                  <input type="text"
-                    id="contact-subject" name="subject" maxLength={120}
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    placeholder="How can we help?"
-                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all"
-                  />
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <label htmlFor="contact-message" className="block text-sm font-semibold mb-2">
-                    Message
-                  </label>
-                  <textarea id="contact-message" name="message" maxLength={1000}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Tell us more about your inquiry..."
-                    rows="5"
-                    className="w-full bg-[#0a0f18] border border-gray-700 hover:border-cyan-500/50 focus:border-cyan-500 text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition-all resize-none"
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
-                >
-                  <Send size={20} />
-                  Open WhatsApp draft
-                </button>
-              </form>
-          </div>
-
-          {/* Business Hours & Info */}
-          <div className="space-y-6">
-            {/* Why Contact Us */}
-            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4">Why Contact Us?</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">✓</span>
-                  <span className="text-gray-300">
-                    Product inquiries & support
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">✓</span>
-                  <span className="text-gray-300">Technical assistance</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">✓</span>
-                  <span className="text-gray-300">
-                    Bulk orders & partnerships
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">✓</span>
-                  <span className="text-gray-300">Feedback & suggestions</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">✓</span>
-                  <span className="text-gray-300">Returns & replacements</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Social Links */}
-            <div className="bg-gradient-to-r from-cyan-500/10 to-teal-500/10 border border-cyan-500/30 rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-              <div className="flex gap-4">
-                {/* Instagram */}
-                <a
-                  href="https://www.instagram.com/afritek_gadget_spot/"
-                  className="w-12 h-12 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg flex items-center justify-center text-white hover:text-white transition-all"
-                  title="Instagram"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
-                  >
-                    <rect
-                      x="2"
-                      y="2"
-                      width="20"
-                      height="20"
-                      rx="5"
-                      ry="5"
-                      fill="url(#g)"
-                    />
-                    <defs>
-                      <linearGradient id="g" x1="0" x2="1">
-                        <stop offset="0%" stopColor="#f58529" />
-                        <stop offset="50%" stopColor="#dd2a7b" />
-                        <stop offset="100%" stopColor="#8134af" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2z"
-                      fill="#ffffff"
-                    />
-                    <circle cx="17.6" cy="6.4" r="0.9" fill="#ffffff" />
-                  </svg>
-                </a>
-
-                {/* TikTok */}
-                <a
-                  href="https://www.tiktok.com/@afritekgadget"
-                  className="w-12 h-12 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg flex items-center justify-center text-white hover:text-white transition-all"
-                  title="TikTok"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
-                  >
-                    <path
-                      d="M16 8.5v4.9a3.6 3.6 0 1 1-3.6-3.6V7.1h2.4c.6 1.1 1.6 1.9 2.7 1.4z"
-                      fill="#25F4EE"
-                    />
-                    <path
-                      d="M13.4 21.5a5.9 5.9 0 1 0 0-11.8v2.6a3.3 3.3 0 1 1 0 6.6v2.6z"
-                      fill="#010101"
-                    />
-                    <path
-                      d="M17.2 7.3c-.2-.1-.5-.1-.7 0-.3.1-.5.3-.6.6-.1.3-.1.5 0 .8.2.5.6.9 1.2 1.1.6.2 1.2.1 1.7-.2v-1.5c-.6.3-1.2.4-1.6.2z"
-                      fill="#FF0050"
-                      opacity="0.95"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Map / Location Section */}
-        <div className="mt-12">
-          <h2 className="text-3xl font-bold text-center mb-4">Our Location</h2>
-          <div className="max-w-4xl mx-auto rounded-lg overflow-hidden border border-gray-800">
-            <iframe
-              title="Afritek Gadgets Spot - Map"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(shop.data?.address || 'Afritek Gadget Spot Nairobi')}&output=embed`}
-              width="100%"
-              height="400"
-              className="w-full h-64 sm:h-80 border-0"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-            <div className="p-4 bg-[#0b1218] text-center">
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.data?.address || 'Afritek Gadget Spot Nairobi')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-400 hover:text-cyan-300 font-semibold"
-              >
-                View on Google Maps
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-20">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            Frequently Asked <span className="text-cyan-400">Questions</span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                q: "What's your return policy?",
-                a: "Please contact the shop to discuss the terms for your specific phone before ordering.",
-              },
-
-              {
-                q: "How long does delivery take?",
-                a: "We agree the delivery timing and fee with you before confirming your order.",
-              },
-              {
-                q: "Do you offer warranty?",
-                a: "Warranty terms depend on the phone. Please ask us before ordering.",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-[#111827] border border-gray-800 rounded-xl p-6 hover:border-cyan-500/50 transition-all"
-              >
-                <h4 className="font-bold text-lg mb-2 text-cyan-400">
-                  {item.q}
-                </h4>
-                <p className="text-gray-400">{item.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Contact;
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [notice, setNotice] = useState('');
+  const phone = shop.data?.phone;
+  const configuredAddress = shop.data?.address?.trim();
+  const address = configuredAddress || 'The Bazaar, Wing 5, Mezzanine floor, Moi Avenue, Nairobi, Kenya';
+  const mapQuery = configuredAddress || '-1.2819548,36.8216073';
+  function submit(event) {
+    event.preventDefault();
+    if (!phone) return;
+    const text = `Name: ${form.name}\nEmail: ${form.email}\nSubject: ${form.subject}\nMessage: ${form.message}`;
+    window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    setNotice('Your WhatsApp draft is ready. Send it in WhatsApp to contact us. If a new tab did not open, allow pop-ups and try again.');
+  }
+  return <div className="editorial-page"><div className="store-container">
+    <header className="page-intro"><p className="eyebrow">CONTACT & DELIVERY</p><h1>Let’s talk phones.</h1><p>Need help choosing, arranging delivery or checking an order? Talk to the shop.</p></header>
+    <RequestState {...shop} />
+    {!shop.loading && !shop.error && <div className="contact-cards">
+      <section className="information-card"><Phone size={22} /><h2>Call the shop</h2><p>Discuss a phone or your order.</p>{phone ? <a href={`tel:${phone}`}>{phone}</a> : <p>Phone details are not available yet.</p>}</section>
+      <section className="information-card"><Mail size={22} /><h2>Email us</h2><p>Include your order reference if you have one.</p>{shop.data?.email ? <a href={`mailto:${shop.data.email}`}>{shop.data.email}</a> : <p>Email details are not available yet.</p>}</section>
+      <section className="information-card"><MapPin size={22} /><h2>Visit our shop</h2><p>Walk-in customers are welcome. Come in to explore phones and speak with us in person.</p><p>{address || 'Contact the shop for location and opening hours before visiting.'}</p>{address && <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} target="_blank" rel="noreferrer">Find on Google Maps <ArrowUpRight size={16} /></a>}</section>
+    </div>}
+    {address && <section className="information-card shop-location" aria-labelledby="shop-location-heading">
+      <h2 id="shop-location-heading">Find our physical shop</h2>
+      <p>Visit us at {address}. Walk in for help choosing your next phone.</p>
+      <iframe title="Afritek Gadget Spot shop location" src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`} width="100%" height="360" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen style={{ border: 0, borderRadius: 8 }} />
+      <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} target="_blank" rel="noreferrer">Open shop location in Google Maps <ArrowUpRight size={16} /></a>
+    </section>}
+    <div className="contact-layout"><section className="information-card contact-form"><MessageCircle size={24} /><h2>Start a WhatsApp conversation</h2><p>This form prepares a message. You’ll review and send it in WhatsApp.</p>
+      <form onSubmit={submit}>{[['name', 'Your Name', 'text', 120], ['email', 'Your Email (optional)', 'email', 254], ['subject', 'Subject', 'text', 120]].map(([name, label, type, max]) => <label key={name} htmlFor={`contact-${name}`}>{label}<input id={`contact-${name}`} type={type} maxLength={max} required={name !== 'email'} autoComplete={name === 'subject' ? 'off' : name} value={form[name]} onChange={e => setForm({ ...form, [name]: e.target.value })} /></label>)}
+      <label htmlFor="contact-message"><span id="message-label">Message</span><textarea aria-labelledby="message-label" id="contact-message" required maxLength={1000} rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Tell us the phone you’re interested in, or include your order reference." /></label>
+      <button className="solid-button" disabled={!phone} type="submit">Open WhatsApp draft</button>
+      {!phone && <p className="field-help">WhatsApp is available once the shop’s phone details have loaded.</p>}
+      {notice && <p role="status" className="draft-notice">{notice}</p>}</form>
+    </section><section className="shopping-questions"><p className="eyebrow">GOOD TO KNOW</p><h2>Before you order</h2>{[
+      ['How do I pay?', 'Pay cash on delivery. No online payment is required.'],
+      ['How much is delivery?', 'We agree the delivery fee and timing with you before confirming your order. The fee is separate from the phone price.'],
+      ['What happens after I place an order?', 'The shop contacts you to confirm availability and delivery arrangements with our rider. Keep your order reference for any questions.'],
+      ['What about warranty and returns?', 'Ask the shop about the terms for your specific phone before ordering.']
+    ].map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}<Link className="text-button" to="/shop">Back to shopping →</Link></section></div>
+  </div></div>;
+}

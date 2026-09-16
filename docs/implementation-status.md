@@ -47,3 +47,16 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - See `docs/storefront-design.md` for the review scope and next product-detail/checkout iterations.
 - Verification: six unit tests, production build, and 18 desktop/mobile browser scenarios. Visual checks with saved test-catalogue images at 1440, 768, 390 and 320 pixels found no horizontal overflow on home/shop.
 - No remote orders, settings or catalogue mutations were performed for this design iteration. Temporary test data and screenshots remain outside Git. Owner review/merge and exact preview-origin configuration remain deployment steps.
+
+## Storefront discovery and information pages — 16 September 2026
+
+- Shop: selectable brands, draft/apply filters, decimal budget validation, removable applied chips, reset pagination and consistent empty-state action.
+- Contact: matching light design, configured contact links and directions, clearer WhatsApp draft flow, disabled action without phone details, expandable delivery/payment questions.
+- Our Story: concise confirmed business information and three-step ordering explanation; shared design replaces decorative gradients and generic claims.
+- Added desktop/mobile regression coverage for invalid budgets, fractional API prices, applied-chip/history synchronization and missing shop contact data.
+- Remaining product-detail, cart/checkout, server-side sorting/facets and owner-provided business content are tracked in docs/storefront-design.md.
+- Verification: six unit tests, production build and all 22 desktop/mobile browser scenarios passed. Local visual review at 1440, 768, 390 and 320 pixels found no horizontal overflow on shop/contact/about. Reviewed desktop/mobile screenshots are included for the PR; no remote orders or settings were changed.
+
+- PR #7 follow-up: restored the embedded map using the configured shop address and highlighted walk-in customers. No location fallback is used when the address is missing.
+
+- Correction: restored the original storefront’s documented Bazaar branch address and exact coordinates (-1.2819548, 36.8216073) as defaults when backend address settings are empty. An explicit admin address overrides these defaults. Earlier statements about omitting the map for empty settings are superseded.
