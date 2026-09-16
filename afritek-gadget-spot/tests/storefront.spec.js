@@ -116,6 +116,7 @@ test('filter URL and controls stay in sync and reset without losing unrelated se
   await expect(page.getByLabel('Search phones', { exact: true })).toHaveValue('Galaxy');
   await expect(page.getByLabel('Brand', { exact: true })).toHaveValue('Test');
   await page.getByLabel('Available to order').check();
+  await page.getByRole('button', { name: 'Apply filters', exact: true }).click();
   await expect.poll(() => urls.some(url => url.includes('brand=Test') && url.includes('minPriceMinor=10000') && url.includes('availability=available'))).toBe(true);
   await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page.getByLabel('Search phones', { exact: true })).toHaveValue('');
@@ -199,4 +200,36 @@ test('empty home catalogue does not invent a spotlight product or a price', asyn
   await expect(page.locator('.phone-card')).toHaveCount(0);
   await expect(page.locator('.spotlight-link')).toHaveCount(0);
   await expect(page.getByRole('link', { name: 'Shop phones', exact: true }).first()).toBeVisible();
+});
+
+
+test('budget validation, applied chips and browser history preserve filters', async ({ page, isMobile }) => {
+  const urls = [];
+  await mockShop(page, async route => { urls.push(route.request().url()); return false; });
+  await page.goto('/shop?brand=Samsung&min=100&max=20000&page=2');
+  if (isMobile) await page.getByRole('button', { name: 'Filters', exact: true }).click();
+  await page.getByLabel('Min price (KES)', { exact: true }).fill('25000');
+  await page.getByRole('button', { name: 'Apply filters' }).click();
+  await expect(page.getByRole('alert')).toContainText('Maximum price');
+  await page.getByLabel('Min price (KES)', { exact: true }).fill('15000.50');
+  await page.getByRole('button', { name: 'Apply filters' }).click();
+  await expect(page).not.toHaveURL(/page=/);
+  await expect.poll(() => urls.some(url => url.includes('minPriceMinor=1500050'))).toBe(true);
+  await page.getByRole('button', { name: 'Remove Samsung filter' }).click();
+  await expect(page.getByLabel('Brand', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Min price (KES)', { exact: true })).toHaveValue('15000.5');
+  await page.goBack();
+  await expect(page.getByLabel('Brand', { exact: true })).toHaveValue('Samsung');
+});
+
+test('missing shop details never invent a map or enable a WhatsApp draft', async ({ page }) => {
+  await mockShop(page, async route => {
+    if (new URL(route.request().url()).pathname.endsWith('/shop')) { await route.fulfill({ json: { name: 'Afritek', phone: null, email: null, address: null } }); return true; }
+  });
+  await page.goto('/contact');
+  await expect(page.getByText('Phone details are not available yet.')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Open WhatsApp draft' })).toBeDisabled();
+  await expect(page.locator('a[href*="google.com/maps"], iframe')).toHaveCount(0);
+  await page.getByText('How much is delivery?', { exact: true }).click();
+  await expect(page.getByText('We agree the delivery fee and timing', { exact: false })).toBeVisible();
 });
