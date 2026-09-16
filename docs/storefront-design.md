@@ -46,3 +46,5 @@ Preview deployments need their exact origin in the backend allowlist to fetch li
 5. Confirm the production contact settings and replace/remove the temporary test catalogue before taking real orders.
 
 - Walk-in visits: Contact highlights the physical shop and embeds Google Maps using the configured address, with an external map link. The map is omitted only when no address is configured.
+
+- Correction: restored the original storefront’s documented Bazaar branch address and exact coordinates (-1.2819548, 36.8216073) as defaults when backend address settings are empty. An explicit admin address overrides these defaults. Earlier statements about omitting the map for empty settings are superseded.

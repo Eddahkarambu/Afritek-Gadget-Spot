@@ -224,14 +224,15 @@ test('budget validation, applied chips and browser history preserve filters', as
   await expect(page.getByLabel('Brand', { exact: true })).toHaveValue('Samsung');
 });
 
-test('missing shop details never invent a map or enable a WhatsApp draft', async ({ page }) => {
+test('empty shop settings retain the original physical shop map and disable WhatsApp', async ({ page }) => {
   await mockShop(page, async route => {
     if (new URL(route.request().url()).pathname.endsWith('/shop')) { await route.fulfill({ json: { name: 'Afritek', phone: null, email: null, address: null } }); return true; }
   });
   await page.goto('/contact');
   await expect(page.getByText('Phone details are not available yet.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Open WhatsApp draft' })).toBeDisabled();
-  await expect(page.locator('a[href*="google.com/maps"], iframe')).toHaveCount(0);
+  await expect(page.getByTitle('Afritek Gadget Spot shop location')).toHaveAttribute('src', 'https://www.google.com/maps?q=-1.2819548%2C36.8216073&output=embed');
+  await expect(page.getByText('The Bazaar, Wing 5, Mezzanine floor, Moi Avenue, Nairobi, Kenya', { exact: true })).toBeVisible();
   await page.getByText('How much is delivery?', { exact: true }).click();
   await expect(page.getByText('We agree the delivery fee and timing', { exact: false })).toBeVisible();
 });

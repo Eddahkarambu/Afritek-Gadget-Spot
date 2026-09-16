@@ -58,3 +58,5 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - Verification: six unit tests, production build and all 22 desktop/mobile browser scenarios passed. Local visual review at 1440, 768, 390 and 320 pixels found no horizontal overflow on shop/contact/about. Reviewed desktop/mobile screenshots are included for the PR; no remote orders or settings were changed.
 
 - PR #7 follow-up: restored the embedded map using the configured shop address and highlighted walk-in customers. No location fallback is used when the address is missing.
+
+- Correction: restored the original storefront’s documented Bazaar branch address and exact coordinates (-1.2819548, 36.8216073) as defaults when backend address settings are empty. An explicit admin address overrides these defaults. Earlier statements about omitting the map for empty settings are superseded.
