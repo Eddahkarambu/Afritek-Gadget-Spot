@@ -60,3 +60,11 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - PR #7 follow-up: restored the embedded map using the configured shop address and highlighted walk-in customers. No location fallback is used when the address is missing.
 
 - Correction: restored the original storefront’s documented Bazaar branch address and exact coordinates (-1.2819548, 36.8216073) as defaults when backend address settings are empty. An explicit admin address overrides these defaults. Earlier statements about omitting the map for empty settings are superseded.
+
+## Search, pagination and WhatsApp polish — 16 September 2026
+
+- Moved the header search focus indicator outside the search box so it cannot overlap the first character; keyboard focus remains visible.
+- Catalogue requests retain the previous cards/count/page controls while updating. A reserved status line announces updates and pagination buttons are disabled until the response arrives, preventing the loading-time page collapse that shifted the filter area.
+- WhatsApp inquiry now requires only the message. Removed name/email/subject inputs; blank messages are blocked and the exact message is preserved after opening the draft.
+- Regression coverage includes delayed page navigation, filter draft persistence, stable panel dimensions and message-only WhatsApp URLs.
+- Verification: production build, six unit tests and all 24 desktop/mobile Playwright scenarios passed. Fresh screenshot capture was blocked by the automatic approval review service reporting capacity failure when starting the preview server.
