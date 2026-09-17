@@ -11,7 +11,7 @@ export default function useResource(path, { keepPreviousData = false } = {}) {
   useEffect(() => {
     let active = true;
     setState(previous => ({ data: keepPreviousData ? previous.data : null, error: '', loading: true }));
-    const timer = setTimeout(() => get(path).then(data => { if (active) setState({ data, error: '', loading: false }); }, error => { if (active) setState({ data: null, error: error.message, loading: false }); }), 150);
+    const timer = setTimeout(() => get(path).then(data => { if (active) setState({ path, data, error: '', loading: false }); }, error => { if (active) setState({ path, data: null, error: error.message, loading: false }); }), 150);
     return () => { active = false; clearTimeout(timer); };
   }, [path, revision, keepPreviousData]);
   return { ...state, reload: () => setRevision(value => value + 1) };

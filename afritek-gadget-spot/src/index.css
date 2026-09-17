@@ -1223,3 +1223,6 @@ body {
 .visit-shop-actions a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; color: #154d40; text-decoration: underline; }
 .shop-location { scroll-margin-top: 145px; }
 .footer-address { max-width: 280px; font-size: 13px; color: #60706a; line-height: 1.7; }
+
+.catalogue-results-heading { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; scroll-margin-top: 145px; }
+.phone-card-link, #contact-message { scroll-margin-top: 145px; }

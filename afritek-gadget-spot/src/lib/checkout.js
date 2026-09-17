@@ -16,3 +16,13 @@ export function normalizePhone(value) {
   if (/^254[17]\d{8}$/.test(compact)) return `+${compact}`;
   return compact;
 }
+
+export const DRAFT_KEY = 'afritek.checkout-draft.v1';
+export function checkoutDraft() {
+  const saved = readSession(DRAFT_KEY);
+  return Object.fromEntries(Object.entries({ customerName: 120, phone: 30, area: 120, address: 500, instructions: 1000 }).map(([key, limit]) => [key, typeof saved?.[key] === 'string' ? saved[key].slice(0, limit) : '']));
+}
+export function saveCheckoutDraft(form) {
+  const draft = Object.fromEntries(['customerName', 'phone', 'area', 'address', 'instructions'].map(key => [key, form[key] || '']));
+  try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch { /* Editing still works without storage; submission checks storage separately. */ }
+}

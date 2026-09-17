@@ -9,6 +9,13 @@ export default function Contact() {
   const [params] = useSearchParams();
   const { hash } = useLocation();
   useEffect(() => { if (!shop.loading && hash === '#shop-location') document.getElementById('shop-location')?.scrollIntoView(); }, [shop.loading, hash]);
+  useEffect(() => {
+    if (!shop.loading && hash === '#contact-message') {
+      const field = document.getElementById('contact-message');
+      field?.focus({ preventScroll: true });
+      field?.scrollIntoView({ block: 'center' });
+    }
+  }, [shop.loading, hash]);
   const [message, setMessage] = useState(() => (params.get('message') || '').slice(0, 1000));
   const [notice, setNotice] = useState('');
   const phone = shop.data?.phone;
