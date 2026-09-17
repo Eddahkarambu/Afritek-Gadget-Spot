@@ -1,6 +1,6 @@
 import VisitShop from '../components/VisitShop';
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 import useResource from '../hooks/useResource';
 import RequestState from '../components/RequestState';
@@ -8,10 +8,13 @@ import ProductImage from '../components/ProductImage';
 import { cartItem, money, imageUrl, variantLabel } from '../lib/api';
 
 export default function ProductDetail({ addToCart }) {
+  const { state } = useLocation();
+  const origin = state?.catalogue;
+  const catalogue = origin && typeof origin.search === 'string' && (origin.search === '' || origin.search.startsWith('?')) && typeof origin.productId === 'string' ? origin : null;
   const { slug } = useParams();
   const result = useResource(`/products/${encodeURIComponent(slug)}`);
   return <div className="min-h-screen bg-white pt-28 pb-20 text-gray-900"><div className="max-w-7xl mx-auto px-6">
-    <Link to="/shop" className="text-teal-800 underline inline-block mb-8">Back to phones</Link>
+    <Link to={catalogue ? `/shop${catalogue.search}` : "/shop"} state={catalogue ? { returnToProduct: catalogue.productId } : null} className="text-teal-800 underline inline-block mb-8">Back to phones</Link>
     <RequestState {...result} />
     {result.data && <Product key={result.data.id} product={result.data} addToCart={addToCart} />}
   </div></div>;

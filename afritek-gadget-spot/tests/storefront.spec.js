@@ -70,6 +70,7 @@ test('variants, cart reload and server receipt handling', async ({ page }) => {
   expect(body.email).toBeUndefined();
   await page.reload();
   await expect(page.getByText(receipt.reference)).toBeVisible();
+  expect(await page.evaluate(() => sessionStorage.getItem('afritek.checkout-draft.v1'))).toBeNull();
   await page.goto('/cart');
   await expect(page.getByText('Your cart is empty')).toBeVisible();
 });
@@ -107,6 +108,15 @@ test('price conflict keeps cart and customer details; changes require explicit a
   await page.getByRole('button', { name: 'Accept cart updates' }).click();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('afritek.cart.v2')));
   expect(saved[0].priceMinor).toBe(1500000);
+  await page.getByRole('link', { name: 'Proceed to Checkout' }).click();
+  await expect(page.getByLabel('Full name')).toHaveValue('Fictional Customer');
+  await expect(page.getByLabel('Kenyan mobile number')).toHaveValue('0712 345 678');
+  await page.reload();
+  await expect(page.getByLabel('Delivery address or landmark')).toHaveValue('Test landmark');
+  const summary = await page.getByRole('region', { name: 'Order summary' }).boundingBox();
+  const submit = await page.getByRole('button', { name: 'Place order — cash on delivery' }).boundingBox();
+  expect(summary.y + summary.height).toBeLessThanOrEqual(submit.y);
+
 });
 test('filter URL and controls stay in sync and reset without losing unrelated selections', async ({ page, isMobile }) => {
   const urls = [];
@@ -263,6 +273,8 @@ test('pagination keeps the catalogue and filter layout visible during delayed re
   await expect.poll(() => Boolean(release)).toBe(true);
   release();
   await expect(page.getByText('Page 2 of 2')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Phone results' })).toBeFocused();
+  await expect(page.getByRole('heading', { name: 'Phone results' })).toBeInViewport();
   await page.getByRole('button', { name: 'Previous', exact: true }).click();
   await expect(page.getByText('Page 1 of 2')).toBeVisible();
 });
@@ -278,5 +290,29 @@ test('walk-in journey leads from home and a selected phone to the Bazaar map and
   await page.goto('/products/test-galaxy');
   await page.getByRole('link', { name: 'Ask about this phone' }).click();
   await expect(page.getByLabel('Message', { exact: true })).toHaveValue(/Test Galaxy.*128GB.*Black/);
+  await expect(page.getByLabel('Message', { exact: true })).toBeFocused();
+  await expect(page.getByLabel('Message', { exact: true })).toBeInViewport();
   await expect(page.getByText('No online order is needed.', { exact: false }).first()).toBeVisible();
+});
+
+
+test('return from a phone preserves catalogue filters and page and reveals the originating card', async ({ page }) => {
+  await mockShop(page, async route => {
+    const url = new URL(route.request().url());
+    if (!url.pathname.endsWith('/products')) return false;
+    await route.fulfill({ json: { items: Array.from({ length: 12 }, (_, i) => ({ ...product, id: `model-${i}`, name: `Phone ${i}` })), total: 24, pages: 2, page: Number(url.searchParams.get('page') || 1) } });
+    return true;
+  });
+  await page.goto('/shop?brand=Test&min=100&page=2');
+  await page.getByRole('heading', { name: 'Phone 10', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Test Galaxy', exact: true })).toBeVisible();
+  await page.reload();
+  await page.getByRole('link', { name: 'Back to phones' }).click();
+  await expect(page).toHaveURL(/shop\?brand=Test&min=100&page=2$/);
+  const card = page.locator('#phone-model-10');
+  await expect(card).toBeFocused();
+  await expect(card).toBeInViewport();
+  expect((await card.boundingBox()).y).toBeGreaterThanOrEqual(130);
+  await page.goto('/products/test-galaxy');
+  await expect(page.getByRole('link', { name: 'Back to phones' })).toHaveAttribute('href', '/shop');
 });

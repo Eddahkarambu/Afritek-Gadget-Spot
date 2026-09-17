@@ -76,3 +76,15 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - Fixed checkout/receipt contrast while preserving delivery order creation and retries. Real branch photos and confirmed opening days remain content follow-ups.
 - Verification: build, six unit tests and all 26 desktop/mobile browser scenarios passed, including walk-in navigation and configuration-specific inquiry text.
 - Visual review at 1440, 768, 390 and 320px found no home/shop/contact overflow. PR previews use saved temporary catalogue data, blank contact settings and the real Bazaar map; the public live contact settings are not modified.
+
+## UX audit — 17 September 2026
+
+- Saved findings, acceptance checks, proposed batches and launch follow-ups in [the storefront UX backlog](storefront-ux-backlog.md). Batches A and B subsequently selected; see implementation below.
+- Re-ran production build, six unit tests and 26 desktop/mobile browser scenarios successfully; exploratory checks identified additional navigation, enquiry and checkout UX gaps. No live orders submitted or application changes made during the audit.
+
+## Browsing, enquiries and checkout continuity — 17 September 2026
+
+- Implemented UX-01 through UX-05 from the [UX backlog](storefront-ux-backlog.md): catalogue return context, pagination result focus, direct enquiry focus, tab-scoped checkout drafts and review-before-submit layout.
+- Pending orders still retry their exact saved request. A valid receipt clears the checkout draft; no backend schema or endpoint changes.
+- Owner merge pending. Other backlog suggestions remain open.
+- Verification: production build, six unit tests and all 28 desktop/mobile Playwright scenarios passed. Reviewed checkout/enquiry previews at 390 and 1440px with no horizontal overflow; screenshots use fictional local data and no live order submissions.
