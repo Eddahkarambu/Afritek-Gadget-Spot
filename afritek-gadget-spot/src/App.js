@@ -14,8 +14,11 @@ import Footer from './components/Footer';
 import { CART_KEY, readCart } from './lib/cart';
 
 function RouteChange() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash === '#shop-location') document.getElementById('shop-location')?.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
