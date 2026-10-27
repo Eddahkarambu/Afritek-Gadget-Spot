@@ -54,3 +54,16 @@ Preview deployments need their exact origin in the backend allowlist to fetch li
 The owner confirmed walk-ins are the main customer path and the branch is in The Bazaar. Home now leads with visiting the shop alongside browsing; navigation, footer, catalogue, product details and cart/checkout include a clear visit path. Customers are explicitly told no online order is required. Product-specific inquiries prefill the WhatsApp message with the chosen phone/configuration.
 
 The original Bazaar address and exact map pin are retained. Confirmed hours are 7:00 am–7:00 pm, Nairobi time; opening days and holiday exceptions have not been supplied, so no seven-days-a-week claim is made. A real storefront/entrance photo remains owner-provided content. Hash links land at the map after contact details finish loading. Checkout and receipt text/surfaces now use readable light styling; delivery submission and uncertain-order handling remain intact.
+
+## Accessories — 27 October 2026
+
+Reference: the owner supplied [Phones Store Kenya’s mobile accessories catalogue](https://phonesstorekenya.com/product-category/mobile-phone-accessories/). Adopt category-first discovery, price/brand filtering and clear product cards within Afritek’s existing visual direction. Do not import the reference store’s products, prices, promotional claims or branding.
+
+- A dedicated `/accessories` catalogue, with Power banks, Chargers, Earbuds and Other accessories. Category shortcuts are also on Home; navigation and footer expose Accessories.
+- The API filters/counts/paginates all accessories via `category=ACCESSORIES`. Category and existing filters remain in the URL. Clear filters retains the chosen department/category; returning from a product restores its catalogue context.
+- Global search requests all products; phone browsing explicitly requests PHONE. Accessory/all-product brand filters accept an exact brand name instead of constraining shoppers to phone brands.
+- Cards show accessory options and colours. Detail pages show option/colour selection and supplied accessory specifications, with a compatibility reminder. No fabricated storage, RAM or compatibility claims.
+- Phone and accessory variants share the existing cart, price review, cash-on-delivery checkout and uncertain-request recovery. Accessory enquiries prefill the selected configuration and focus the message field.
+- Mobile accessory discovery uses a compact visit reminder to reduce scrolling while retaining directions to The Bazaar building.
+
+Deploy the companion API filter release before the storefront. Product photography, prices and specifications come from published admin records. PR screenshots use fictional fixture products and simple illustrative test images, not a production catalogue import.

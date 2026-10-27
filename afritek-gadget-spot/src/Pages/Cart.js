@@ -97,7 +97,7 @@ const Cart = ({
 
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <p className="text-teal-600 font-bold text-lg">
-                          KES {item.price.toLocaleString()}
+                          {money(item.priceMinor)}
                         </p>
 
                         <div className="flex items-center gap-3">
@@ -146,7 +146,7 @@ const Cart = ({
                     <div className="mt-3 sm:mt-0 sm:ml-4 text-left sm:text-right">
                       <p className="text-gray-600 text-sm mb-2">Subtotal</p>
                       <p className="text-2xl font-bold text-teal-700">
-                        KES {(item.price * item.quantity).toLocaleString()}
+                        {money(item.priceMinor * item.quantity)}
                       </p>
                     </div>
                   </div>

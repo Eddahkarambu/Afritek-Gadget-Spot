@@ -71,7 +71,8 @@ function App() {
       <main id="main"><Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:slug" element={<ProductDetail addToCart={addToCart} />} />
-        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+        <Route path="/shop" element={<Shop key="phones" />} />
+        <Route path="/accessories" element={<Shop key="accessories" accessories />} />
         <Route
           path="/cart"
           element={

@@ -20,7 +20,7 @@ export async function api(path, options = {}) {
   } finally { clearTimeout(timer); }
 }
 export const money = minor => new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(minor / 100);
-export const variantLabel = v => `${v.storageGb}GB${v.ramGb ? ` / ${v.ramGb}GB RAM` : ''} / ${v.colour}`;
+export const variantLabel = v => [v.storageGb ? `${v.storageGb}GB` : v.optionLabel, v.ramGb ? `${v.ramGb}GB RAM` : '', v.colour].filter(Boolean).join(' / ');
 export const imageUrl = image => image ? `${API_BASE}/images/${image.id}/content` : '';
 export function cartItem(product, variant) {
   const image = product.images.find(i => i.variantId === variant.id) || product.images.find(i => !i.variantId) || product.images[0];

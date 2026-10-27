@@ -66,7 +66,7 @@ export default function Checkout({ cart, clearCart }) {
       {error && <div role="alert" className="border border-red-400 rounded-lg p-4 mt-5"><p>{error}</p>{!pending && <Link to="/cart" className="underline">Review cart prices and availability</Link>}</div>}
       {loading && <RequestState loading />}
       <section aria-labelledby="order-summary-heading" className="bg-teal-50 rounded-2xl p-5 border border-teal-200 mt-6"><h2 id="order-summary-heading" className="text-2xl font-bold mb-6">Order summary</h2>
-      {pending ? <p>The saved request contains {pending.items.reduce((sum, item) => sum + item.quantity, 0)} phone(s).</p> : cart.map(item => <div className="border-b border-gray-200 py-4" key={item.id}><p>{item.name}</p><p className="text-gray-600 text-sm">{item.specs} × {item.quantity}</p><p>{money(item.priceMinor * item.quantity)}</p></div>)}
+      {pending ? <p>The saved request contains {pending.items.reduce((sum, item) => sum + item.quantity, 0)} item(s).</p> : cart.map(item => <div className="border-b border-gray-200 py-4" key={item.id}><p>{item.name}</p><p className="text-gray-600 text-sm">{item.specs} × {item.quantity}</p><p>{money(item.priceMinor * item.quantity)}</p></div>)}
       <p className="text-xl font-bold mt-6">Subtotal: {money(pending ? pending.items.reduce((sum, item) => sum + item.expectedUnitPriceMinor * item.quantity, 0) : subtotal)}</p>
       <p className="mt-4">Delivery fee to be confirmed.</p><p className="mt-4">Pay cash on delivery. We will call you to agree availability, delivery arrangements and the final amount before confirming your order.</p>
     </section>
