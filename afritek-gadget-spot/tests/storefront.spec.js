@@ -37,7 +37,7 @@ async function fillCheckout(page) {
 }
 test('all routes render without runtime errors or horizontal overflow; local CSS works without CDN', async ({ page }, testInfo) => {
   const errors = await mockShop(page);
-  for (const route of ['/', '/shop', '/products/test-galaxy', '/cart', '/checkout', '/payment', '/order-confirmation', '/about', '/contact', '/missing']) {
+  for (const route of ['/', '/shop', '/products/test-galaxy', '/cart', '/checkout', '/payment', '/order-confirmation', '/about', '/contact', '/accessories', '/missing']) {
     await page.goto(route);
     await expect(page.locator('main')).toBeVisible();
     await expect(page.locator('main h1')).toBeVisible();
@@ -181,8 +181,8 @@ test('visible catalogue search, budget links and mobile navigation work together
   await page.goto('/');
   await page.getByRole('search').getByRole('searchbox').fill('Galaxy');
   await page.getByRole('search').getByRole('button', { name: 'Search catalogue' }).click();
-  await expect(page).toHaveURL(/\/shop\?q=Galaxy$/);
-  await expect(page.getByLabel('Search phones', { exact: true })).toHaveValue('Galaxy');
+  await expect(page).toHaveURL(/\/shop\?q=Galaxy&category=ALL$/);
+  await expect(page.getByLabel('Search products', { exact: true })).toHaveValue('Galaxy');
   if (isMobile) {
     await page.getByRole('button', { name: 'Menu', exact: true }).click();
     await expect(page.locator('#mobile-navigation')).toBeVisible();

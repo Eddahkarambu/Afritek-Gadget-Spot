@@ -1,3 +1,4 @@
+import AccessoryCategories from '../components/AccessoryCategories';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Truck, MessageCircle, Smartphone, MapPin } from 'lucide-react';
@@ -7,7 +8,7 @@ import useResource from '../hooks/useResource';
 import { imageUrl, money } from '../lib/api';
 
 export default function Home() {
-  const result = useResource('/products?pageSize=8');
+  const result = useResource('/products?category=PHONE&pageSize=8');
   const spotlight = result.data?.items.find(product => product.variants.some(variant => variant.available));
   const startingPrice = spotlight ? Math.min(...spotlight.variants.filter(v => v.available).map(v => v.priceMinor)) : null;
   return <div className="store-home">
@@ -20,6 +21,7 @@ export default function Home() {
     </div></section>
     <div className="shopping-notes"><div className="store-container notes-layout"><p><MapPin size={21} aria-hidden="true" /><span><strong>Visit The Bazaar</strong><small>Wing 5 · Mezzanine floor · Moi Avenue</small></span></p><p><Truck size={21} aria-hidden="true" /><span><strong>Delivery, agreed with you</strong><small>Confirm the fee before your order is confirmed</small></span></p><p><MessageCircle size={21} aria-hidden="true" /><span><strong>A little help choosing?</strong><Link to="/contact">Talk to the shop <ArrowUpRight size={13} aria-hidden="true" /></Link></span></p></div></div>
     <FeaturedProducts result={result} />
+    <section className="store-container accessory-home" aria-labelledby="accessory-heading"><div className="section-heading"><div><p className="eyebrow">THE EVERYDAY EXTRAS</p><h2 id="accessory-heading">A little more for your phone.</h2></div><Link className="text-button" to="/accessories">Shop accessories →</Link></div><AccessoryCategories /></section>
     <section className="store-container discovery-section" aria-labelledby="budget-heading"><div className="section-heading"><div><p className="eyebrow">YOUR PHONE. YOUR BUDGET.</p><h2 id="budget-heading">Start with what works for you.</h2></div></div><div className="budget-grid">{[{label:'Up to KSh 15,000',note:'Everyday essentials',to:'/shop?max=15000'},{label:'KSh 15,000–30,000',note:'Room for more',to:'/shop?min=15000&max=30000'},{label:'Above KSh 30,000',note:'Explore your next upgrade',to:'/shop?min=30000.01'}].map(budget => <Link to={budget.to} key={budget.label} className="budget-card"><span>{budget.note}<strong>{budget.label}</strong></span><ArrowUpRight size={24} aria-hidden="true" /></Link>)}</div></section>
     <section className="store-container brand-section" aria-labelledby="brand-heading"><h2 id="brand-heading">Have a brand in mind?</h2><div className="brand-links">{['Samsung','Xiaomi','Poco','Oppo','Tecno','Infinix','Itel','Vivo','Honor'].map(brand => <Link key={brand} to={`/shop?brand=${encodeURIComponent(brand)}`}>{brand}<ArrowUpRight size={15} aria-hidden="true" /></Link>)}</div></section>
     <section className="store-container help-section"><div><p className="eyebrow">LET’S FIND YOUR FIT</p><h2>Not sure which phone to choose?</h2><p>Come into our Bazaar shop for help choosing your phone, or talk to us before your visit. Delivery is also available.</p></div><Link className="store-button button-light" to="/contact">Talk to the shop <ArrowUpRight size={19} aria-hidden="true" /></Link></section>

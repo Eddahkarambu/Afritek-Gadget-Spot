@@ -88,3 +88,12 @@ PR checks revealed two existing Netlify integrations. One reported a failed depl
 - Pending orders still retry their exact saved request. A valid receipt clears the checkout draft; no backend schema or endpoint changes.
 - Owner merge pending. Other backlog suggestions remain open.
 - Verification: production build, six unit tests and all 28 desktop/mobile Playwright scenarios passed. Reviewed checkout/enquiry previews at 390 and 1440px with no horizontal overflow; screenshots use fictional local data and no live order submissions.
+
+## Accessory storefront — 27 October 2026
+
+- Added accessory discovery from Home/navigation/footer, dedicated catalogue/category routes and preserved filter/pagination/return context.
+- Supports backend POWER_BANK, CHARGER, EARBUDS and OTHER_ACCESSORY options/specifications; mixed phone/accessory cart, reload, price review, checkout and enquiry flows.
+- Global search uses all categories; Home/Shop phones explicitly remain phone-only. Accessory filters combine category, exact brand, budget and availability on the server.
+- Dependency: companion backend `category=ACCESSORIES` filter must deploy first. No catalogue import or production orders were performed. Publish accessories in admin with reviewed photos/specifications/prices to populate the page.
+- Build, seven unit tests and all 38 desktop/mobile browser scenarios passed. API/admin companion builds and all 16 catalogue API tests passed. Final responsive previews cover 320, 390, 768, 1024 and 1440px; reviewed screenshots use fictional products and illustrative test images.
+- After final catalogue spacing and gallery assertions, all 10 accessory desktop/mobile scenarios passed again. Companion API review: https://github.com/MuthomiMate/CommBend/pull/4.

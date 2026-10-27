@@ -30,7 +30,7 @@ export default function Contact() {
     setNotice('Your WhatsApp draft is ready. Send it in WhatsApp to contact us. If a new tab did not open, allow pop-ups and try again.');
   }
   return <div className="editorial-page"><div className="store-container">
-    <header className="page-intro"><p className="eyebrow">VISIT OUR SHOP</p><h1>Walk in. Find your phone.</h1><p>Visit us at The Bazaar, Moi Avenue, Nairobi to browse and buy in person. No online order is needed. You can also contact us about a phone or delivery.</p></header>
+    <header className="page-intro"><p className="eyebrow">VISIT OUR SHOP</p><h1>Walk in. Find your phone.</h1><p>Visit us at The Bazaar, Moi Avenue, Nairobi to browse and buy in person. No online order is needed. You can also contact us about a phone, accessory or delivery.</p></header>
     <RequestState {...shop} />
     {!shop.loading && !shop.error && <div className="contact-cards">
       <section className="information-card"><Phone size={22} /><h2>Call the shop</h2><p>Discuss a phone or your order.</p>{phone ? <a href={`tel:${phone}`}>{phone}</a> : <p>Phone details are not available yet.</p>}</section>
@@ -45,12 +45,12 @@ export default function Contact() {
     </section>}
     <div className="contact-layout"><section className="information-card contact-form"><MessageCircle size={24} /><h2>Start a WhatsApp conversation</h2><p>This form prepares a message. You’ll review and send it in WhatsApp.</p>
       <form onSubmit={submit}>
-      <label htmlFor="contact-message"><span id="message-label">Message</span><textarea aria-labelledby="message-label" id="contact-message" required maxLength={1000} rows={5} value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us the phone you’re interested in, or include your order reference." /></label>
+      <label htmlFor="contact-message"><span id="message-label">Message</span><textarea aria-labelledby="message-label" id="contact-message" required maxLength={1000} rows={5} value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us the product you’re interested in, or include your order reference." /></label>
       <button className="solid-button" disabled={!phone || !message.trim()} type="submit">Open WhatsApp draft</button>
       {!phone && <p className="field-help">WhatsApp is available once the shop’s phone details have loaded.</p>}
       {notice && <p role="status" className="draft-notice">{notice}</p>}</form>
     </section><section className="shopping-questions"><p className="eyebrow">GOOD TO KNOW</p><h2>Before you order</h2>{[
-      ['Do I need to order online before visiting?', 'No. Walk in to browse and buy at our Bazaar shop. Contact us before travelling to confirm opening days and your preferred phone’s availability.'],
+      ['Do I need to order online before visiting?', 'No. Walk in to browse and buy at our Bazaar shop. Contact us before travelling to confirm opening days and your preferred product’s availability.'],
       ['How do I pay for a delivery order?', 'Pay cash on delivery. No online payment is required.'],
       ['How much is delivery?', 'We agree the delivery fee and timing with you before confirming your order. The fee is separate from the phone price.'],
       ['What happens after I place an order?', 'The shop contacts you to confirm availability and delivery arrangements with our rider. Keep your order reference for any questions.'],

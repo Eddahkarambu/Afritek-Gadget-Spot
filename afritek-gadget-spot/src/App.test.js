@@ -1,6 +1,6 @@
 import { readCart, CART_KEY } from './lib/cart';
 import { normalizePhone, receiptValid } from './lib/checkout';
-import { api, ApiError } from './lib/api';
+import { api, ApiError, variantLabel, cartItem } from './lib/api';
 beforeEach(() => { localStorage.clear(); });
 test.each(['bad json', '{}', '[null,{"id":1,"quantity":-1}]'])('invalid saved cart is harmless: %s', saved => {
   localStorage.setItem(CART_KEY, saved);
@@ -22,4 +22,14 @@ test('failed order requests are not retried automatically and omit cookies', asy
   await expect(api('/orders', { method: 'POST', body: '{}' })).rejects.toBeInstanceOf(ApiError);
   expect(fetch).toHaveBeenCalledTimes(1);
   expect(fetch.mock.calls[0][1].credentials).toBe('omit');
+});
+
+test('accessory configurations keep their option labels without fabricated memory in saved carts', () => {
+  const variant = { id: 'a0000000-0000-4000-8000-000000000003', storageGb: null, ramGb: 0, optionLabel: '20,000 mAh / USB-C', colour: 'Black', priceMinor: 250000 };
+  expect(variantLabel(variant)).toBe('20,000 mAh / USB-C / Black');
+  expect(variantLabel({ storageGb: 128, ramGb: 8, colour: 'White' })).toBe('128GB / 8GB RAM / White');
+  const item = { ...cartItem({ name: 'Power bank', slug: 'power-bank', category: 'POWER_BANK', images: [] }, variant), quantity: 2 };
+  localStorage.setItem(CART_KEY, JSON.stringify([item]));
+  expect(readCart()[0].specs).toBe('20,000 mAh / USB-C / Black');
+  expect(readCart()[0].priceMinor).toBe(250000);
 });
